@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Υλικό · Από το Prompt στη Δήλωση · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .materials-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+    @media (min-width: 700px) { .materials-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .materials-grid { grid-template-columns: repeat(3, 1fr); } }
+    .material-card { background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-4); display: flex; flex-direction: column; transition: all 0.3s; }
+    .material-card:hover { transform: translate(-3px, -3px); }
+    .material-card[data-color="coral"] { box-shadow: 5px 5px 0 var(--coral); }
+    .material-card[data-color="coral"]:hover { box-shadow: 8px 8px 0 var(--coral); }
+    .material-card[data-color="teal"] { box-shadow: 5px 5px 0 var(--teal); }
+    .material-card[data-color="teal"]:hover { box-shadow: 8px 8px 0 var(--teal); }
+    .material-card[data-color="sun"] { box-shadow: 5px 5px 0 var(--sun); }
+    .material-card[data-color="sun"]:hover { box-shadow: 8px 8px 0 var(--sun); }
+    .material-card[data-color="sage"] { box-shadow: 5px 5px 0 var(--sage); }
+    .material-card[data-color="sage"]:hover { box-shadow: 8px 8px 0 var(--sage); }
+    .material-icon { width: 3rem; height: 3rem; border-radius: var(--r-md); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem; color: white; margin-bottom: var(--space-3); border: 2px solid var(--ink); }
+    .material-card[data-color="coral"] .material-icon { background: var(--coral); }
+    .material-card[data-color="teal"] .material-icon { background: var(--teal); }
+    .material-card[data-color="sun"] .material-icon { background: var(--sun); color: var(--ink); }
+    .material-card[data-color="sage"] .material-icon { background: var(--sage); }
+    .material-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: var(--r-full); display: inline-block; margin-bottom: var(--space-2); }
+    .tag-doc { background: var(--coral-bg); color: var(--coral); }
+    .tag-xlsx { background: var(--teal-bg); color: var(--teal); }
+    .material-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: var(--space-2); line-height: 1.2; }
+    .material-desc { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: var(--space-3); flex: 1; }
+    .material-btn { display: flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0.55rem 1rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; background: var(--ink); color: white; border: 2px solid var(--ink); border-radius: var(--r-full); cursor: pointer; transition: all 0.2s; width: 100%; background-image: none; }
+    .material-btn:hover { background: var(--coral); color: white; }
+    .category-header { grid-column: 1 / -1; margin: var(--space-5) 0 var(--space-3); }
+    .category-header h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: var(--space-2); }
+    .category-header p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html" class="active">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Downloads · SR+ Edition · CC BY-NC-SA</div>
+        <h1 class="hero-title fade-up">Υλικό <span class="hand">φοιτητών</span></h1>
+        <p class="hero-subtitle fade-up">8 αρχεία (5 Word + 3 Excel) για χρήση πριν, κατά, και μετά το εργαστήριο. Διδάσκοντες/ουσες: δείτε το <a href="materials-instructors.html">προστατευμένο υλικό →</a></p>
+        <div class="cta-group fade-up"><a href="#downloads" class="btn">Downloads <span class="arrow">↓</span></a></div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--teal); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--coral); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--sun); top: 5%; left: 5%;"></div>
+        <div class="hero-label">8 files<br><span>all yours ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="downloads">
+  <div class="container">
+    <div class="materials-grid">
+
+      <div class="category-header"><h3>📘 Πλαίσιο &amp; Προετοιμασία</h3><p>Βασικά έγγραφα — read online ή download.</p></div>
+
+      <article class="material-card" data-color="coral">
+        <div class="material-icon">P</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">Pre-Work Handout</h4>
+        <p class="material-desc">PICO primer, tech setup, topic selection, draft PICO, glossary.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="prepare.html" class="material-btn" style="flex:1;background:var(--coral);">👁 View Online</a>
+          <a href="downloads/01_PreWork_Handout.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="coral">
+        <div class="material-icon">A</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">AI Usage Agreement</h4>
+        <p class="material-desc">Διάβασε τις 3 αρχές HEAL-Link online, κατέβασε, υπόγραψε.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="agreement.html" class="material-btn" style="flex:1;background:var(--coral);">👁 View Online</a>
+          <a href="downloads/03_AI_Usage_Agreement.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="coral">
+        <div class="material-icon">H</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">HEAL-Link Statement</h4>
+        <p class="material-desc">Δες την online δομή ή κατέβασε το fillable template για τη διπλωματική.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="statement.html" class="material-btn" style="flex:1;background:var(--coral);">👁 View Online</a>
+          <a href="downloads/04_HEAL_Link_Statement_Template.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <div class="category-header"><h3>📚 Reference &amp; Prompts</h3><p>Copy-ready — κάνε Copy ή Download.</p></div>
+
+      <article class="material-card" data-color="teal">
+        <div class="material-icon">T</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">Prompt Templates (8)</h4>
+        <p class="material-desc">8 HEAL-Link prompts. Copy-paste online — δεν χρειάζεται download.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="prompts.html" class="material-btn" style="flex:1;background:var(--teal);">📋 Copy Prompts</a>
+          <a href="downloads/05_Prompt_Templates.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="teal">
+        <div class="material-icon">R</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">Reference Card — Database Syntax</h4>
+        <p class="material-desc">ERIC, PsycINFO, Scopus syntax με copyable strings και troubleshooting.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="reference.html" class="material-btn" style="flex:1;background:var(--teal);">👁 View Online</a>
+          <a href="downloads/09_Reference_Card_Database_Syntax.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="teal">
+        <div class="material-icon">C</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">Critical Reading Cheat Sheet</h4>
+        <p class="material-desc">PICO Scan σε 45 sec. Σήματα INCLUDE/EXCLUDE/MAYBE.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="cheatsheet.html" class="material-btn" style="flex:1;background:var(--teal);">👁 View Online</a>
+          <a href="downloads/10_Critical_Reading_Cheat_Sheet.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="teal">
+        <div class="material-icon">M</div><span class="material-tag tag-doc">.docx</span>
+        <h4 class="material-title">Methodological Paragraphs</h4>
+        <p class="material-desc">3 παραδείγματα μεθοδολογικών παραγράφων + 4 συχνά λάθη.</p>
+        <a href="downloads/06_Methodological_Paragraph_Examples.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <div class="category-header"><h3>📊 Interactive Forms → Excel</h3><p>Συμπλήρωσε online — Download .xlsx όταν τελειώσεις.</p></div>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">W</div><span class="material-tag" style="background:var(--sun-bg);color:var(--ink);">Form</span>
+        <h4 class="material-title">Block-by-Block Worksheet</h4>
+        <p class="material-desc">Χτίσε τη search strategy online — το string δημιουργείται αυτόματα.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="worksheet.html" class="material-btn" style="flex:1;background:var(--sun);color:var(--ink);">📝 Open Form</a>
+          <a href="downloads/08_Block_by_Block_Worksheet.docx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">S</div><span class="material-tag tag-xlsx">.xlsx</span>
+        <h4 class="material-title">Search Log</h4>
+        <p class="material-desc">Καταγραφή αναζητήσεων. Συμπλήρωσε online → Download .xlsx.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="search-log.html" class="material-btn" style="flex:1;background:var(--sun);color:var(--ink);">📊 Open Form</a>
+          <a href="downloads/11_Search_Log_Template.xlsx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">D</div><span class="material-tag tag-xlsx">.xlsx</span>
+        <h4 class="material-title">DOI Verification</h4>
+        <p class="material-desc">Επαλήθευσε DOIs online — status auto-εμφανίζεται. Download .xlsx.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="doi-verify.html" class="material-btn" style="flex:1;background:var(--sun);color:var(--ink);">📊 Open Form</a>
+          <a href="downloads/12_DOI_Verification_Template.xlsx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">E</div><span class="material-tag tag-xlsx">.xlsx</span>
+        <h4 class="material-title">Data Extraction</h4>
+        <p class="material-desc">Εξαγωγή δεδομένων (P/I/C/O + Findings) online. Download .xlsx.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="data-extract.html" class="material-btn" style="flex:1;background:var(--sun);color:var(--ink);">📊 Open Form</a>
+          <a href="downloads/13_Data_Extraction_Template.xlsx" class="material-btn" download style="flex:1;">⬇ Download</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="max-width: 36rem; margin: var(--space-6) auto 0; padding: var(--space-4); background: var(--paper-warm); border: 2px dashed var(--ink-soft); border-radius: var(--r-md); text-align: center;">
+      <p style="margin-bottom: var(--space-3); color: var(--ink-soft);"><strong>Είσαι διδάσκων/ουσα;</strong><br>Lesson Plan, Bad Prompts Cards, Worksheets, Reference Cards, Sample Abstracts.</p>
+      <a href="materials-instructors.html" class="btn btn-outline" style="font-size: 0.9rem;">🔒 Υλικό Διδάσκοντος <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ. <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Παν/μιο Θεσσαλίας</a>.</p></div>
+      <div><h5>Σελίδες</h5><ul><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="materials.html">Υλικό</a></li></ul></div>
+      <div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li><li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li><li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div>
+  </div>
+</footer>
+</body>
+</html>

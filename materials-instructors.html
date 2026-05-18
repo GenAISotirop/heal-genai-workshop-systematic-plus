@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Υλικό Διδάσκοντος · Από το Prompt στη Δήλωση · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .materials-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+    @media (min-width: 700px) { .materials-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .materials-grid { grid-template-columns: repeat(3, 1fr); } }
+    .material-card { background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-4); display: flex; flex-direction: column; transition: all 0.3s; }
+    .material-card:hover { transform: translate(-3px, -3px); }
+    .material-card[data-color="coral"] { box-shadow: 5px 5px 0 var(--coral); }
+    .material-card[data-color="coral"]:hover { box-shadow: 8px 8px 0 var(--coral); }
+    .material-card[data-color="sun"] { box-shadow: 5px 5px 0 var(--sun); }
+    .material-card[data-color="sun"]:hover { box-shadow: 8px 8px 0 var(--sun); }
+    .material-card[data-color="sage"] { box-shadow: 5px 5px 0 var(--sage); }
+    .material-card[data-color="sage"]:hover { box-shadow: 8px 8px 0 var(--sage); }
+    .material-icon { width: 3rem; height: 3rem; border-radius: var(--r-md); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.2rem; color: white; margin-bottom: var(--space-3); border: 2px solid var(--ink); }
+    .material-card[data-color="coral"] .material-icon { background: var(--coral); }
+    .material-card[data-color="sun"] .material-icon { background: var(--sun); color: var(--ink); }
+    .material-card[data-color="sage"] .material-icon { background: var(--sage); }
+    .material-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: var(--r-full); display: inline-block; margin-bottom: var(--space-2); background: var(--coral-bg); color: var(--coral); }
+    .material-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: var(--space-2); line-height: 1.2; }
+    .material-desc { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: var(--space-3); flex: 1; }
+    .material-btn { display: flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0.55rem 1rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; background: var(--ink); color: white; border: 2px solid var(--ink); border-radius: var(--r-full); cursor: pointer; transition: all 0.2s; width: 100%; background-image: none; }
+    .material-btn:hover { background: var(--coral); color: white; }
+    .category-header { grid-column: 1 / -1; margin: var(--space-5) 0 var(--space-3); }
+    .category-header h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: var(--space-2); }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="password-gate">
+  <div class="gate-card">
+    <div class="gate-icon">🔒</div>
+    <h1 class="gate-title">Υλικό για <span class="hand">τον/την Καθηγητή/τρια</span></h1>
+    <p class="gate-msg">Αν <em>βρέθηκες εδώ κατά λάθος</em>, κάνε πίσω στον browser.</p>
+    <p class="gate-msg">Αλλιώς, <strong>βάλε τον κωδικό</strong>:</p>
+    <div class="gate-form">
+      <input type="password" id="gate-password" class="gate-input" placeholder="• • • • • • •" autocomplete="off">
+      <button onclick="checkPassword()" class="gate-btn">Είσοδος <span class="arrow">→</span></button>
+      <p id="gate-error" class="gate-error">Λάθος κωδικός.</p>
+    </div>
+    <a href="index.html" class="gate-back">← Επιστροφή στην αρχική</a>
+  </div>
+</div>
+<script>
+  const INSTRUCTOR_PASSWORD = "diadaskontes2026"; // 🔑 ΑΛΛΑΞΕ ΤΟΝ ΚΩΔΙΚΟ
+  if (sessionStorage.getItem('instructor_unlocked') === 'yes') { document.getElementById('password-gate').style.display = 'none'; } else { document.body.classList.add('gate-locked'); }
+  function checkPassword() { const input = document.getElementById('gate-password').value; const error = document.getElementById('gate-error'); if (input === INSTRUCTOR_PASSWORD) { document.getElementById('password-gate').style.display = 'none'; document.body.classList.remove('gate-locked'); sessionStorage.setItem('instructor_unlocked', 'yes'); } else { error.classList.add('show'); document.getElementById('gate-password').value = ''; setTimeout(function() { error.classList.remove('show'); }, 3000); } }
+  document.getElementById('gate-password').addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); checkPassword(); } });
+  document.getElementById('gate-password').focus();
+</script>
+
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html" class="active">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">🔒 Υλικό Διδάσκοντος · SR+ Edition</div>
+        <h1 class="hero-title fade-up">Υλικό <span class="hand">διδασκαλίας</span></h1>
+        <p class="hero-subtitle fade-up">7 αρχεία: Lesson Plan, Cards, Worksheets, Reference Cards, Sample Abstracts + τα κοινά Agreement/Statement για διανομή.</p>
+        <div class="cta-group fade-up"><a href="#downloads" class="btn">Downloads <span class="arrow">↓</span></a><a href="instructor.html" class="btn btn-outline">Lesson Plan →</a></div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--sun); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--sage); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--coral); top: 5%; left: 5%;"></div>
+        <div class="hero-label">7 files<br><span>for you only ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="downloads">
+  <div class="container">
+    <div class="materials-grid">
+
+      <div class="category-header"><h3>📘 Για διανομή στους φοιτητές</h3></div>
+
+      <article class="material-card" data-color="coral">
+        <div class="material-icon">A</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">AI Usage Agreement</h4>
+        <p class="material-desc">Εκτυπώνεις × N φοιτητές. Υπογράφεται στο Μάθημα 1.</p>
+        <a href="downloads/03_AI_Usage_Agreement.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <article class="material-card" data-color="coral">
+        <div class="material-icon">H</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">HEAL-Link Statement</h4>
+        <p class="material-desc">Εκτυπώνεις × N. Συμπληρώνεται στο Μάθημα 2.</p>
+        <a href="downloads/04_HEAL_Link_Statement_Template.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <div class="category-header"><h3>🎓 Για τη διδασκαλία — Μάθημα 1</h3></div>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">L</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">Lesson Plan</h4>
+        <p class="material-desc">Πλήρης οδηγός 2×3 ωρών — αναλυτικοί χρόνοι, tips, watch-fors, HEAL-Link compliance.</p>
+        <a href="downloads/02_Lesson_Plan.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">B</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">Bad Prompts Cards</h4>
+        <p class="material-desc">9 κακά prompts σε printable κάρτες + answer key. Για την Άσκηση 1.</p>
+        <a href="downloads/07_Bad_Prompts_Cards.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">W</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">Block-by-Block Worksheet</h4>
+        <p class="material-desc">Φύλλο εργασίας: PICO → blocks → συνώνυμα → ERIC string. Για την Άσκηση 4.</p>
+        <a href="downloads/08_Block_by_Block_Worksheet.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <article class="material-card" data-color="sun">
+        <div class="material-icon">R</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">Reference Card — Database Syntax</h4>
+        <p class="material-desc">Quick reference: ERIC / PsycINFO / Scopus σύνταξη, Boolean operators, field tags, troubleshooting.</p>
+        <a href="downloads/09_Reference_Card_Database_Syntax.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+      <div class="category-header"><h3>🎓 Για τη διδασκαλία — Μάθημα 2</h3></div>
+
+      <article class="material-card" data-color="sage">
+        <div class="material-icon">C</div><span class="material-tag">.docx</span>
+        <h4 class="material-title">Critical Reading Cheat Sheet</h4>
+        <p class="material-desc">Τεχνική PICO Scan σε 45 sec. Σήματα EXCLUDE/INCLUDE/MAYBE + στρατηγικές screening.</p>
+        <a href="downloads/10_Critical_Reading_Cheat_Sheet.docx" class="material-btn" download>⬇ Download</a>
+      </article>
+
+    </div>
+
+    <div style="max-width: 36rem; margin: var(--space-6) auto 0; padding: var(--space-4); background: var(--teal-bg); border: 2px dashed var(--teal); border-radius: var(--r-md); text-align: center;">
+      <p style="margin-bottom: var(--space-3); color: var(--ink-soft); font-size: 0.93rem;"><strong>Χρειάζεσαι τα student materials;</strong><br>Pre-Work Handout, Prompt Templates, Excel templates, κ.ά.</p>
+      <a href="materials.html" class="btn btn-outline" style="font-size: 0.9rem;">Student Materials <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ. <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Παν/μιο Θεσσαλίας</a>.</p></div>
+      <div><h5>Σελίδες</h5><ul><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες 🔒</a></li></ul></div>
+      <div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li><li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li><li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div>
+  </div>
+</footer>
+</body>
+</html>

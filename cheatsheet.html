@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Critical Reading Cheat Sheet · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .cs-card { background:var(--paper-card); border:3px solid var(--ink); border-radius:var(--r-lg); padding:var(--space-5); margin-bottom:var(--space-5); }
+    .cs-card:nth-of-type(1){box-shadow:6px 6px 0 var(--coral);}
+    .cs-card:nth-of-type(2){box-shadow:6px 6px 0 var(--teal);}
+    .cs-card:nth-of-type(3){box-shadow:6px 6px 0 var(--sun);}
+    .cs-card:nth-of-type(4){box-shadow:6px 6px 0 var(--sage);}
+    .cs-title { font-family:var(--font-display); font-size:1.5rem; margin-bottom:var(--space-3); }
+    .step-list { list-style:none; padding:0; }
+    .step-list li { display:flex; gap:var(--space-3); padding:var(--space-3) 0; border-bottom:1px dashed var(--rule); }
+    .step-list li:last-child { border-bottom:none; }
+    .step-n { flex-shrink:0; width:2rem; height:2rem; border-radius:var(--r-full); display:grid; place-items:center; font-family:var(--font-display); font-size:1.1rem; color:white; border:2px solid var(--ink); }
+    .step-text strong { display:block; margin-bottom:2px; }
+    .step-text span { font-size:0.9rem; color:var(--ink-soft); }
+    .signal-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:var(--space-3); }
+    @media(max-width:700px){ .signal-grid{grid-template-columns:1fr;} }
+    .signal-box { padding:var(--space-3); border-radius:var(--r-md); border:2px solid var(--ink); }
+    .signal-box h4 { font-family:var(--font-display); font-size:1rem; margin-bottom:var(--space-2); }
+    .signal-box ul { list-style:none; padding:0; font-size:0.88rem; }
+    .signal-box li { padding-left:var(--space-3); position:relative; margin-bottom:4px; }
+    .signal-box li::before { content:'▸'; position:absolute; left:0; }
+    .include { background:var(--sage-bg); }
+    .include h4 { color:var(--sage); }
+    .include li::before { color:var(--sage); }
+    .exclude { background:var(--coral-bg); }
+    .exclude h4 { color:var(--coral); }
+    .exclude li::before { color:var(--coral); }
+    .maybe { background:var(--sun-bg); }
+    .maybe h4 { color:var(--ink); }
+    .maybe li::before { color:var(--ink); }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Cheat Sheet · Μάθημα 2 — Άσκηση 6</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">Critical Reading</h1>
+    <p style="color:var(--ink-soft);max-width:36rem;">PICO Scan σε 45 δευτερόλεπτα + σήματα INCLUDE / EXCLUDE / MAYBE.</p>
+    <a href="downloads/10_Critical_Reading_Cheat_Sheet.docx" download class="btn" style="margin-top:var(--space-3);font-size:.9rem;">⬇ Download .docx</a>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <div class="cs-card">
+      <h3 class="cs-title">⏱ PICO Scan σε 45 δευτερόλεπτα</h3>
+      <ul class="step-list">
+        <li><div class="step-n" style="background:var(--coral);">1</div><div class="step-text"><strong>Τίτλος (5 sec)</strong><span>Περιέχει keywords από το PICO μου; Φαίνεται σχετικό;</span></div></li>
+        <li><div class="step-n" style="background:var(--coral);">2</div><div class="step-text"><strong>P — Population (10 sec)</strong><span>Ποιοι συμμετέχουν; Ταιριάζει με το P μου;</span></div></li>
+        <li><div class="step-n" style="background:var(--teal);">3</div><div class="step-text"><strong>I — Intervention (10 sec)</strong><span>Τι εξετάζεται; Είναι το I που ψάχνω;</span></div></li>
+        <li><div class="step-n" style="background:var(--teal);">4</div><div class="step-text"><strong>O — Outcomes (10 sec)</strong><span>Τι μετριέται; Συνδέεται με τα O μου;</span></div></li>
+        <li><div class="step-n" style="background:var(--sun);color:var(--ink);">5</div><div class="step-text"><strong>Απόφαση (10 sec)</strong><span>INCLUDE / EXCLUDE / MAYBE — γράψε 1-word reason</span></div></li>
+      </ul>
+    </div>
+
+    <div class="cs-card">
+      <h3 class="cs-title">🚦 Σήματα για κάθε απόφαση</h3>
+      <div class="signal-grid">
+        <div class="signal-box include">
+          <h4>✅ INCLUDE</h4>
+          <ul>
+            <li>P ταιριάζει ακριβώς</li>
+            <li>I είναι αυτό που ψάχνω</li>
+            <li>Τα O είναι σχετικά</li>
+            <li>Empirical study</li>
+            <li>Peer-reviewed</li>
+          </ul>
+        </div>
+        <div class="signal-box exclude">
+          <h4>❌ EXCLUDE</h4>
+          <ul>
+            <li>Λάθος πληθυσμός</li>
+            <li>Άσχετη παρέμβαση</li>
+            <li>Γνώμη / Opinion piece</li>
+            <li>Εκτός χρονολογικού εύρους</li>
+            <li>Γλώσσα εκτός κριτηρίων</li>
+          </ul>
+        </div>
+        <div class="signal-box maybe">
+          <h4>❓ MAYBE</h4>
+          <ul>
+            <li>Abstract ασαφές</li>
+            <li>P μερικώς ταιριάζει</li>
+            <li>Δεν είναι σαφές το I</li>
+            <li>Χρειάζεται full text</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-card">
+      <h3 class="cs-title">⚖ Κανόνες HEAL-Link</h3>
+      <ul class="step-list">
+        <li><div class="step-n" style="background:var(--ink);">!</div><div class="step-text"><strong>Το screening ΔΕΝ ανατίθεται σε ΤΝ</strong><span>Είναι ανθρώπινη επιστημονική κρίση — HEAL-Link Αρχή 2. Κλείσε ΟΛΑ τα Claude/ChatGPT tabs κατά το screening.</span></div></li>
+        <li><div class="step-n" style="background:var(--ink);">!</div><div class="step-text"><strong>1 word reason υποχρεωτικό</strong><span>Κάθε EXCLUDE ή MAYBE έχει 1-word αιτιολόγηση (π.χ. "population", "language", "unclear").</span></div></li>
+        <li><div class="step-n" style="background:var(--ink);">!</div><div class="step-text"><strong>DOI verification πριν data extraction</strong><span>Κάθε paper που μπαίνει στο INCLUDE επαληθεύεται στο doi.org.</span></div></li>
+      </ul>
+    </div>
+
+    <div class="cs-card">
+      <h3 class="cs-title">💡 Quick Tips</h3>
+      <ul class="step-list">
+        <li><div class="step-n" style="background:var(--sage);">1</div><div class="step-text"><strong>Χρησιμοποίησε Blind mode στο Rayyan</strong><span>Αποφεύγεις cognitive bias — δεν βλέπεις τις αποφάσεις άλλων screeners.</span></div></li>
+        <li><div class="step-n" style="background:var(--sage);">2</div><div class="step-text"><strong>45 sec max — μετά πας MAYBE</strong><span>Αν ξοδεύεις πάνω από 45 sec, βάλε MAYBE και προχώρα. Θα γυρίσεις.</span></div></li>
+        <li><div class="step-n" style="background:var(--sage);">3</div><div class="step-text"><strong>MAYBE ≠ αποτυχία</strong><span>Είναι επιστημονική πράξη — σημαίνει "χρειάζομαι full text για να αποφασίσω".</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-2.html">Μάθημα 2</a></li></ul></div><div><h5>Εργαλεία</h5><ul><li><a href="https://rayyan.ai" target="_blank">Rayyan</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Διδάσκοντες/ουσες · Από το Prompt στη Δήλωση · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .tip-card { background: var(--paper-card); border: 2px solid var(--rule); border-radius: var(--r-md); padding: var(--space-4); margin-bottom: var(--space-3); transition: all 0.2s; }
+    .tip-card:hover { border-color: var(--coral); transform: translateY(-2px); }
+    .tip-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+    .tip-badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: var(--r-full); }
+    .badge-tip { background: var(--teal-bg); color: var(--teal); }
+    .badge-watch { background: var(--sun-bg); color: var(--ink); }
+    .badge-critical { background: var(--coral-bg); color: var(--coral); }
+    .tip-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; flex: 1; }
+    .tip-body { font-size: 0.93rem; color: var(--ink-soft); line-height: 1.55; }
+    .session-card { background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-5); margin-bottom: var(--space-5); }
+    .session-card:nth-of-type(1) { box-shadow: 6px 6px 0 var(--coral); }
+    .session-card:nth-of-type(2) { box-shadow: 6px 6px 0 var(--teal); }
+    .session-card-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 2px dashed var(--rule); }
+    .session-card-num { width: 3rem; height: 3rem; border-radius: var(--r-full); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; color: white; border: 3px solid var(--ink); flex-shrink: 0; }
+    .session-card:nth-of-type(1) .session-card-num { background: var(--coral); }
+    .session-card:nth-of-type(2) .session-card-num { background: var(--teal); }
+    .materials-needed { background: var(--paper-warm); border: 2px dashed var(--ink-soft); border-radius: var(--r-md); padding: var(--space-3); margin: var(--space-3) 0; }
+    .materials-needed h5 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--space-2); }
+    .materials-needed ul { list-style: none; padding: 0; font-size: 0.88rem; }
+    .materials-needed li { padding-left: var(--space-3); position: relative; margin-bottom: 4px; }
+    .materials-needed li::before { content: '▸'; position: absolute; left: 0; color: var(--coral); }
+    .checklist { list-style: none; margin: var(--space-3) 0; }
+    .checklist li { display: flex; gap: var(--space-3); padding: var(--space-2) 0; border-bottom: 1px dashed var(--rule); }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .check { flex-shrink: 0; width: 1.5rem; height: 1.5rem; border-radius: var(--r-sm); border: 2px solid var(--ink); background: white; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="password-gate">
+  <div class="gate-card">
+    <div class="gate-icon">🔒</div>
+    <h1 class="gate-title">Υλικό για <span class="hand">τον/την Καθηγητή/τρια</span></h1>
+    <p class="gate-msg">Αν <em>βρέθηκες εδώ κατά λάθος</em>, κάνε πίσω στον browser.</p>
+    <p class="gate-msg">Αλλιώς, <strong>βάλε τον κωδικό</strong> για να συνεχίσεις:</p>
+    <div class="gate-form">
+      <input type="password" id="gate-password" class="gate-input" placeholder="• • • • • • •" autocomplete="off">
+      <button onclick="checkPassword()" class="gate-btn">Είσοδος <span class="arrow">→</span></button>
+      <p id="gate-error" class="gate-error">Λάθος κωδικός. Δοκίμασε ξανά.</p>
+    </div>
+    <a href="index.html" class="gate-back">← Επιστροφή στην αρχική</a>
+  </div>
+</div>
+<script>
+  // 🔑 ΑΛΛΑΞΕ ΤΟΝ ΚΩΔΙΚΟ ΕΔΩ:
+  const INSTRUCTOR_PASSWORD = "diadaskontes2026";
+  if (sessionStorage.getItem('instructor_unlocked') === 'yes') { document.getElementById('password-gate').style.display = 'none'; } else { document.body.classList.add('gate-locked'); }
+  function checkPassword() { const input = document.getElementById('gate-password').value; const error = document.getElementById('gate-error'); if (input === INSTRUCTOR_PASSWORD) { document.getElementById('password-gate').style.display = 'none'; document.body.classList.remove('gate-locked'); sessionStorage.setItem('instructor_unlocked', 'yes'); } else { error.classList.add('show'); document.getElementById('gate-password').value = ''; setTimeout(function() { error.classList.remove('show'); }, 3000); } }
+  document.getElementById('gate-password').addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); checkPassword(); } });
+  document.getElementById('gate-password').focus();
+</script>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html">Προετοιμασία</a></li>
+      <li><a href="session-1.html">Μάθημα 1</a></li>
+      <li><a href="session-2.html">Μάθημα 2</a></li>
+      <li><a href="instructor.html" class="active">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Lesson Plan · SR+ Edition · 2 × 3 ώρες</div>
+        <h1 class="hero-title fade-up">Οδηγός<br><span class="hand">διδασκαλίας</span></h1>
+        <p class="hero-subtitle fade-up">Πλήρης οδηγός για 2 τρίωρα μαθήματα + pre-work + homework. Φιλοσοφία, teaching tips, watch-fors, materials ανά session.</p>
+        <div class="cta-group fade-up">
+          <a href="materials-instructors.html" class="btn">Υλικό Διδάσκοντος <span class="arrow">→</span></a>
+          <a href="#sessions" class="btn btn-outline">Lesson Plan ↓</a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--coral); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--teal); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--sun); top: 5%; left: 5%;"></div>
+        <div class="hero-label">Teach<br><span>with care ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">✷ Φιλοσοφία</div>
+    <h2 class="section-title">Co-pilot, <span class="hand">verify</span>, διαφάνεια</h2>
+    <div class="principles-grid">
+      <div class="principle fade-up"><div class="principle-icon">i</div><h3 class="principle-title">Co-pilot, not autopilot</h3><p class="principle-text">Ο φοιτητής διατηρεί πάντα τον έλεγχο. Η ΤΝ δεν αποφασίζει.</p></div>
+      <div class="principle fade-up"><div class="principle-icon">ii</div><h3 class="principle-title">Verify, don't trust</h3><p class="principle-text">Κάθε output ελέγχεται. Η ψευδαίσθηση αναφορών είναι ο μεγαλύτερος κίνδυνος.</p></div>
+      <div class="principle fade-up"><div class="principle-icon">iii</div><h3 class="principle-title">Διαφάνεια</h3><p class="principle-text">Κάθε χρήση δηλώνεται. Η διαφάνεια προστατεύει, δεν περιορίζει.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="sessions" class="glance">
+  <div class="container">
+    <div class="section-eyebrow">✷ Ανά session</div>
+    <h2 class="section-title">Tips για <span class="accent">κάθε μάθημα</span></h2>
+
+    <div class="session-card">
+      <div class="session-card-header">
+        <div class="session-card-num">1</div>
+        <div><h3 style="font-family: var(--font-display); font-size: 1.4rem;">Μάθημα 1 — Ηθική + Αναζήτηση</h3></div>
+      </div>
+      <div class="materials-needed">
+        <h5>Υλικά που εκτυπώνεις</h5>
+        <ul>
+          <li>AI Usage Agreement × N φοιτητές</li>
+          <li>Bad Prompts Cards (3 ανά ζευγάρι)</li>
+          <li>Block-by-Block Worksheet × N</li>
+          <li>Reference Card Database Syntax × N</li>
+        </ul>
+      </div>
+      <div class="tip-card"><div class="tip-header"><span class="tip-badge badge-critical">Κρίσιμο</span><h4 class="tip-title">Σενάριο 3 — αφιέρωσε χρόνο</h4></div><p class="tip-body">Το γκρίζο σενάριο «εναλλακτικές διατυπώσεις» δεν έχει μονόδρομο. Δείξε ότι η διάκριση «επιμέλεια» vs «αλλαγή νοήματος» απαιτεί κριτική σκέψη.</p></div>
+      <div class="tip-card"><div class="tip-header"><span class="tip-badge badge-watch">Watch</span><h4 class="tip-title">Prompts ακόμα πολύ ευρέα</h4></div><p class="tip-body">Πρωτοετείς γράφουν «πες μου για δυσλεξία» αντί «Ως ειδικός παιδαγωγός, δώσε μου...». Σταμάτησε και σχολίασε: «λείπει ο ρόλος + τα όρια».</p></div>
+      <div class="tip-card"><div class="tip-header"><span class="tip-badge badge-tip">Tip</span><h4 class="tip-title">DOI verification live = χρυσή στιγμή</h4></div><p class="tip-body">Αν κάποιο DOI δεν επαληθεύεται live, ΜΙΛΑ ΓΙ' ΑΥΤΟ. Είναι η πιο διδακτική στιγμή — «η ΤΝ ψεύδεται».</p></div>
+    </div>
+
+    <div class="session-card">
+      <div class="session-card-header">
+        <div class="session-card-num">2</div>
+        <div><h3 style="font-family: var(--font-display); font-size: 1.4rem;">Μάθημα 2 — Screening + Σύνθεση</h3></div>
+      </div>
+      <div class="materials-needed">
+        <h5>Υλικά που εκτυπώνεις</h5>
+        <ul>
+          <li>Critical Reading Cheat Sheet × N</li>
+          <li>Data Extraction Template × N (ή ψηφιακά)</li>
+          <li>HEAL-Link Statement Template × N</li>
+          <li>Sample Abstracts (3 δείγματα, ίδια για όλους)</li>
+        </ul>
+      </div>
+      <div class="tip-card"><div class="tip-header"><span class="tip-badge badge-critical">Κρίσιμο</span><h4 class="tip-title">Rayyan: ΚΑΝΕΝΑ Claude tab ανοιχτό</h4></div><p class="tip-body">Πες ρητά: «Κλείστε ΟΛΑ τα tabs Claude/ChatGPT/Consensus. Αυτό είναι ανθρώπινη κρίση.» Περπάτα στην τάξη.</p></div>
+      <div class="tip-card"><div class="tip-header"><span class="tip-badge badge-critical">Κρίσιμο</span><h4 class="tip-title">Σύνθεση = η φωνή του φοιτητή</h4></div><p class="tip-body">Η Άσκηση 8 (draft synthesis) γίνεται ΧΩΡΙΣ ΤΝ. Η Άσκηση 9 (AI editing) γίνεται ΜΕ ΤΝ. Αυτή η σειρά είναι κρίσιμη — δείχνει τη γραμμή.</p></div>
+      <div class="tip-card"><div class="tip-header"><span class="tip-badge badge-tip">Tip</span><h4 class="tip-title">Σύνδεσε Detection → Διαφάνεια → Statement</h4></div><p class="tip-body">«Αυτό που μόλις κάνατε (Δήλωση Χρήσης) είναι η πρακτική που σας απαλλάσσει από κάθε φόβο AI detection tools.»</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">✷ Pre-workshop checklist</div>
+    <h2 class="section-title">Μία ημέρα <span class="hand">πριν</span></h2>
+    <div style="max-width: 42rem; margin: var(--space-4) auto; background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-5); box-shadow: 6px 6px 0 var(--sun);">
+      <ul class="checklist">
+        <li><span class="check"></span><div><strong>Pre-workshop email</strong> σταλμένο 5-7 ημέρες πριν</div></li>
+        <li><span class="check"></span><div><strong>Δικό σου laptop</strong> με Claude + Consensus ενεργό</div></li>
+        <li><span class="check"></span><div><strong>Sample Rayyan project</strong> (20-30 abstracts) + sample RIS file</div></li>
+        <li><span class="check"></span><div><strong>Εκτυπωμένα:</strong> Agreement, Worksheets, Cards, Templates × N</div></li>
+        <li><span class="check"></span><div><strong>Slides:</strong> 3 αρχές, 4+4 χρήσεις, PICO, prompt structure</div></li>
+        <li><span class="check"></span><div><strong>Backup Wi-Fi:</strong> hotspot σε περίπτωση ιδρυματικού fail</div></li>
+      </ul>
+    </div>
+    <div class="text-center" style="margin-top: var(--space-5);">
+      <a href="materials-instructors.html" class="btn">Κατέβασε τα materials <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p><p class="footer-text" style="margin-top:1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Παν/μιο Θεσσαλίας</a>.</p></div>
+      <div><h5>Σελίδες</h5><ul><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="materials.html">Υλικό</a></li></ul></div>
+      <div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li><li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li><li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div>
+  </div>
+</footer>
+</body>
+</html>

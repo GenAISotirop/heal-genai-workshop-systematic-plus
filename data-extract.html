@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Extraction · Από το Prompt στη Δήλωση</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    .tbl { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:900px; }
+    .tbl th { background:var(--teal); color:white; padding:10px 12px; text-align:left; font-family:var(--font-display); font-weight:400; }
+    .tbl td { padding:0; border:1px solid var(--rule); }
+    .tbl td input, .tbl td textarea, .tbl td select { width:100%; padding:8px; border:none; background:transparent; font-family:var(--font-body); font-size:0.82rem; color:var(--ink); outline:none; resize:vertical; }
+    .tbl td input:focus, .tbl td textarea:focus, .tbl td select:focus { background:var(--teal-bg); outline:2px solid var(--teal); }
+    .tbl tr:nth-child(even) td { background:var(--paper-warm); }
+    .bar { display:flex; gap:var(--space-3); flex-wrap:wrap; margin-bottom:var(--space-4); }
+    .btn-add { padding:.5rem 1rem; background:var(--teal); color:white; border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:3px 3px 0 var(--ink); }
+    .btn-dl  { padding:.5rem 1rem; background:var(--sage); color:white; border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:3px 3px 0 var(--ink); }
+    .btn-out { padding:.5rem 1rem; background:var(--paper-card); color:var(--ink); border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; }
+    .ovx { overflow-x:auto; }
+    .info { background:var(--teal-bg); border:2px solid var(--teal); border-radius:var(--r-md); padding:var(--space-3) var(--space-4); margin-bottom:var(--space-4); font-size:.9rem; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Εργαλείο · Μάθημα 2 — Άσκηση 7</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">Data Extraction</h1>
+    <p style="color:var(--ink-soft);max-width:36rem;">Εξαγωγή δεδομένων από τα papers που πέρασαν screening. Συμπλήρωσε online, κατέβασε ως Excel.</p>
+    <div style="margin-top:var(--space-3);display:flex;gap:var(--space-3);flex-wrap:wrap;">
+      <button class="btn-dl" onclick="downloadExcel()">⬇ Download .xlsx</button>
+      <a href="downloads/13_Data_Extraction_Template.xlsx" download class="btn-add" style="text-decoration:none;">⬇ Blank template</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="info">💡 <strong>Tip:</strong> 1 γραμμή = 1 paper. Συμπλήρωσε ΤΟΥΛΑΧΙΣΤΟΝ 5 papers για την Άσκηση 7. Η ΤΝ ΔΕΝ κάνει data extraction — αυτό είναι δική σου ανθρώπινη εργασία (HEAL-Link Αρχή 2).</div>
+    <div class="bar">
+      <button class="btn-add" onclick="addRow()">+ Νέο Paper</button>
+      <button class="btn-dl" onclick="downloadExcel()">⬇ Download .xlsx</button>
+      <button class="btn-out" onclick="clearAll()">🗑 Καθαρισμός</button>
+    </div>
+    <div class="ovx">
+      <table class="tbl">
+        <thead><tr>
+          <th>#</th><th>Author(s) &amp; Year</th><th>Title</th><th>DOI</th>
+          <th>N / Sample</th><th>Population (P)</th><th>Intervention (I)</th>
+          <th>Comparator (C)</th><th>Outcomes (O)</th><th>Study Design</th>
+          <th>Key Findings</th><th>Quality Notes</th>
+        </tr></thead>
+        <tbody id="extBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+let n=0;
+function addRow(){
+  n++;
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td style="text-align:center;padding:8px;background:var(--teal-bg);color:var(--teal);font-weight:700;">${n}</td>
+    <td><input placeholder="Smith et al., 2023"></td>
+    <td><input placeholder="Τίτλος paper"></td>
+    <td><input placeholder="10.xxxx/..."></td>
+    <td><input placeholder="N=..."></td>
+    <td><textarea rows="2" placeholder="Ποιοι συμμετέχουν;"></textarea></td>
+    <td><textarea rows="2" placeholder="Τι παρέμβαση;"></textarea></td>
+    <td><input placeholder="Ή 'Δεν υπάρχει'"></td>
+    <td><textarea rows="2" placeholder="Τι μετράται;"></textarea></td>
+    <td><select style="width:100%;padding:8px;border:none;background:transparent;font-family:inherit;">
+      <option>—</option><option>RCT</option><option>Quasi-experimental</option>
+      <option>Single-case</option><option>Qualitative</option><option>Mixed methods</option><option>Review</option><option>Άλλο</option>
+    </select></td>
+    <td><textarea rows="2" placeholder="Κύρια ευρήματα..."></textarea></td>
+    <td><textarea rows="2" placeholder="Δυνατά/αδύνατα σημεία..."></textarea></td>
+  `;
+  document.getElementById('extBody').appendChild(tr);
+}
+
+function downloadExcel(){
+  const headers=['#','Author(s) & Year','Title','DOI','N/Sample','Population (P)','Intervention (I)','Comparator (C)','Outcomes (O)','Study Design','Key Findings','Quality Notes'];
+  const rows=[headers];
+  document.querySelectorAll('#extBody tr').forEach((tr,i)=>{
+    const inp=tr.querySelectorAll('input,textarea,select');
+    rows.push([i+1,...[...inp].map(el=>el.value)]);
+  });
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:4},{wch:18},{wch:35},{wch:18},{wch:10},{wch:22},{wch:22},{wch:18},{wch:22},{wch:16},{wch:35},{wch:25}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Data Extraction');
+  XLSX.writeFile(wb,'Data_Extraction.xlsx');
+}
+
+function clearAll(){if(confirm('Να σβηστούν όλα;')){document.getElementById('extBody').innerHTML='';n=0;}}
+
+for(let i=0;i<5;i++) addRow();
+</script>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-2.html">Μάθημα 2</a></li></ul></div><div><h5>Εργαλεία</h5><ul><li><a href="https://rayyan.ai" target="_blank">Rayyan</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

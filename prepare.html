@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Προετοιμασία · Από το Prompt στη Δήλωση · SR+ Edition</title>
+  <meta name="description" content="Pre-work για το πλήρες εργαστήριο: 6 μέρη, ~2 ώρες. Tech setup, PICO primer, topic selection, draft PICO, AI Agreement.">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .step { background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-5); margin-bottom: var(--space-5); }
+    .step:nth-of-type(1) { box-shadow: 6px 6px 0 var(--coral); }
+    .step:nth-of-type(2) { box-shadow: 6px 6px 0 var(--teal); }
+    .step:nth-of-type(3) { box-shadow: 6px 6px 0 var(--sun); }
+    .step:nth-of-type(4) { box-shadow: 6px 6px 0 var(--sage); }
+    .step:nth-of-type(5) { box-shadow: 6px 6px 0 var(--plum); }
+    .step:nth-of-type(6) { box-shadow: 6px 6px 0 var(--coral); }
+    .step-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 2px dashed var(--rule); }
+    .step-num { width: 3rem; height: 3rem; border-radius: var(--r-full); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; color: white; border: 3px solid var(--ink); flex-shrink: 0; }
+    .step:nth-of-type(1) .step-num { background: var(--coral); }
+    .step:nth-of-type(2) .step-num { background: var(--teal); }
+    .step:nth-of-type(3) .step-num { background: var(--sun); color: var(--ink); }
+    .step:nth-of-type(4) .step-num { background: var(--sage); }
+    .step:nth-of-type(5) .step-num { background: var(--plum); }
+    .step:nth-of-type(6) .step-num { background: var(--coral); }
+    .step-meta { display: flex; flex-direction: column; gap: 4px; }
+    .step-time { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+    .step-title { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.1; }
+    .checklist { list-style: none; margin: var(--space-3) 0; }
+    .checklist li { display: flex; gap: var(--space-3); padding: var(--space-3); background: var(--paper-warm); border-radius: var(--r-md); margin-bottom: var(--space-2); border: 2px solid transparent; transition: all 0.2s; }
+    .checklist li:hover { border-color: var(--rule); transform: translateX(3px); }
+    .checklist .check { flex-shrink: 0; width: 1.5rem; height: 1.5rem; border-radius: var(--r-sm); border: 2px solid var(--ink); background: white; margin-top: 2px; }
+    .callout { background: var(--sun-bg); border: 2px solid var(--sun); border-radius: var(--r-md); padding: var(--space-4); margin: var(--space-4) 0; display: flex; gap: var(--space-3); }
+    .callout-icon { flex-shrink: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--sun); color: var(--ink); display: grid; place-items: center; font-weight: 700; border: 2px solid var(--ink); }
+    .callout-text { font-size: 0.95rem; line-height: 1.55; }
+    .callout-text strong { display: block; margin-bottom: 4px; }
+    .pico-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.92rem; margin: var(--space-3) 0; }
+    .pico-table th, .pico-table td { padding: var(--space-3); text-align: left; vertical-align: top; border-bottom: 2px dashed var(--rule); }
+    .pico-table th { background: var(--coral); color: white; font-family: var(--font-display); font-weight: 400; width: 5rem; }
+    .pico-table td { background: var(--paper-card); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html" class="active">Προετοιμασία</a></li>
+      <li><a href="session-1.html">Μάθημα 1</a></li>
+      <li><a href="session-2.html">Μάθημα 2</a></li>
+      <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Πριν το εργαστήριο · ~2 ώρες · 6 μέρη</div>
+        <h1 class="hero-title fade-up">Έλα <span class="accent">έτοιμος</span><br>να <span class="hand">ξεκινήσουμε</span></h1>
+        <p class="hero-subtitle fade-up">
+          Η SR+ Edition απαιτεί σοβαρή προετοιμασία. Σε 6 μέρη (~2 ώρες), θα στήσεις τα εργαλεία σου, θα διαβάσεις ένα PICO primer, θα επιλέξεις θέμα, και θα γράψεις draft PICO — ώστε να ξεκινήσεις από λεπτό 1 στο μάθημα.
+        </p>
+        <div class="cta-group fade-up">
+          <a href="#steps" class="btn">Ξεκίνα <span class="arrow">↓</span></a>
+          <a href="session-1.html" class="btn btn-outline">Δες το Μάθημα 1</a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--coral); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--teal); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--sun); top: 5%; left: 5%;"></div>
+        <div class="hero-label">~2h<br><span>worth every minute ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="steps">
+  <div class="container">
+    <div class="section-eyebrow">✷ 6 μέρη</div>
+    <h2 class="section-title">Βήμα-βήμα <span class="accent">προετοιμασία</span></h2>
+
+    <!-- PART A -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">Α</div>
+        <div class="step-meta">
+          <span class="step-time">~15 ΛΕΠΤΑ</span>
+          <h3 class="step-title">Tech Setup</h3>
+        </div>
+      </div>
+      <p>Φτιάξε λογαριασμούς στα 4 εργαλεία που θα χρησιμοποιήσουμε:</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div><strong>Claude</strong> — claude.ai (sign up δωρεάν)</div></li>
+        <li><span class="check"></span><div><strong>Consensus</strong> — consensus.app (sign up + σύνδεση με Claude)</div></li>
+        <li><span class="check"></span><div><strong>Rayyan</strong> — rayyan.ai (sign up δωρεάν)</div></li>
+        <li><span class="check"></span><div><strong>HEAL-Link</strong> — πρόσβαση μέσω ιδρυματικού login/VPN</div></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-icon">!</div>
+        <div class="callout-text"><strong>Test σύνδεσης Claude ↔ Consensus</strong>Γράψε στο Claude: «Ψάξε στο Consensus για mindfulness» — αν εμφανίσει αποτελέσματα, είσαι ΟΚ.</div>
+      </div>
+    </div>
+
+    <!-- PART B -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">Β</div>
+        <div class="step-meta">
+          <span class="step-time">~30 ΛΕΠΤΑ</span>
+          <h3 class="step-title">PICO Primer</h3>
+        </div>
+      </div>
+      <p>Διάβασε αυτό το σύντομο primer για το πλαίσιο PICO — θα το χρησιμοποιήσουμε εντατικά στο εργαστήριο.</p>
+      <table class="pico-table">
+        <tr><th>P</th><td><strong>Population</strong> — Ποιους αφορά η έρευνα; (π.χ. παιδιά 6-12 με ΔΑΦ)</td></tr>
+        <tr><th>I</th><td><strong>Intervention</strong> — Τι παρέμβαση/έκθεση εξετάζεται; (π.χ. tablet-based social skills app)</td></tr>
+        <tr><th>C</th><td><strong>Comparator</strong> — Με τι συγκρίνεται; (π.χ. business-as-usual, waitlist)</td></tr>
+        <tr><th>O</th><td><strong>Outcomes</strong> — Τι μετριέται; (π.χ. classroom participation, social interaction)</td></tr>
+        <tr><th>S</th><td><strong>Study design</strong> — Τι τύπου μελέτες; (π.χ. RCT, quasi-experimental, qualitative)</td></tr>
+      </table>
+      <div class="callout">
+        <div class="callout-icon">📖</div>
+        <div class="callout-text"><strong>Tip</strong>Δεν χρειάζεται να θυμάσαι τα πάντα — θα κάνουμε review στο μάθημα. Αρκεί να ξέρεις τι σημαίνει κάθε γράμμα.</div>
+      </div>
+    </div>
+
+    <!-- PART Γ -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">Γ</div>
+        <div class="step-meta">
+          <span class="step-time">~20 ΛΕΠΤΑ</span>
+          <h3 class="step-title">Επιλογή Θέματος</h3>
+        </div>
+      </div>
+      <p>Σκέψου ένα <strong>ερευνητικό ενδιαφέρον</strong> που θα δουλέψεις σε ολόκληρο το εργαστήριο (και τα 2 μαθήματα + homework). Ιδανικά σχετίζεται με το θέμα της διπλωματικής σου.</p>
+      <p>Γράψε σε <strong>1-2 προτάσεις</strong> τι θέλεις να ερευνήσεις. Παραδείγματα:</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div>«Θέλω να δω αν τα tablet apps βοηθούν παιδιά με ΔΑΦ σε γενικές τάξεις»</div></li>
+        <li><span class="check"></span><div>«Με ενδιαφέρει πώς εφαρμόζεται το UDL σε νηπιαγωγεία με παιδιά με ΔΕΠ-Υ»</div></li>
+        <li><span class="check"></span><div>«Ψάχνω τι ξέρουμε για AAC σε παιδιά με σοβαρές επικοινωνιακές δυσκολίες»</div></li>
+      </ul>
+    </div>
+
+    <!-- PART Δ -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">Δ</div>
+        <div class="step-meta">
+          <span class="step-time">~30 ΛΕΠΤΑ</span>
+          <h3 class="step-title">Draft PICO</h3>
+        </div>
+      </div>
+      <p>Χρησιμοποιώντας τον πίνακα PICO από το Μέρος Β, γράψε ένα <strong>πρώτο draft</strong> του PICO σου. Δεν χρειάζεται να είναι τέλειο — θα το βελτιώσουμε στο μάθημα.</p>
+      <table class="pico-table">
+        <tr><th>P</th><td>________________________________________________</td></tr>
+        <tr><th>I</th><td>________________________________________________</td></tr>
+        <tr><th>C</th><td>________________________________________________ (ή «δεν εφαρμόζεται»)</td></tr>
+        <tr><th>O</th><td>________________________________________________</td></tr>
+        <tr><th>S</th><td>________________________________________________</td></tr>
+      </table>
+      <div class="callout" style="background: var(--coral-bg); border-color: var(--coral);">
+        <div class="callout-icon" style="background: var(--coral); color: white;">⚠</div>
+        <div class="callout-text"><strong>ΜΗ χρησιμοποιήσεις ΤΝ για αυτό!</strong>Το PICO είναι ΔΙΚΟ ΣΟΥ ερευνητικό ερώτημα. Η ΤΝ δεν το διατυπώνει — εσύ. (HEAL-Link Αρχή 2)</div>
+      </div>
+    </div>
+
+    <!-- PART Ε -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">Ε</div>
+        <div class="step-meta">
+          <span class="step-time">~10 ΛΕΠΤΑ</span>
+          <h3 class="step-title">AI Usage Agreement</h3>
+        </div>
+      </div>
+      <p>Διάβασε, υπέγραψε, και φέρε μαζί σου το AI Usage Agreement (1 σελίδα). Σου το στέλνει ο/η διδάσκων/ουσα μαζί με την πρόσκληση.</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div>Διάβασε προσεκτικά — δεν είναι τυπική φόρμα</div></li>
+        <li><span class="check"></span><div>Συμπλήρωσε ονοματεπώνυμο + ΑΕΜ + ημερομηνία</div></li>
+        <li><span class="check"></span><div>Υπέγραψε με μπλε στυλό</div></li>
+        <li><span class="check"></span><div>Εκτύπωσε και φέρε στο Μάθημα 1</div></li>
+      </ul>
+    </div>
+
+    <!-- PART ΣΤ -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">ΣΤ</div>
+        <div class="step-meta">
+          <span class="step-time">~5 ΛΕΠΤΑ</span>
+          <h3 class="step-title">Final Checklist</h3>
+        </div>
+      </div>
+      <ul class="checklist">
+        <li><span class="check"></span><div><strong>Laptop φορτισμένο</strong> + φορτιστής</div></li>
+        <li><span class="check"></span><div><strong>4 λογαριασμοί ενεργοί:</strong> Claude · Consensus · Rayyan · HEAL-Link</div></li>
+        <li><span class="check"></span><div><strong>Σύνδεση Claude ↔ Consensus</strong> δοκιμασμένη</div></li>
+        <li><span class="check"></span><div><strong>PICO primer</strong> διαβασμένο</div></li>
+        <li><span class="check"></span><div><strong>Θέμα</strong> σε 1-2 προτάσεις</div></li>
+        <li><span class="check"></span><div><strong>Draft PICO</strong> γραμμένο (σε χαρτί ή ψηφιακά)</div></li>
+        <li><span class="check"></span><div><strong>AI Usage Agreement</strong> εκτυπωμένο + υπογεγραμμένο</div></li>
+        <li><span class="check"></span><div><strong>Στυλό</strong> + διάθεση για 3 ώρες εντατικής δουλειάς</div></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="text-center" style="max-width: 36rem; margin: 0 auto;">
+      <h2 class="section-title" style="margin: 0 auto var(--space-4);">Τα <span class="hand">λέμε</span> στο Μάθημα 1!</h2>
+      <p style="font-size: 1.05rem; color: var(--ink-soft);">Αν έχεις απορία με οτιδήποτε, στείλε email στον/στη διδάσκοντα/ουσα πριν την ημέρα.</p>
+      <div style="margin-top: var(--space-4);">
+        <a href="session-1.html" class="btn">Δες το Μάθημα 1 <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Πλήρες εργαστήριο GenAI στη συστηματική ανασκόπηση. HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top: 1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color: var(--sun);">ΠΜΣ Ειδικής Αγωγής, Παν/μιο Θεσσαλίας</a>.</p>
+      </div>
+      <div><h5>Σελίδες</h5><ul><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="homework.html">Εργασία</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="materials.html">Υλικό</a></li></ul></div>
+      <div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li><li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li><li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li><li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Templates · Από το Prompt στη Δήλωση</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .prompt-card { background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-5); margin-bottom: var(--space-5); }
+    .prompt-card:nth-child(odd) { box-shadow: 6px 6px 0 var(--coral); }
+    .prompt-card:nth-child(even) { box-shadow: 6px 6px 0 var(--teal); }
+    .prompt-num { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); margin-bottom: var(--space-2); }
+    .prompt-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: var(--space-2); }
+    .prompt-use { font-size: 0.9rem; color: var(--muted); margin-bottom: var(--space-3); font-style: italic; }
+    .prompt-box { position: relative; background: var(--paper-warm); border: 2px dashed var(--ink-soft); border-radius: var(--r-md); padding: var(--space-3); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.65; white-space: pre-wrap; margin-bottom: var(--space-3); }
+    .prompt-note { font-size: 0.85rem; color: var(--ink-soft); background: var(--sun-bg); border: 2px solid var(--sun); border-radius: var(--r-md); padding: var(--space-2) var(--space-3); }
+    .prompt-note strong { color: var(--ink); }
+    .tag-heal { display: inline-block; padding: 0.2rem 0.6rem; background: var(--teal-bg); color: var(--teal); font-size: 0.7rem; font-weight: 700; border-radius: var(--r-full); letter-spacing: 0.05em; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ 8 Έτοιμα Prompts · HEAL-Link Compliant</div>
+        <h1 class="hero-title fade-up">Prompt <span class="hand">Templates</span></h1>
+        <p class="hero-subtitle fade-up">8 έτοιμα prompts για copy-paste στη διπλωματική σου. Όλα με σαφείς ρόλους, περιορισμούς, και έλεγχο — σύμφωνα με τις αρχές HEAL-Link.</p>
+        <div class="cta-group fade-up">
+          <a href="downloads/05_Prompt_Templates.docx" download class="btn">⬇ Download .docx</a>
+          <a href="#prompts" class="btn btn-outline">Δες online ↓</a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background:var(--coral);top:0;right:0;"></div>
+        <div class="hero-shape shape-2" style="background:var(--teal);bottom:0;left:0;"></div>
+        <div class="hero-shape shape-3" style="background:var(--sun);top:5%;left:5%;"></div>
+        <div class="hero-label">8<br><span>copy & go ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="prompts">
+  <div class="container">
+    <div class="section-eyebrow">✷ Κάνε κλικ Copy σε κάθε prompt</div>
+    <h2 class="section-title">8 <span class="accent">prompts</span> για αμέσως</h2>
+    <p class="section-lead">Άλλαξε μόνο τα <code>[σε αγκύλες]</code> με τα δικά σου στοιχεία. ΜΗΝ αλλάξεις τα ΜΗΝ/ΧΩΡΙΣ — αυτοί είναι οι HEAL-Link περιορισμοί.</p>
+
+    <div id="prompts-list">
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 1 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Literature Scoping</h3>
+        <p class="prompt-use">Πότε: Αρχή έρευνας — τι ερευνητικά ρεύματα υπάρχουν στο θέμα σου</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Ενεργείς ως ειδικός στην εκπαιδευτική έρευνα. Είμαι μεταπτυχιακή/ός φοιτήτρια/ής στην ειδική αγωγή.
+
+Θέμα ενδιαφέροντος: [ΘΕΜΑ ΣΟΥ]
+
+Χαρτογράφησε τα κύρια ερευνητικά ρεύματα των τελευταίων 5 ετών. Δείξε:
+- 3-4 κύρια θεματικά ρεύματα
+- Κύριες μεθοδολογίες ανά ρεύμα
+- 5 επιδραστικά papers (με DOI)
+
+ΜΗΝ συνθέσεις τα ευρήματα. ΜΗΝ προτείνεις συμπεράσματα.
+Απλώς περίγραψε τι υπάρχει. Θα ελέγξω κάθε DOI.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση HEAL-Link:</strong> Scoping / χαρτογράφηση πεδίου — με DOI verification.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 2 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">PICO Brainstorming</h3>
+        <p class="prompt-use">Πότε: Βοήθεια διατύπωσης ερωτήματος — ΟΧΙ για να σου γράψει το PICO</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Ενεργείς ως μέντορας ερευνητικής μεθοδολογίας.
+
+Έχω αυτό το αρχικό ερευνητικό ενδιαφέρον:
+[ΠΕΡΙΓΡΑΦΕ ΤΟ ΘΕΜΑ ΣΟΥ ΣΕ 2-3 ΠΡΟΤΑΣΕΙΣ]
+
+Βοήθησέ με να σκεφτώ τα στοιχεία PICO:
+- Ποια P (population) θα ήταν πιο εστιασμένη;
+- Τι I (intervention) είναι μετρήσιμο;
+- Ποια O (outcomes) έχουν καταγραφεί στη βιβλιογραφία;
+
+ΜΗΝ μου γράψεις το PICO. Κάνε μου ερωτήσεις για να το σκεφτώ μόνος/η μου.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση:</strong> Υποστήριξη σκέψης, όχι υποκατάσταση ερευνητικής κρίσης.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 3 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Synonym Brainstorming</h3>
+        <p class="prompt-use">Πότε: Block-by-block worksheet — Βήμα 4 (μετά τα δικά σου συνώνυμα)</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Δουλεύω σε στρατηγική αναζήτησης. Έχω ήδη σκεφτεί τα παρακάτω συνώνυμα για το concept "[ΟΝΟΜΑ BLOCK]":
+
+[ΛΙΣΤΑ ΣΥΝΩΝΥΜΩΝ ΠΟΥ ΗΔΗΣ ΕΧΕΙΣ]
+
+Πρότεινε 5 ακόμα synonyms που μπορεί να μου διαφεύγουν — ιδιαίτερα όρους από MeSH, ICD, DSM ή διεθνή βιβλιογραφία.
+
+ΜΗΝ φτιάξεις το search string. ΜΗΝ δώσεις Boolean συντακτικές δομές.
+Μόνο επιπλέον λέξεις-κλειδιά.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση:</strong> Brainstorming συνωνύμων — μετά τη δική σου λίστα. Πρώτα ΕΣΥΣ, μετά η ΤΝ.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 4 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Search String Debugging</h3>
+        <p class="prompt-use">Πότε: Τα αποτελέσματα είναι πολύ πολλά ή πολύ λίγα</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Ενεργείς ως ειδικός βιβλιοθηκάριος πληροφόρησης.
+
+Τρέχω αυτό το search string στο ERIC:
+[ΕΠΙΚΟΛΛΑ ΤΟ STRING ΣΟΥ]
+
+Αποτελέσματα: [ΑΡΙΘΜΟΣ] (ιδανικό: 200-1500)
+
+Εντόπισε πιθανά προβλήματα σύνταξης ή λογικής. Εξήγησε γιατί μπορεί να παίρνω [πολλά/λίγα] αποτελέσματα.
+
+ΜΗΝ ξαναγράψεις το string. Εξήγησέ μου τι να αλλάξω — θα το κάνω εγώ.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση:</strong> Debug — ο φοιτητής εφαρμόζει τη λύση, η ΤΝ εξηγεί.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 5 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Abstract Explanation</h3>
+        <p class="prompt-use">Πότε: Δυσνόητη ορολογία σε abstract κατά το screening</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Εξήγησέ μου απλά τι σημαίνει "[ΤΕΧΝΙΚΟΣ ΟΡΟΣ]" στο πλαίσιο [ΠΕΔΙΟ ΣΟΥ].
+
+Δώσε:
+1. Σύντομο ορισμό (2-3 προτάσεις)
+2. Ένα παράδειγμα από έρευνα
+3. Γιατί είναι σχετικό με [ΘΕΜΑ ΣΟΥ]
+
+ΜΗΝ εξηγήσεις αν η μελέτη αξίζει να συμπεριληφθεί — αυτή είναι δική μου απόφαση.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση:</strong> Κατανόηση ορολογίας — όχι απόφαση INCLUDE/EXCLUDE.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 6 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Consensus Search</h3>
+        <p class="prompt-use">Πότε: Scoping / εύρεση papers μέσω Claude + Consensus connector</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Ψάξε στο Consensus για peer-reviewed papers σχετικά με:
+[ΘΕΜΑ ΣΟΥ ΣΕ ΑΓΓΛΙΚΑ]
+
+Για κάθε paper που βρίσκεις, δώσε:
+- Τίτλο
+- Συγγραφείς + έτος
+- Κύριο εύρημα (1 πρόταση)
+- DOI
+
+Μόνο empirical studies. Μόνο peer-reviewed.
+Δεν χρειάζομαι τη δική σου ερμηνεία — μόνο τα στοιχεία.
+
+[ΣΗΜΕΙΩΣΗ: Θα ελέγξω κάθε DOI πριν το χρησιμοποιήσω]</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση:</strong> Εύρεση βιβλιογραφίας — με υποχρεωτικό DOI verification.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 7 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Language Editing</h3>
+        <p class="prompt-use">Πότε: Γλωσσική επιμέλεια δικού σου κειμένου — αποδεκτή χρήση HEAL-Link</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Ενεργείς ως γλωσσικός επιμελητής ακαδημαϊκών κειμένων.
+
+Το παρακάτω κείμενο είναι δικό μου (το έγραψα εγώ):
+[ΕΠΙΚΟΛΛΑ ΤΟ ΚΕΙΜΕΝΟ ΣΟΥ]
+
+Επιμελήσου το γλωσσικά:
+- Διόρθωσε γραμματικά λάθη
+- Βελτίωσε ροή και συνοχή
+- Βεβαιώσου ότι το ακαδημαϊκό ύφος είναι κατάλληλο
+
+ΜΗΝ αλλάξεις τα επιχειρήματα, τα ευρήματα, ή τα συμπεράσματα.
+ΜΗΝ προσθέσεις νέο περιεχόμενο.
+Επέστρεψε ΜΟΝΟ το διορθωμένο κείμενο.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση HEAL-Link:</strong> Γλωσσική επιμέλεια χωρίς αλλαγή νοήματος — δηλώνεται στο Statement.</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-num">Prompt 8 · <span class="tag-heal">HEAL-Link ✓</span></div>
+        <h3 class="prompt-title">Methodology Section</h3>
+        <p class="prompt-use">Πότε: Βοήθεια με τη δομή της μεθοδολογικής παραγράφου</p>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Ενεργείς ως ειδικός σε μεθοδολογία συστηματικής ανασκόπησης.
+
+Έχω κάνει τα παρακάτω στην έρευνά μου:
+- PICO: [ΤΟ PICO ΣΟΥ]
+- Βάσεις αναζήτησης: [ERIC, PsycINFO, Scopus]
+- Φίλτρα: [ΕΤΟΣ, ΓΛΩΣΣΑ, κλπ]
+- Αποτελέσματα: [ΑΡΙΘΜΟΣ] papers
+- Χρησιμοποίησα ΤΝ για: [DESCRIBE]
+
+Εξήγησέ μου πώς να δομήσω τη μεθοδολογική μου παράγραφο. Δώσε μου τα στοιχεία που πρέπει να συμπεριλάβω — θα την γράψω εγώ.
+
+ΜΗΝ γράψεις την παράγραφο για μένα.</div>
+        <p class="prompt-note"><strong>Αποδεκτή χρήση:</strong> Βοήθεια δόμησης — ο φοιτητής γράφει ο ίδιος.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function copyPrompt(btn) {
+  const box = btn.parentElement;
+  const clone = box.cloneNode(true);
+  const b = clone.querySelector('.copy-btn');
+  if (b) b.remove();
+  const text = clone.textContent.trim();
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  }).catch(function() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ. <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Παν/μιο Θεσσαλίας</a>.</p></div>
+      <div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li></ul></div>
+      <div><h5>Εργαλεία</h5><ul><li><a href="https://claude.ai" target="_blank">Claude</a></li><li><a href="https://consensus.app" target="_blank">Consensus</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div>
+  </div>
+</footer>
+</body>
+</html>

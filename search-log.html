@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Log · Από το Prompt στη Δήλωση</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    .log-table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: 0.85rem; }
+    .log-table th { background: var(--coral); color: white; padding: var(--space-2) var(--space-3); text-align: left; font-family: var(--font-display); font-weight: 400; white-space: nowrap; }
+    .log-table td { padding: 0; border: 1px solid var(--rule); }
+    .log-table td input, .log-table td select, .log-table td textarea {
+      width: 100%; padding: var(--space-2); border: none; background: transparent;
+      font-family: var(--font-body); font-size: 0.85rem; color: var(--ink);
+      outline: none; resize: vertical;
+    }
+    .log-table td input:focus, .log-table td select:focus, .log-table td textarea:focus {
+      background: var(--sun-bg); outline: 2px solid var(--sun);
+    }
+    .log-table tr:nth-child(even) td { background: var(--paper-warm); }
+    .row-num { background: var(--coral-bg); color: var(--coral); font-weight: 700; text-align: center; width: 2rem; padding: var(--space-2); }
+    .action-bar { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-4); align-items: center; }
+    .btn-add { padding: 0.5rem 1rem; background: var(--teal); color: white; border: 2px solid var(--ink); border-radius: var(--r-full); font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; cursor: pointer; box-shadow: 3px 3px 0 var(--ink); }
+    .btn-add:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+    .btn-dl { padding: 0.5rem 1rem; background: var(--sage); color: white; border: 2px solid var(--ink); border-radius: var(--r-full); font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; cursor: pointer; box-shadow: 3px 3px 0 var(--ink); }
+    .btn-dl:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+    .btn-clear { padding: 0.5rem 1rem; background: var(--paper-card); color: var(--ink); border: 2px solid var(--ink); border-radius: var(--r-full); font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+    .info-box { background: var(--teal-bg); border: 2px solid var(--teal); border-radius: var(--r-md); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-4); font-size: 0.9rem; }
+    .overflow-x { overflow-x: auto; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background: var(--paper-warm); padding: var(--space-5) 0; border-bottom: 2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Εργαλείο · Homework Task 1</div>
+    <h1 style="font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); margin: var(--space-2) 0;">Search Log</h1>
+    <p style="color:var(--ink-soft); font-size:1.05rem; max-width:36rem;">Καταγραφή αναζητήσεων σε ERIC, PsycINFO, Scopus. Συμπλήρωσε online και κατέβασε ως Excel.</p>
+    <div style="margin-top:var(--space-3); display:flex; gap:var(--space-3); flex-wrap:wrap;">
+      <button class="btn-dl" onclick="downloadExcel()">⬇ Download .xlsx</button>
+      <a href="downloads/11_Search_Log_Template.xlsx" download class="btn-add" style="text-decoration:none;">⬇ Download blank .xlsx</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="info-box">
+      💡 <strong>Πώς χρησιμοποιείς αυτό το εργαλείο:</strong> Συμπλήρωσε μία γραμμή για κάθε αναζήτηση που τρέχεις. Κλικ "Download .xlsx" για να αποθηκεύσεις τα δεδομένα σου.
+    </div>
+
+    <div class="action-bar">
+      <button class="btn-add" onclick="addRow()">+ Νέα γραμμή</button>
+      <button class="btn-dl" onclick="downloadExcel()">⬇ Download .xlsx</button>
+      <button class="btn-clear" onclick="clearAll()">🗑 Καθαρισμός</button>
+    </div>
+
+    <div class="overflow-x">
+      <table class="log-table" id="logTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Βάση</th>
+            <th>Ημερομηνία</th>
+            <th>Version</th>
+            <th>Search String</th>
+            <th>Αποτελέσματα</th>
+            <th>Φίλτρα</th>
+            <th>RIS Εξάχθηκε</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+let rowCount = 0;
+
+function addRow(db, date, ver, str, res, filters, ris, notes) {
+  rowCount++;
+  const tbody = document.getElementById('logBody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="row-num">${rowCount}</td>
+    <td><select style="width:100%;padding:8px;border:none;background:transparent;font-family:inherit;">
+      <option ${db==='ERIC'?'selected':''}>ERIC</option>
+      <option ${db==='PsycINFO'?'selected':''}>PsycINFO</option>
+      <option ${db==='Scopus'?'selected':''}>Scopus</option>
+      <option ${db==='Consensus'?'selected':''}>Consensus</option>
+      <option ${db==='Άλλο'?'selected':''}>Άλλο</option>
+    </select></td>
+    <td><input type="date" value="${date||''}"></td>
+    <td><input type="text" placeholder="v1" value="${ver||''}"></td>
+    <td><textarea rows="3" placeholder="Επικόλλα εδώ το search string σου...">${str||''}</textarea></td>
+    <td><input type="number" placeholder="0" value="${res||''}"></td>
+    <td><input type="text" placeholder="2020-2025, Peer reviewed..." value="${filters||''}"></td>
+    <td><select style="width:100%;padding:8px;border:none;background:transparent;font-family:inherit;">
+      <option value="">—</option>
+      <option ${ris==='Ναι'?'selected':''}>Ναι</option>
+      <option ${ris==='Όχι'?'selected':''}>Όχι</option>
+    </select></td>
+    <td><textarea rows="3" placeholder="Σχόλια...">${notes||''}</textarea></td>
+  `;
+  tbody.appendChild(tr);
+}
+
+function downloadExcel() {
+  const wb = XLSX.utils.book_new();
+  const headers = ['#', 'Βάση', 'Ημερομηνία', 'Version', 'Search String', 'Αποτελέσματα', 'Φίλτρα', 'RIS Εξάχθηκε', 'Notes'];
+  const rows = [headers];
+  document.querySelectorAll('#logBody tr').forEach((tr, i) => {
+    const cells = tr.querySelectorAll('td');
+    rows.push([
+      i+1,
+      cells[1].querySelector('select').value,
+      cells[2].querySelector('input').value,
+      cells[3].querySelector('input').value,
+      cells[4].querySelector('textarea').value,
+      cells[5].querySelector('input').value,
+      cells[6].querySelector('input').value,
+      cells[7].querySelector('select').value,
+      cells[8].querySelector('textarea').value,
+    ]);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [{wch:4},{wch:12},{wch:12},{wch:8},{wch:50},{wch:14},{wch:20},{wch:14},{wch:25}];
+  XLSX.utils.book_append_sheet(wb, ws, 'Search Log');
+  XLSX.writeFile(wb, 'Search_Log.xlsx');
+}
+
+function clearAll() {
+  if (confirm('Να σβηστούν όλες οι γραμμές;')) {
+    document.getElementById('logBody').innerHTML = '';
+    rowCount = 0;
+  }
+}
+
+// Prefill 3 default rows
+['ERIC', 'PsycINFO', 'Scopus'].forEach(db => addRow(db));
+</script>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="homework.html">Εργασία</a></li></ul></div><div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank">HEAL-Link</a></li><li><a href="https://rayyan.ai" target="_blank">Rayyan</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

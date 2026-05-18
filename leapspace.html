@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeapSpace · Από το Prompt στη Δήλωση</title>
+  <meta name="description" content="Πρόσθετος πόρος: το LeapSpace της Elsevier — οδηγίες prompting και πρακτική χρήση για ερευνητική βιβλιογραφία.">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .prompt-card {
+      background: var(--paper-card);
+      border: 3px solid var(--ink);
+      border-radius: var(--r-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-4);
+      box-shadow: 6px 6px 0 var(--coral);
+      transition: all 0.3s;
+    }
+    .prompt-card:nth-of-type(2) { box-shadow: 6px 6px 0 var(--teal); }
+    .prompt-card:nth-of-type(3) { box-shadow: 6px 6px 0 var(--sun); }
+    .prompt-card:nth-of-type(4) { box-shadow: 6px 6px 0 var(--sage); }
+    .prompt-card:nth-of-type(5) { box-shadow: 6px 6px 0 var(--plum); }
+    .prompt-card:hover { transform: translate(-2px, -2px); }
+
+    .prompt-num {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--coral);
+      margin-right: var(--space-2);
+    }
+    .prompt-card:nth-of-type(2) .prompt-num { color: var(--teal); }
+    .prompt-card:nth-of-type(3) .prompt-num { color: var(--ink); }
+    .prompt-card:nth-of-type(4) .prompt-num { color: var(--sage); }
+    .prompt-card:nth-of-type(5) .prompt-num { color: var(--plum); }
+
+    .prompt-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      line-height: 1.2;
+      margin-bottom: var(--space-2);
+      display: inline-block;
+    }
+    .prompt-purpose {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: var(--space-3);
+    }
+    .prompt-box {
+      position: relative;
+      background: var(--paper-warm);
+      border: 2px dashed var(--ink-soft);
+      border-radius: var(--r-md);
+      padding: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: var(--space-3);
+      white-space: pre-wrap;
+    }
+    .prompt-tip {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+    .prompt-tip strong {
+      color: var(--coral);
+    }
+
+    .principle-box {
+      background: var(--paper-card);
+      border: 2px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: var(--space-4);
+      margin-bottom: var(--space-3);
+      display: flex;
+      gap: var(--space-3);
+      transition: all 0.2s;
+    }
+    .principle-box:hover {
+      border-color: var(--coral);
+      transform: translateX(3px);
+    }
+    .principle-icon {
+      flex-shrink: 0;
+      width: 2.5rem; height: 2.5rem;
+      border-radius: var(--r-full);
+      display: grid; place-items: center;
+      background: var(--coral);
+      color: white;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      border: 2px solid var(--ink);
+    }
+    .principle-box:nth-of-type(2) .principle-icon { background: var(--teal); }
+    .principle-box:nth-of-type(3) .principle-icon { background: var(--sun); color: var(--ink); }
+    .principle-box:nth-of-type(4) .principle-icon { background: var(--sage); }
+    .principle-box:nth-of-type(5) .principle-icon { background: var(--plum); }
+
+    .principle-content h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .principle-content p {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .compare-box {
+      background: var(--paper-card);
+      border: 3px solid var(--ink);
+      border-radius: var(--r-lg);
+      padding: var(--space-5);
+      margin: var(--space-5) 0;
+      box-shadow: 6px 6px 0 var(--plum);
+    }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+    @media (min-width: 700px) {
+      .compare-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .compare-tool {
+      padding: var(--space-3);
+      background: var(--paper-warm);
+      border-radius: var(--r-md);
+      border-left: 4px solid var(--teal);
+    }
+    .compare-tool:nth-child(2) { border-left-color: var(--coral); }
+    .compare-tool h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: var(--space-2);
+      font-weight: 400;
+    }
+    .compare-tool ul {
+      list-style: none;
+      padding: 0;
+      font-size: 0.92rem;
+    }
+    .compare-tool ul li {
+      padding-left: var(--space-3);
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .compare-tool ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+    }
+    .compare-tool:nth-child(2) ul li::before { color: var(--coral); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="spark">Από</span> το Prompt στη Δήλωση
+    </a>
+<ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html">Προετοιμασία</a></li>
+      <li><a href="session-1.html">Μάθημα 1</a></li>
+      <li><a href="session-2.html">Μάθημα 2</a></li>
+      <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html" class="active">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Πρόσθετος πόρος · Elsevier LeapSpace</div>
+        <h1 class="hero-title fade-up">
+          Pro tip:<br>
+          <span class="hand">LeapSpace</span>
+        </h1>
+        <p class="hero-subtitle fade-up">
+          Ένα ακόμα ισχυρό εργαλείο τεχνητής νοημοσύνης για ακαδημαϊκή έρευνα, από την Elsevier. Σύγκριση με το Consensus, σαφείς οδηγίες prompting, και πώς να το αξιοποιήσεις HEAL-Link compliant.
+        </p>
+        <div class="cta-group fade-up">
+          <a href="#prompting" class="btn">
+            Οδηγίες prompting <span class="arrow">↓</span>
+          </a>
+          <a href="https://www.elsevier.com/products/leapspace" target="_blank" rel="noopener" class="btn btn-outline">
+            Επίσημη σελίδα →
+          </a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--plum); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--sun); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--teal); top: 5%; left: 5%;"></div>
+        <div class="hero-label">
+          Trust<br>
+          <span>but verify ✦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">✷ Τι είναι</div>
+    <h2 class="section-title">Ένα <span class="accent">research-grade</span> AI workspace</h2>
+    <p class="section-lead">
+      Το <strong>LeapSpace</strong> ξεκίνησε από την Elsevier τον Νοέμβριο 2025. Είναι το νέο AI-assisted workspace που συνδυάζει <em>ScienceDirect AI</em> + <em>Scopus AI</em> σε ένα ενιαίο περιβάλλον — με ιδιαίτερη έμφαση στη <strong>διαφάνεια και επαληθευσιμότητα</strong> κάθε αποτελέσματος μέσω των «Trust Cards».
+    </p>
+
+    <div style="background: var(--paper-card); border: 2px solid var(--rule); border-radius: var(--r-lg); padding: var(--space-5); margin-top: var(--space-4);">
+      <h3 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: var(--space-3);">Τι το ξεχωρίζει</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: var(--space-3); position: relative; margin-bottom: var(--space-2);"><span style="position: absolute; left: 0; color: var(--coral); font-weight: 700;">▸</span> <strong>Trust Cards:</strong> Κάθε απάντηση συνοδεύεται από context + transparency για το πόσο ισχυρή είναι η ένδειξη</li>
+        <li style="padding-left: var(--space-3); position: relative; margin-bottom: var(--space-2);"><span style="position: absolute; left: 0; color: var(--coral); font-weight: 700;">▸</span> <strong>Source diversity:</strong> Tραβάει από millions of peer-reviewed full-text άρθρα + abstracts</li>
+        <li style="padding-left: var(--space-3); position: relative; margin-bottom: var(--space-2);"><span style="position: absolute; left: 0; color: var(--coral); font-weight: 700;">▸</span> <strong>No training:</strong> Τα queries σου ΔΕΝ χρησιμοποιούνται για training των μοντέλων</li>
+        <li style="padding-left: var(--space-3); position: relative; margin-bottom: var(--space-2);"><span style="position: absolute; left: 0; color: var(--coral); font-weight: 700;">▸</span> <strong>Multi-task:</strong> Idea generation · Project planning · Literature discovery · Funding identification</li>
+        <li style="padding-left: var(--space-3); position: relative;"><span style="position: absolute; left: 0; color: var(--coral); font-weight: 700;">▸</span> <strong>Διαθεσιμότητα:</strong> Preview για ιδρύματα τώρα · Full launch Q1 2026 · Auto-upgrade για ScienceDirect AI customers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow" style="display: inline-block;">✷ Σύγκριση</div>
+      <h2 class="section-title" style="margin: 0 auto var(--space-4);">
+        LeapSpace vs <span class="hand">Consensus</span>
+      </h2>
+      <p class="section-lead" style="margin: 0 auto var(--space-4);">
+        Και τα δύο εργαλεία είναι peer-reviewed AI για έρευνα. Διαφέρουν στις βάσεις και τις δυνατότητες.
+      </p>
+    </div>
+
+    <div class="compare-box">
+      <div class="compare-grid">
+        <div class="compare-tool">
+          <h4>🔵 Consensus</h4>
+          <ul>
+            <li>Δωρεάν tier · ευρεία προσβασιμότητα</li>
+            <li>Βασίζεται σε open access papers + Semantic Scholar</li>
+            <li>Καλό για quick scoping + αρχικές αναζητήσεις</li>
+            <li>Ενσωματώνεται εύκολα με Claude</li>
+            <li>Καλύτερο για: αρχικό sense-making</li>
+          </ul>
+        </div>
+        <div class="compare-tool">
+          <h4>🟣 LeapSpace</h4>
+          <ul>
+            <li>Ιδρυματική πρόσβαση (μέσω Elsevier license)</li>
+            <li>Πλήρες ScienceDirect + Scopus περιεχόμενο</li>
+            <li>Καλό για deep dive + comprehensive synthesis</li>
+            <li>Trust Cards για επαληθευσιμότητα</li>
+            <li>Καλύτερο για: λεπτομερή ανασκόπηση</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: var(--space-4); text-align: center; font-size: 0.92rem; color: var(--ink-soft);">
+        💡 <strong>Στο εργαστήριο</strong> διδάσκουμε <strong>Consensus</strong> (δωρεάν, προσβάσιμο σε όλους). Το LeapSpace είναι <strong>προαιρετική αναβάθμιση</strong> αν έχεις πρόσβαση μέσω του πανεπιστημίου σου.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="prompting">
+  <div class="container">
+    <div class="section-eyebrow">✷ Οδηγός prompting</div>
+    <h2 class="section-title">5 αρχές <span class="accent">prompting</span> για AI έρευνας</h2>
+    <p class="section-lead">
+      Οι παρακάτω αρχές δουλεύουν με το LeapSpace, το Consensus, και κάθε άλλο AI εργαλείο που χρησιμοποιεί ακαδημαϊκές βάσεις. Ισχύουν πέρα από συγκεκριμένα μοντέλα — είναι φιλοσοφικές αρχές καλής επικοινωνίας με ΤΝ.
+    </p>
+
+    <div style="margin-top: var(--space-5);">
+
+      <div class="principle-box">
+        <div class="principle-icon">i</div>
+        <div class="principle-content">
+          <h4>Συγκεκριμένο πεδίο, όχι γενικότητες</h4>
+          <p>Πες ρητά το επιστημονικό σου πεδίο και επιθυμητό setting. «Ειδική αγωγή στην πρωτοβάθμια εκπαίδευση» είναι 10× καλύτερο από «εκπαίδευση».</p>
+        </div>
+      </div>
+
+      <div class="principle-box">
+        <div class="principle-icon">ii</div>
+        <div class="principle-content">
+          <h4>Structured queries (όχι ασαφείς ερωτήσεις)</h4>
+          <p>Χρησιμοποίησε δομές όπως PICO ή PEO. «Παιδιά με ΔΑΦ (P) · Tablet-based παρέμβαση (I) · Inclusive σχολεία (Setting)» οδηγεί σε ακριβή αποτελέσματα.</p>
+        </div>
+      </div>
+
+      <div class="principle-box">
+        <div class="principle-icon">iii</div>
+        <div class="principle-content">
+          <h4>Πάντα ζήτα citations</h4>
+          <p>Στο ΤΝ της Elsevier ζήτα ρητά «with full citations and DOIs». Στο LeapSpace δες πάντα τα Trust Cards. ΠΑΝΤΑ verify DOI πριν συμπεριλάβεις αναφορά.</p>
+        </div>
+      </div>
+
+      <div class="principle-box">
+        <div class="principle-icon">iv</div>
+        <div class="principle-content">
+          <h4>Αξιολόγηση, όχι συμπέρασμα</h4>
+          <p>Ζήτα «show me the evidence on...» και ΟΧΙ «what should I conclude?». Η σύνθεση και ερμηνεία είναι ΑΝΘΡΩΠΙΝΗ ΕΡΓΑΣΙΑ — HEAL-Link Αρχή 2.</p>
+        </div>
+      </div>
+
+      <div class="principle-box">
+        <div class="principle-icon">v</div>
+        <div class="principle-content">
+          <h4>Σαφείς περιορισμοί (ΜΗ κάνε...)</h4>
+          <p>Όπως διδάχθηκες στο εργαστήριο: γράψε στο prompt «ΜΗΝ συνθέσεις τα ευρήματα» ή «ΜΗΝ προτείνεις κάποιο συμπέρασμα — μόνο δείξε τα δεδομένα».</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="section-eyebrow">✷ Έτοιμα prompts</div>
+    <h2 class="section-title">5 prompts για χρήση με <span class="hand">LeapSpace</span></h2>
+    <p class="section-lead">
+      Όλα τα prompts είναι HEAL-Link compliant — με σαφείς ρόλους, περιορισμούς, και υποχρέωση επαλήθευσης. Adjust τα στο δικό σου θέμα.
+    </p>
+
+    <div style="margin-top: var(--space-5); max-width: 50rem;">
+
+      <div class="prompt-card">
+        <div>
+          <span class="prompt-num">i.</span>
+          <h3 class="prompt-title">Literature Mapping</h3>
+        </div>
+        <div class="prompt-purpose">Για αρχικό scoping — εντοπίζεις θεματικές κατευθύνσεις στο πεδίο σου.</div>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Map the research landscape on [topic] from the last 5 years. Show:
+- 3-4 main research streams
+- Key authors per stream
+- 5 most cited papers (with DOIs)
+
+Do NOT synthesize findings or draw conclusions. Just describe what research exists. Include Trust Cards.</div>
+        <div class="prompt-tip">💡 <strong>Tip:</strong> Στο [topic] βάλε συγκεκριμένη φράση π.χ. «tablet-based interventions for children with ASD in inclusive classrooms».</div>
+      </div>
+
+      <div class="prompt-card">
+        <div>
+          <span class="prompt-num">ii.</span>
+          <h3 class="prompt-title">Cross-Disciplinary Insights</h3>
+        </div>
+        <div class="prompt-purpose">Για να βρεις ιδέες από συγγενή πεδία — χρήσιμο όταν η βιβλιογραφία στο δικό σου πεδίο είναι περιορισμένη.</div>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>I'm researching [your topic] in the field of [your field]. Show me adjacent fields where similar approaches are studied — and identify:
+- 3 transferable methodologies
+- 5 papers from adjacent fields (with DOIs)
+- Specific evidence connecting these fields
+
+Show Trust Cards. Do NOT recommend which approach is best.</div>
+        <div class="prompt-tip">💡 <strong>Παράδειγμα:</strong> έρευνα στην ΔΑΦ μπορεί να ωφεληθεί από συγγενή πεδία όπως ADHD, developmental coordination disorder, κλπ.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div>
+          <span class="prompt-num">iii.</span>
+          <h3 class="prompt-title">Methodology Comparison</h3>
+        </div>
+        <div class="prompt-purpose">Για να καταλάβεις πώς συγκρίνονται διαφορετικές μεθοδολογικές προσεγγίσεις στο θέμα σου.</div>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>In studies on [topic], compare these methodologies:
+- [Method A, e.g., RCT]
+- [Method B, e.g., Single-case design]
+- [Method C, e.g., Qualitative case study]
+
+For each, show:
+- 3 representative studies with DOIs
+- Typical sample sizes
+- Strengths and limitations of the approach (from the literature, not your opinion)
+
+Do NOT recommend which methodology I should use.</div>
+        <div class="prompt-tip">💡 <strong>Tip:</strong> Πολύ χρήσιμο για το Methods chapter της διπλωματικής σου — αλλά πάντα verify κάθε DOI.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div>
+          <span class="prompt-num">iv.</span>
+          <h3 class="prompt-title">Recent Advances</h3>
+        </div>
+        <div class="prompt-purpose">Για να βρεις τι έχει αλλάξει στο πεδίο σου τα τελευταία 2 χρόνια.</div>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>What are the most significant new developments in [topic] from 2024-2026? Show:
+- 5 high-impact recent papers (with DOIs)
+- New theoretical frameworks (if any)
+- Emerging methodological trends
+- Open questions identified by recent reviews
+
+ONLY peer-reviewed sources. Include Trust Cards.</div>
+        <div class="prompt-tip">💡 <strong>Προσοχή:</strong> «high-impact» μπορεί να σημαίνει διαφορετικά πράγματα — ζήτα ρητά τι κριτήριο χρησιμοποιεί.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div>
+          <span class="prompt-num">v.</span>
+          <h3 class="prompt-title">Counter-Evidence Search</h3>
+        </div>
+        <div class="prompt-purpose">Για να ελέγξεις τη δύναμη μιας ένδειξης — δείχνει αν υπάρχουν studies που αντικρούουν την υπόθεσή σου.</div>
+        <div class="prompt-box"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Find peer-reviewed studies that question or contradict the claim: "[your hypothesis or popular claim in your field]"
+
+Show:
+- 5 studies with conflicting findings (with DOIs)
+- The specific evidence each presents
+- Limitations of these counter-studies
+
+Do NOT take a position on which side is correct. Show me the disagreement clearly.</div>
+        <div class="prompt-tip">💡 <strong>Critical thinking:</strong> Αυτό το prompt είναι ίσως το πιο σημαντικό — προστατεύει από confirmation bias.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">✷ Πώς το χρησιμοποιείς</div>
+    <h2 class="section-title">Δευτερευόντως: <span class="hand">πρόσβαση</span> &amp; workflow</h2>
+
+    <div style="background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-5); box-shadow: 6px 6px 0 var(--sage); margin-top: var(--space-4);">
+      <h3 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: var(--space-3);">3 βήματα πρόσβασης</h3>
+      <ol style="list-style: none; counter-reset: step; padding: 0;">
+        <li style="counter-increment: step; padding-left: 3rem; position: relative; margin-bottom: var(--space-3);">
+          <span style="position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--sage); color: white; display: grid; place-items: center; font-family: var(--font-display); border: 2px solid var(--ink);">1</span>
+          <strong>Έλεγξε αν το πανεπιστήμιό σου έχει license</strong> — Ρώτησε τη βιβλιοθήκη ή κάνε login μέσω institutional access στο elsevier.com/products/leapspace
+        </li>
+        <li style="counter-increment: step; padding-left: 3rem; position: relative; margin-bottom: var(--space-3);">
+          <span style="position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--sage); color: white; display: grid; place-items: center; font-family: var(--font-display); border: 2px solid var(--ink);">2</span>
+          <strong>Login μέσω HEAL-Link / VPN</strong> — Αν είσαι σε ελληνικό ΑΕΙ, η σύνδεση γίνεται μέσω της κοινής εθνικής πύλης HEAL-Link.
+        </li>
+        <li style="counter-increment: step; padding-left: 3rem; position: relative;">
+          <span style="position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--sage); color: white; display: grid; place-items: center; font-family: var(--font-display); border: 2px solid var(--ink);">3</span>
+          <strong>Δοκίμασε ένα prompt</strong> — Χρησιμοποίησε ένα από τα 5 prompts παραπάνω. Πάντα κοίτα τα Trust Cards και verify DOIs.
+        </li>
+      </ol>
+    </div>
+
+    <div style="background: var(--sun-bg); border: 2px dashed var(--ink); border-radius: var(--r-md); padding: var(--space-4); margin-top: var(--space-5); display: flex; gap: var(--space-3); align-items: center;">
+      <div style="flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: var(--r-full); background: var(--sun); color: var(--ink); display: grid; place-items: center; font-weight: 700; border: 2px solid var(--ink); font-size: 1.2rem;">⚖</div>
+      <div>
+        <strong style="display: block; margin-bottom: 4px;">HEAL-Link compliance reminder</strong>
+        <span style="font-size: 0.95rem; color: var(--ink-soft);">
+          Όπως και με το Consensus, η χρήση LeapSpace στη διπλωματική σου πρέπει να δηλώνεται ρητά στο HEAL-Link Statement, στη μεθοδολογία, και στα DOIs. Δεν αντικαθιστά τη συστηματική αναζήτηση σε εξειδικευμένες βάσεις.
+        </span>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: var(--space-6);">
+      <a href="materials.html" class="btn">
+        Πίσω στο υλικό <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="hand">Από</span> το Prompt στη Δήλωση
+        </div>
+        <p class="footer-text">
+          Εργαστήριο εισαγωγής στην υπεύθυνη χρήση εργαλείων GenAI για μεταπτυχιακούς φοιτητές. Σύμφωνα με τις κατευθυντήριες του Συνδέσμου Ελληνικών Ακαδημαϊκών Βιβλιοθηκών (HEAL-Link / ΣΕΑΒ).
+        </p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="agenda.html">Πρόγραμμα</a></li>
+          <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+          <li><a href="materials.html">Υλικό</a></li>
+          <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html" class="active">LeapSpace</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Εργαλεία</h5>
+        <ul>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link.gr</a></li>
+          <li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li>
+          <li><a href="https://www.elsevier.com/products/leapspace" target="_blank" rel="noopener">LeapSpace</a></li>
+          <li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li>
+          <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA</div>
+      <div>SR+ Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function copyPrompt(btn) {
+  const box = btn.parentElement;
+  const clone = box.cloneNode(true);
+  const btnClone = clone.querySelector('.copy-btn');
+  if (btnClone) btnClone.remove();
+  const text = clone.textContent.trim();
+
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(function() {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

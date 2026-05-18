@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Εργασία Σπιτιού · Από το Prompt στη Δήλωση · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .task { background: var(--paper-card); border: 3px solid var(--ink); border-radius: var(--r-lg); padding: var(--space-5); margin-bottom: var(--space-5); }
+    .task:nth-of-type(1) { box-shadow: 6px 6px 0 var(--coral); }
+    .task:nth-of-type(2) { box-shadow: 6px 6px 0 var(--teal); }
+    .task:nth-of-type(3) { box-shadow: 6px 6px 0 var(--sun); }
+    .task:nth-of-type(4) { box-shadow: 6px 6px 0 var(--sage); }
+    .task:nth-of-type(5) { box-shadow: 6px 6px 0 var(--plum); }
+    .task-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 2px dashed var(--rule); }
+    .task-num { width: 3rem; height: 3rem; border-radius: var(--r-full); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; color: white; border: 3px solid var(--ink); flex-shrink: 0; }
+    .task:nth-of-type(1) .task-num { background: var(--coral); }
+    .task:nth-of-type(2) .task-num { background: var(--teal); }
+    .task:nth-of-type(3) .task-num { background: var(--sun); color: var(--ink); }
+    .task:nth-of-type(4) .task-num { background: var(--sage); }
+    .task:nth-of-type(5) .task-num { background: var(--plum); }
+    .task-title { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.1; }
+    .task-time { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+    .checklist { list-style: none; margin: var(--space-3) 0; }
+    .checklist li { display: flex; gap: var(--space-3); padding: var(--space-3); background: var(--paper-warm); border-radius: var(--r-md); margin-bottom: var(--space-2); }
+    .checklist .check { flex-shrink: 0; width: 1.5rem; height: 1.5rem; border-radius: var(--r-sm); border: 2px solid var(--ink); background: white; margin-top: 2px; }
+    .callout { background: var(--sun-bg); border: 2px solid var(--sun); border-radius: var(--r-md); padding: var(--space-4); margin: var(--space-4) 0; display: flex; gap: var(--space-3); }
+    .callout-icon { flex-shrink: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--sun); color: var(--ink); display: grid; place-items: center; font-weight: 700; border: 2px solid var(--ink); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html">Προετοιμασία</a></li>
+      <li><a href="session-1.html">Μάθημα 1</a></li>
+      <li><a href="session-2.html">Μάθημα 2</a></li>
+      <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Μεταξύ Μαθημάτων · ~3 ώρες</div>
+        <h1 class="hero-title fade-up">Εργασία<br><span class="hand">σπιτιού</span></h1>
+        <p class="hero-subtitle fade-up">
+          5 εργασίες μεταξύ Μαθήματος 1 και 2. Τρέχεις τις αναζητήσεις σου σε πραγματικές βάσεις, εξάγεις αποτελέσματα, ανεβάζεις στο Rayyan, και κάνεις DOI verification. Αυτή η εργασία είναι η γέφυρα μεταξύ θεωρίας και πράξης.
+        </p>
+        <div class="cta-group fade-up">
+          <a href="#tasks" class="btn">Δες τις εργασίες <span class="arrow">↓</span></a>
+          <a href="session-1.html" class="btn btn-outline">← Μάθημα 1</a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--sun); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--sage); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--coral); top: 5%; left: 5%;"></div>
+        <div class="hero-label">Home<br><span>work time ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="tasks">
+  <div class="container">
+    <div class="section-eyebrow">✷ 5 εργασίες</div>
+    <h2 class="section-title">Βήμα-βήμα στο <span class="accent">σπίτι</span></h2>
+    <p class="section-lead">Κάνε τα με τη σειρά. Κάθε εργασία χτίζει στην προηγούμενη. Χρησιμοποίησε τα templates που σου δώσαμε.</p>
+
+    <!-- TASK 1 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">1</div>
+        <div><span class="task-time">~45 ΛΕΠΤΑ</span><h3 class="task-title">Τρέξε τις αναζητήσεις</h3></div>
+      </div>
+      <p>Μετάφρασε το ERIC search string σε <strong>PsycINFO</strong> και <strong>Scopus</strong> σύνταξη (βλ. Reference Card). Τρέξε και στις 3 βάσεις.</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div>Τρέξε στο <strong>ERIC</strong> — σημείωσε αποτελέσματα</div></li>
+        <li><span class="check"></span><div>Μετάφρασε σε <strong>PsycINFO</strong> σύνταξη — τρέξε</div></li>
+        <li><span class="check"></span><div>Μετάφρασε σε <strong>Scopus</strong> σύνταξη (TITLE-ABS-KEY) — τρέξε</div></li>
+        <li><span class="check"></span><div>Καταγράψε στο <strong>Search Log Template</strong> (Excel)</div></li>
+      </ul>
+      <div class="callout">
+        <div class="callout-icon">💡</div>
+        <div style="font-size: 0.95rem;"><strong>Αν τα αποτελέσματα είναι >5000 ή <50</strong><br>Χρησιμοποίησε Prompt #4 (Search String Debugging) για να εντοπίσεις το πρόβλημα. Αυτή ΕΙΝΑΙ αποδεκτή χρήση ΤΝ.</div>
+      </div>
+    </div>
+
+    <!-- TASK 2 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">2</div>
+        <div><span class="task-time">~20 ΛΕΠΤΑ</span><h3 class="task-title">Εξαγωγή RIS files</h3></div>
+      </div>
+      <p>Από κάθε βάση, εξάγω τα αποτελέσματα σε <strong>RIS format</strong> (ή BibTeX). Αυτά θα τα ανεβάσεις στο Rayyan.</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div><strong>ERIC:</strong> Select All → Export → RIS</div></li>
+        <li><span class="check"></span><div><strong>PsycINFO:</strong> Select All → Export → RIS/BibTeX</div></li>
+        <li><span class="check"></span><div><strong>Scopus:</strong> Select All → Export → RIS</div></li>
+        <li><span class="check"></span><div>Σώσε τα 3 αρχεία σε φάκελο «homework»</div></li>
+      </ul>
+    </div>
+
+    <!-- TASK 3 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">3</div>
+        <div><span class="task-time">~30 ΛΕΠΤΑ</span><h3 class="task-title">Upload στο Rayyan</h3></div>
+      </div>
+      <p>Δημιούργησε νέο project στο Rayyan και ανέβασε τα 3 RIS files.</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div>Rayyan → New Review → Όνομα: «[Θέμα σου] — Workshop»</div></li>
+        <li><span class="check"></span><div>Upload τα 3 RIS files</div></li>
+        <li><span class="check"></span><div>Περίμενε deduplication (~5 λεπτά)</div></li>
+        <li><span class="check"></span><div>Σημείωσε: Πόσα συνολικά; Πόσα duplicates αφαιρέθηκαν;</div></li>
+      </ul>
+      <div class="callout" style="background: var(--coral-bg); border-color: var(--coral);">
+        <div class="callout-icon" style="background: var(--coral); color: white;">⚠</div>
+        <div style="font-size: 0.95rem;"><strong>ΜΗΝ ξεκινήσεις screening ακόμα!</strong><br>Θα κάνουμε screening μαζί στο Μάθημα 2. Απλά ανέβασε τα αρχεία.</div>
+      </div>
+    </div>
+
+    <!-- TASK 4 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">4</div>
+        <div><span class="task-time">~45 ΛΕΠΤΑ</span><h3 class="task-title">DOI Verification (10 papers)</h3></div>
+      </div>
+      <p>Από τα Consensus αποτελέσματα του Μαθήματος 1, επαλήθευσε <strong>10 DOIs</strong>.</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div>Άνοιξε το <strong>DOI Verification Template</strong> (Excel)</div></li>
+        <li><span class="check"></span><div>Για κάθε DOI: πήγαινε στο doi.org/[DOI]</div></li>
+        <li><span class="check"></span><div>Έλεγξε: URL ανοίγει; Τίτλος ταιριάζει; Συγγραφείς ταιριάζουν;</div></li>
+        <li><span class="check"></span><div>Σημείωσε Yes/No στο template</div></li>
+        <li><span class="check"></span><div>Αν κάποιο DOI δεν επαληθεύεται → ΔΕΝ ΤΟ ΧΡΗΣΙΜΟΠΟΙΕΙΣ</div></li>
+      </ul>
+    </div>
+
+    <!-- TASK 5 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">5</div>
+        <div><span class="task-time">~15 ΛΕΠΤΑ</span><h3 class="task-title">Αυτοαξιολόγηση</h3></div>
+      </div>
+      <p>Πριν έρθεις στο Μάθημα 2, βεβαιώσου:</p>
+      <ul class="checklist">
+        <li><span class="check"></span><div>Search Log <strong>συμπληρωμένο</strong> (3 βάσεις × αποτελέσματα)</div></li>
+        <li><span class="check"></span><div>3 RIS files <strong>ανεβασμένα</strong> στο Rayyan</div></li>
+        <li><span class="check"></span><div>DOI Verification <strong>10 papers checked</strong></div></li>
+        <li><span class="check"></span><div>Αποτελέσματα σε <strong>λογική κλίμακα</strong> (200-1500)</div></li>
+        <li><span class="check"></span><div>Αν ΟΧΙ → έτρεξα debugging με Prompt #4</div></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="text-center" style="max-width: 36rem; margin: 0 auto;">
+      <h2 class="section-title" style="margin: 0 auto var(--space-4);">Έτοιμος για το <span class="hand">Μάθημα 2</span>;</h2>
+      <p style="font-size: 1.05rem; color: var(--ink-soft);">Φέρε μαζί σου: laptop + login Rayyan + Search Log + DOI Verification Template. Θα δουλέψουμε πάνω στα δικά σου δεδομένα.</p>
+      <div style="margin-top: var(--space-5);">
+        <a href="session-2.html" class="btn">Μάθημα 2 <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Πλήρες εργαστήριο GenAI στη συστηματική ανασκόπηση. HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top: 1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color: var(--sun);">ΠΜΣ Ειδικής Αγωγής, Παν/μιο Θεσσαλίας</a>.</p>
+      </div>
+      <div><h5>Σελίδες</h5><ul><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="materials.html">Υλικό</a></li></ul></div>
+      <div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li><li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li><li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li><li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOI Verification · Από το Prompt στη Δήλωση</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    .tbl { width:100%; border-collapse:collapse; font-size:0.85rem; }
+    .tbl th { background:var(--coral); color:white; padding:10px 12px; text-align:left; font-family:var(--font-display); font-weight:400; white-space:nowrap; }
+    .tbl td { padding:0; border:1px solid var(--rule); }
+    .tbl td input, .tbl td select { width:100%; padding:8px 10px; border:none; background:transparent; font-family:var(--font-body); font-size:0.85rem; color:var(--ink); outline:none; }
+    .tbl td input:focus, .tbl td select:focus { background:var(--sun-bg); outline:2px solid var(--sun); }
+    .tbl tr:nth-child(even) td { background:var(--paper-warm); }
+    .status-yes { color:#16a34a; font-weight:700; }
+    .status-no  { color:var(--coral); font-weight:700; }
+    .bar { display:flex; gap:var(--space-3); flex-wrap:wrap; margin-bottom:var(--space-4); align-items:center; }
+    .btn-add { padding:.5rem 1rem; background:var(--teal); color:white; border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:3px 3px 0 var(--ink); }
+    .btn-dl  { padding:.5rem 1rem; background:var(--sage); color:white; border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:3px 3px 0 var(--ink); }
+    .btn-out { padding:.5rem 1rem; background:var(--paper-card); color:var(--ink); border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; }
+    .ovx { overflow-x:auto; }
+    .info { background:var(--coral-bg); border:2px solid var(--coral); border-radius:var(--r-md); padding:var(--space-3) var(--space-4); margin-bottom:var(--space-4); font-size:.9rem; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Εργαλείο · Homework Task 4</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">DOI Verification</h1>
+    <p style="color:var(--ink-soft);max-width:36rem;">Επαλήθευσε κάθε DOI πριν τη χρησιμοποιήσεις. Κανένα unverified DOI στη διπλωματική.</p>
+    <div style="margin-top:var(--space-3);display:flex;gap:var(--space-3);flex-wrap:wrap;">
+      <button class="btn-dl" onclick="downloadExcel()">⬇ Download .xlsx</button>
+      <a href="downloads/12_DOI_Verification_Template.xlsx" download class="btn-add" style="text-decoration:none;">⬇ Blank template</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="info">
+      ⚖ <strong>Κανόνας HEAL-Link:</strong> Κάθε DOI από ΤΝ ή Consensus <em>πρέπει</em> να επαληθεύεται στο doi.org. Αν δεν επαληθεύεται → ΔΕΝ χρησιμοποιείται.
+    </div>
+    <div class="bar">
+      <button class="btn-add" onclick="addRow()">+ Νέο DOI</button>
+      <button class="btn-dl" onclick="downloadExcel()">⬇ Download .xlsx</button>
+      <button class="btn-out" onclick="clearAll()">🗑 Καθαρισμός</button>
+    </div>
+    <div class="ovx">
+      <table class="tbl">
+        <thead><tr>
+          <th>#</th><th>DOI</th><th>Τίτλος (από ΤΝ/Consensus)</th>
+          <th>URL ανοίγει;</th><th>Τίτλος ταιριάζει;</th>
+          <th>Συγγραφείς ταιριάζουν;</th><th>Status</th><th>Notes</th>
+        </tr></thead>
+        <tbody id="doiBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+let n = 0;
+function addRow() {
+  n++;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td style="text-align:center;padding:8px;background:var(--coral-bg);color:var(--coral);font-weight:700;">${n}</td>
+    <td><input placeholder="10.xxxx/xxxxx"></td>
+    <td><input placeholder="Τίτλος από ΤΝ..."></td>
+    <td><select onchange="updateStatus(this)">
+      <option>—</option><option>✅ Ναι</option><option>❌ Όχι</option>
+    </select></td>
+    <td><select onchange="updateStatus(this)">
+      <option>—</option><option>✅ Ναι</option><option>❌ Όχι</option>
+    </select></td>
+    <td><select onchange="updateStatus(this)">
+      <option>—</option><option>✅ Ναι</option><option>❌ Όχι</option>
+    </select></td>
+    <td class="status-cell" style="text-align:center;padding:8px;">—</td>
+    <td><input placeholder="Σχόλιο..."></td>
+  `;
+  document.getElementById('doiBody').appendChild(tr);
+}
+
+function updateStatus(sel) {
+  const row = sel.closest('tr');
+  const selects = row.querySelectorAll('select');
+  const vals = [...selects].map(s => s.value);
+  const cell = row.querySelector('.status-cell');
+  if (vals.includes('❌ Όχι')) {
+    cell.innerHTML = '<span style="color:var(--coral);font-weight:700;">❌ Δεν επαληθεύτηκε</span>';
+  } else if (vals.every(v => v === '✅ Ναι')) {
+    cell.innerHTML = '<span style="color:#16a34a;font-weight:700;">✅ Επαληθεύτηκε</span>';
+  } else {
+    cell.innerHTML = '⏳ Σε εξέλιξη';
+  }
+}
+
+function downloadExcel() {
+  const headers = ['#','DOI','Τίτλος (από ΤΝ)','URL ανοίγει;','Τίτλος ταιριάζει;','Συγγραφείς ταιριάζουν;','Status','Notes'];
+  const rows = [headers];
+  document.querySelectorAll('#doiBody tr').forEach((tr,i) => {
+    const inp = tr.querySelectorAll('input');
+    const sel = tr.querySelectorAll('select');
+    rows.push([i+1, inp[0].value, inp[1].value, sel[0].value, sel[1].value, sel[2].value, tr.querySelector('.status-cell').textContent.trim(), inp[2].value]);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [{wch:4},{wch:22},{wch:40},{wch:16},{wch:18},{wch:22},{wch:22},{wch:25}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'DOI Verification');
+  XLSX.writeFile(wb, 'DOI_Verification.xlsx');
+}
+
+function clearAll() {
+  if(confirm('Να σβηστούν όλα;')) { document.getElementById('doiBody').innerHTML=''; n=0; }
+}
+
+for(let i=0;i<5;i++) addRow();
+</script>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="homework.html">Εργασία</a></li></ul></div><div><h5>Εργαλεία</h5><ul><li><a href="https://doi.org" target="_blank">doi.org</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

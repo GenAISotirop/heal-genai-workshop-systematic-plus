@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Μάθημα 2 · Screening + Σύνθεση · Από το Prompt στη Δήλωση</title>
+  <meta name="description" content="Δεύτερο τρίωρο: Rayyan screening, critical reading, data extraction, σύνθεση, HEAL-Link Statement.">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .timeline { position: relative; max-width: 52rem; margin: var(--space-6) auto 0; }
+    .timeline::before { content: ''; position: absolute; left: 27px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--sage), var(--teal), var(--sun), var(--coral)); border-radius: var(--r-full); }
+    @media (max-width: 700px) { .timeline::before { left: 22px; } }
+
+    .module { position: relative; padding-left: 80px; margin-bottom: var(--space-7); }
+    @media (max-width: 700px) { .module { padding-left: 60px; } }
+    .module-dot { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: var(--r-full); border: 4px solid var(--ink); color: white; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; z-index: 2; box-shadow: 4px 4px 0 var(--ink); }
+    @media (max-width: 700px) { .module-dot { width: 46px; height: 46px; font-size: 1.1rem; } }
+    .module:nth-of-type(1) .module-dot { background: var(--sage); }
+    .module:nth-of-type(2) .module-dot { background: var(--ink); color: var(--sun); border-color: var(--sun); }
+    .module:nth-of-type(3) .module-dot { background: var(--teal); }
+    .module:nth-of-type(4) .module-dot { background: var(--coral); }
+
+    .module-header { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-3); }
+    .module-title { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
+    .module-time { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; padding: 0.3rem 0.8rem; color: white; border-radius: var(--r-full); flex-shrink: 0; }
+    .module:nth-of-type(1) .module-time { background: var(--sage); }
+    .module:nth-of-type(2) .module-time { background: var(--ink); color: var(--sun); }
+    .module:nth-of-type(3) .module-time { background: var(--teal); }
+    .module:nth-of-type(4) .module-time { background: var(--coral); }
+
+    .module-lead { font-size: 1.02rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: var(--space-4); }
+    .module-body { background: var(--paper-card); border: 2px solid var(--rule); border-radius: var(--r-md); padding: var(--space-4); }
+    .module-block { padding: var(--space-3) 0; border-bottom: 1px dashed var(--rule); }
+    .module-block:last-child { border-bottom: none; padding-bottom: 0; }
+    .module-block:first-child { padding-top: 0; }
+    .block-meta { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+    .block-time { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+    .block-type { font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: var(--r-full); }
+    .type-lecture { background: var(--coral-bg); color: var(--coral); }
+    .type-activity { background: var(--teal-bg); color: var(--teal); }
+    .type-demo { background: var(--sun-bg); color: var(--ink); }
+    .type-discussion { background: var(--sage-bg); color: var(--sage); }
+
+    .block-title { font-family: var(--font-display); font-size: 1.08rem; font-weight: 400; margin-bottom: 4px; }
+    .block-desc { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
+    .deliv-card { background: linear-gradient(135deg, var(--sun-bg), var(--coral-bg)); border: 2px dashed var(--coral); border-radius: var(--r-md); padding: var(--space-3); margin-top: var(--space-3); display: flex; gap: var(--space-2); align-items: center; }
+    .deliv-icon { flex-shrink: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--coral); color: white; display: grid; place-items: center; font-weight: 700; border: 2px solid var(--ink); }
+    .deliv-text { font-size: 0.88rem; }
+    .deliv-text strong { font-family: var(--font-display); font-weight: 400; font-size: 0.98rem; display: block; margin-bottom: 2px; }
+
+    .break-module { padding-left: 80px; margin-bottom: var(--space-7); position: relative; }
+    @media (max-width: 700px) { .break-module { padding-left: 60px; } }
+    .break-card { background: var(--paper-warm); border: 2px dashed var(--ink-soft); border-radius: var(--r-md); padding: var(--space-4); text-align: center; }
+    .break-card h4 { font-family: var(--font-hand); font-size: 2rem; font-weight: 600; color: var(--ink-soft); margin-bottom: var(--space-1); }
+    .break-card p { font-size: 0.92rem; color: var(--muted); margin: 0; }
+
+    .heal-callout { background: var(--sage-bg); border: 2px solid var(--sage); border-radius: var(--r-md); padding: var(--space-3); margin-top: var(--space-3); display: flex; gap: var(--space-2); }
+    .heal-callout-icon { flex-shrink: 0; width: 1.8rem; height: 1.8rem; border-radius: var(--r-full); background: var(--sage); color: white; display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; border: 2px solid var(--ink); }
+    .heal-callout p { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html">Προετοιμασία</a></li>
+      <li><a href="session-1.html">Μάθημα 1</a></li>
+      <li><a href="session-2.html" class="active">Μάθημα 2</a></li>
+      <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Μάθημα 2 από 2 · 180 λεπτά</div>
+        <h1 class="hero-title fade-up">Screening +<br><span class="hand">Σύνθεση</span></h1>
+        <p class="hero-subtitle fade-up">
+          Δεύτερο τρίωρο: δουλεύουμε με τα πραγματικά δεδομένα που μάζεψες στο homework. Rayyan screening, critical reading, data extraction, draft synthesis, γλωσσική επιμέλεια, και η τελική Δήλωση Χρήσης. 5 ασκήσεις.
+        </p>
+        <div class="cta-group fade-up">
+          <a href="#block-e" class="btn">Ξεκίνα <span class="arrow">↓</span></a>
+          <a href="session-1.html" class="btn btn-outline">← Μάθημα 1</a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--sage); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--coral); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--teal); top: 5%; left: 5%;"></div>
+        <div class="hero-label">Day 2<br><span>the finish line ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">✷ Αναλυτικό πρόγραμμα</div>
+    <h2 class="section-title">Τέσσερα <span class="accent">blocks</span></h2>
+    <p class="section-lead">Block Ε: Screening (90') · Break (15') · Block ΣΤ: Synthesis + Documentation (45') · Block Ζ: Closure (30')</p>
+
+    <div class="timeline">
+
+      <!-- BLOCK Ε -->
+      <div class="module" id="block-e">
+        <div class="module-dot">Ε</div>
+        <div class="module-header">
+          <h3 class="module-title">Screening + Critical Reading</h3>
+          <span class="module-time">0:00 — 1:30 · 90'</span>
+        </div>
+        <p class="module-lead">Ξεκινάμε με review του homework, μετά βουτάμε στο Rayyan. Κριτική ανάγνωση abstracts, INCLUDE/EXCLUDE/MAYBE decisions, DOI verification review.</p>
+
+        <div class="module-body">
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:00 — 0:15</span><span class="block-type type-discussion">Discussion</span></div>
+            <h4 class="block-title">Homework Review</h4>
+            <p class="block-desc">Τι βρήκατε; Πόσα αποτελέσματα; Δυσκολίες; Κοινά προβλήματα (πολλά/λίγα results, σύνταξη strings).</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:15 — 0:35</span><span class="block-type type-demo">Demo + Practice</span></div>
+            <h4 class="block-title">Rayyan Deep Dive</h4>
+            <p class="block-desc">Δημιουργία project · Import RIS files · Deduplication · Screening interface · Labels · Filters · Blind mode.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:35 — 0:50</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 5: Rayyan Screening (15 abstracts)</h4>
+            <p class="block-desc">Screening 15 abstracts live στο Rayyan. INCLUDE/EXCLUDE/MAYBE με 1-word reason. Όλα τα Claude tabs ΚΛΕΙΣΤΑ — αυτό είναι ανθρώπινη κρίση.</p>
+            <div class="heal-callout">
+              <div class="heal-callout-icon">⚖</div>
+              <p><strong>HEAL-Link:</strong> Το screening δεν ανατίθεται σε ΤΝ — είναι ανθρώπινη επιστημονική κρίση. Αρχή 2.</p>
+            </div>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #6</strong>15 screened abstracts στο Rayyan (INCLUDE/EXCLUDE/MAYBE + reason)</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:50 — 1:00</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">Critical Reading Cheat Sheet</h4>
+            <p class="block-desc">Τεχνική PICO Scan σε 45 δευτερόλεπτα. Σήματα γρήγορου EXCLUDE. Πότε βάζεις MAYBE.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">1:00 — 1:15</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 6: PICO Scan Practice</h4>
+            <p class="block-desc">3 sample abstracts (INCLUDE, EXCLUDE, MAYBE). Εφαρμόζεις PICO Scan σε 45sec ανά abstract. Συζήτηση αποφάσεων.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #7</strong>3 screened sample abstracts με justified decisions</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">1:15 — 1:30</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 7: Data Extraction (5 papers)</h4>
+            <p class="block-desc">Χρησιμοποιώντας το Data Extraction Template, εξάγεις δεδομένα από 5 abstracts: Author/Year, N, Population, Intervention, Outcomes, Findings, Quality.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #8</strong>Συμπληρωμένο Data Extraction Template (5 papers)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BREAK -->
+      <div class="break-module">
+        <div class="break-card">
+          <h4>~ διάλειμμα ~</h4>
+          <p>1:30 — 1:45 · 15 λεπτά</p>
+        </div>
+      </div>
+
+      <!-- BLOCK ΣΤ -->
+      <div class="module" id="block-st">
+        <div class="module-dot">ΣΤ</div>
+        <div class="module-header">
+          <h3 class="module-title">Σύνθεση + Γλωσσική Επιμέλεια</h3>
+          <span class="module-time">1:45 — 2:30 · 45'</span>
+        </div>
+        <p class="module-lead">Μαθαίνουμε πώς γίνεται η σύνθεση ευρημάτων — ΧΩΡΙΣ ΤΝ για τη σύνθεση, αλλά ΜΕ ΤΝ για τη γλωσσική επιμέλεια (αποδεκτή χρήση HEAL-Link).</p>
+
+        <div class="module-body">
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">1:45 — 2:00</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">Synthesis scaffold — πώς δομείται</h4>
+            <p class="block-desc">3 μοτίβα σύνθεσης: thematic, chronological, methodological. Παράδειγμα παραγράφου σύνθεσης 300 λέξεων. Τι κάνει κάθε πρόταση.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:00 — 2:15</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 8: Draft Synthesis Paragraph</h4>
+            <p class="block-desc">Ατομικά: γράφεις 1 παράγραφο σύνθεσης (~150 λέξεις) βασισμένη στα 5 papers που εξήγαγες. ΧΩΡΙΣ ΤΝ — αυτή είναι η δική σου φωνή.</p>
+            <div class="heal-callout">
+              <div class="heal-callout-icon">⚖</div>
+              <p><strong>HEAL-Link:</strong> Η σύνθεση ευρημάτων είναι ανθρώπινη εργασία — Αρχή 2. Η ΤΝ δεν συνθέτει για σένα.</p>
+            </div>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #9</strong>Draft synthesis paragraph (150 λέξεις, χωρίς ΤΝ)</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:15 — 2:30</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 9: AI-Assisted Editing</h4>
+            <p class="block-desc">Χρησιμοποίησε Prompt #7 (Language Editing) στο Claude για να «γυαλίσεις» τη σύνθεσή σου. Αποδεκτή χρήση — δηλώνεται. Σύγκρινε before/after.</p>
+            <div class="heal-callout">
+              <div class="heal-callout-icon">✓</div>
+              <p><strong>HEAL-Link αποδεκτή χρήση:</strong> Γλωσσική επιμέλεια χωρίς αλλαγή νοήματος.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK Ζ -->
+      <div class="module" id="block-z">
+        <div class="module-dot">Ζ</div>
+        <div class="module-header">
+          <h3 class="module-title">Documentation + Κλείσιμο</h3>
+          <span class="module-time">2:30 — 3:00 · 30'</span>
+        </div>
+        <p class="module-lead">Το τελικό βήμα: τεκμηριώνουμε τη χρήση ΤΝ, συμπληρώνουμε τη Δήλωση, και κλείνουμε με AI Detection + reflection.</p>
+
+        <div class="module-body">
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:30 — 2:35</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">HEAL-Link Statement walkthrough</h4>
+            <p class="block-desc">Walkthrough 4+4 αποδεκτές/μη αποδεκτές χρήσεις. Δείχνουμε πώς γράφεται η μεθοδολογική παράγραφος.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:35 — 2:38</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">AI Detection Tools — γιατί δεν φοβόμαστε</h4>
+            <p class="block-desc">GPTZero, Turnitin AI. Αναξιόπιστα, biased. Η λύση = διαφάνεια, όχι ξεγέλασμα.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:38 — 2:50</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 10: Complete HEAL-Link Statement</h4>
+            <p class="block-desc">Συμπληρώνεις το HEAL-Link Statement template με τα πραγματικά δεδομένα: Claude + Consensus χρήσεις, DOI verification, editing. Αυτό πάει στη διπλωματική σου.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #10</strong>Complete HEAL-Link Statement + μεθοδολογική παράγραφος</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:50 — 3:00</span><span class="block-type type-discussion">Closure</span></div>
+            <h4 class="block-title">Ανακεφαλαίωση + Reflection homework</h4>
+            <p class="block-desc">Τι μάθαμε σε 6 ώρες. Reflection 300 λέξεων (deadline 3 ημέρες). Q&A. Ολοκλήρωση.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow" style="display: inline-block;">✷ Παραδοτέα Μαθήματος 2</div>
+      <h2 class="section-title" style="margin: 0 auto var(--space-5);">5 <span class="hand">παραδοτέα</span></h2>
+    </div>
+    <div class="learn-grid" style="max-width: 48rem; margin: 0 auto;">
+      <div class="learn-item"><div class="learn-marker" style="background: var(--sage);">6</div><div class="learn-content"><h4>15 screened abstracts</h4><p>INCLUDE/EXCLUDE/MAYBE στο Rayyan.</p></div></div>
+      <div class="learn-item"><div class="learn-marker" style="background: var(--sage);">7</div><div class="learn-content"><h4>3 sample abstract decisions</h4><p>Justified decisions με PICO Scan.</p></div></div>
+      <div class="learn-item"><div class="learn-marker" style="background: var(--teal);">8</div><div class="learn-content"><h4>Data Extraction (5 papers)</h4><p>Στο Data Extraction Template.</p></div></div>
+      <div class="learn-item"><div class="learn-marker" style="background: var(--teal);">9</div><div class="learn-content"><h4>Synthesis paragraph</h4><p>150 λέξεις — η δική σου φωνή.</p></div></div>
+    </div>
+    <div class="learn-grid" style="max-width: 24rem; margin: var(--space-4) auto 0;">
+      <div class="learn-item"><div class="learn-marker" style="background: var(--coral);">10</div><div class="learn-content"><h4>HEAL-Link Statement</h4><p>Πλήρης δήλωση — έτοιμη για τη διπλωματική.</p></div></div>
+    </div>
+    <div class="text-center" style="margin-top: var(--space-6);">
+      <a href="materials.html" class="btn">Όλο το υλικό <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="text-center" style="max-width: 36rem; margin: 0 auto;">
+      <div class="section-eyebrow" style="display: inline-block;">✷ Τέλος</div>
+      <h2 class="section-title" style="margin: 0 auto var(--space-4);">Τα <span class="hand">κατάφερες</span>!</h2>
+      <p style="font-size: 1.1rem; color: var(--ink-soft); line-height: 1.65;">
+        Σε 6 ώρες + homework, πέρασες ολόκληρο τον κύκλο: από τη διατύπωση του PICO μέχρι τη Δήλωση Χρήσης. Ό,τι έμαθες εδώ εφαρμόζεται αμέσως στη διπλωματική σου.
+      </p>
+      <p style="font-size: 1.1rem; color: var(--ink-soft); line-height: 1.65; margin-top: var(--space-3);">
+        <strong>Reflection homework:</strong> 300 λέξεις, 4 ερωτήματα, μέσα σε 3 ημέρες. Στείλε στον/στη διδάσκοντα/ουσα.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Πλήρες εργαστήριο εισαγωγής στην υπεύθυνη χρήση GenAI στη συστηματική ανασκόπηση. HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top: 1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color: var(--sun);">ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας</a>.</p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="session-1.html">Μάθημα 1</a></li>
+          <li><a href="homework.html">Εργασία</a></li>
+          <li><a href="session-2.html">Μάθημα 2</a></li>
+          <li><a href="materials.html">Υλικό</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Εργαλεία</h5>
+        <ul>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link.gr</a></li>
+          <li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li>
+          <li><a href="https://www.elsevier.com/products/leapspace" target="_blank" rel="noopener">LeapSpace</a></li>
+          <li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li>
+          <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA</div>
+      <div>SR+ Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

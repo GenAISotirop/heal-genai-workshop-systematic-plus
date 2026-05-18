@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEAL-Link Statement · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .doc { max-width:44rem; margin:0 auto; }
+    .doc-header { background:var(--teal); color:white; padding:var(--space-5); border-radius:var(--r-lg) var(--r-lg) 0 0; text-align:center; }
+    .doc-header h2 { font-family:var(--font-display); font-size:1.6rem; color:white; margin-bottom:var(--space-1); }
+    .doc-body { background:var(--paper-card); border:3px solid var(--ink); border-top:none; padding:var(--space-5); border-radius:0 0 var(--r-lg) var(--r-lg); box-shadow:6px 6px 0 var(--teal); }
+    .section-head { font-family:var(--font-display); font-size:1.2rem; background:var(--teal-bg); padding:var(--space-2) var(--space-3); border-radius:var(--r-md); margin:var(--space-4) 0 var(--space-3); display:flex; align-items:center; gap:var(--space-2); }
+    label { display:block; font-weight:700; font-size:.85rem; color:var(--muted); margin-bottom:4px; margin-top:var(--space-3); letter-spacing:.03em; }
+    input[type=text], input[type=email], input[type=date], textarea, select {
+      width:100%; padding:var(--space-2) var(--space-3); border:2px solid var(--rule);
+      border-radius:var(--r-md); font-family:var(--font-body); font-size:.92rem;
+      color:var(--ink); background:var(--paper-warm); outline:none; box-sizing:border-box;
+    }
+    input:focus, textarea:focus, select:focus { border-color:var(--teal); background:var(--paper-card); }
+    .tool-row { display:grid; grid-template-columns:1fr 1fr auto; gap:var(--space-3); align-items:end; margin-bottom:var(--space-2); }
+    @media(max-width:600px){.tool-row{grid-template-columns:1fr;}}
+    .btn-add-row { padding:.4rem .9rem; background:var(--teal); color:white; border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.82rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+    .btn-remove { padding:.4rem .7rem; background:var(--coral-bg); color:var(--coral); border:2px solid var(--coral); border-radius:var(--r-full); font-family:var(--font-body); font-size:.82rem; font-weight:700; cursor:pointer; }
+    .info-box { background:var(--sun-bg); border:2px solid var(--sun); border-radius:var(--r-md); padding:var(--space-3); font-size:.88rem; margin:var(--space-3) 0; }
+    .warn-box { background:var(--coral-bg); border:2px solid var(--coral); border-radius:var(--r-md); padding:var(--space-3); font-size:.88rem; margin-top:var(--space-4); }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); }
+    @media(max-width:600px){.two-col{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Έγγραφο · Μάθημα 2 — Άσκηση 10</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">HEAL-Link Statement</h1>
+    <p style="color:var(--ink-soft);max-width:36rem;">Συμπλήρωσε online για πρακτική. Κατέβασε το Word template για την τελική υποβολή.</p>
+    <a href="downloads/04_HEAL_Link_Statement_Template.docx" download class="btn" style="margin-top:var(--space-3);font-size:.9rem;">⬇ Download Word Template</a>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="info-box">💡 Αυτή είναι online πρακτική. Η <strong>επίσημη υποβολή</strong> γίνεται με το Word template — εκτυπωμένο ή ψηφιακά υπογεγραμμένο.</div>
+    <div class="doc">
+      <div class="doc-header">
+        <h2>Δήλωση Χρήσης Εργαλείων<br>Παραγωγικής Τεχνητής Νοημοσύνης</h2>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.8);">HEAL-Link / ΣΕΑΒ · Κατευθυντήριες Γραμμές 2024</p>
+      </div>
+      <div class="doc-body">
+
+        <div class="section-head">📋 Α. Στοιχεία Συγγραφέα</div>
+        <div class="two-col">
+          <div><label>Ονοματεπώνυμο</label><input type="text" placeholder="Όνομα Επώνυμο"></div>
+          <div><label>ΑΕΜ</label><input type="text" placeholder="1234567"></div>
+          <div><label>Email</label><input type="email" placeholder="user@uth.gr"></div>
+          <div><label>Ημερομηνία</label><input type="date"></div>
+        </div>
+        <label>Τίτλος Εργασίας</label>
+        <input type="text" placeholder="Τίτλος διπλωματικής εργασίας ή μελέτης">
+        <label>Πρόγραμμα Σπουδών</label>
+        <input type="text" value="ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας">
+
+        <div class="section-head">🤖 Β. Εργαλεία ΤΝ που χρησιμοποιήθηκαν</div>
+        <div id="tools-container"></div>
+        <button class="btn-add-row" onclick="addTool()">+ Πρόσθεσε εργαλείο</button>
+
+        <div class="section-head">📌 Γ. Τρόπος χρήσης (ανά εργαλείο)</div>
+        <label>Αποδεκτές χρήσεις — Τι χρησιμοποίησα για:</label>
+        <textarea rows="4" placeholder="π.χ. Claude + Consensus: Αναζήτηση scoping βιβλιογραφίας (Ενότητα 3.2). Επαληθεύτηκαν DOIs.&#10;Claude: Γλωσσική επιμέλεια Κεφαλαίου 4 — χωρίς αλλαγή επιχειρημάτων."></textarea>
+        <label>Μη αποδεκτές χρήσεις — Τι ΔΕΝ χρησιμοποίησα ΤΝ για:</label>
+        <textarea rows="3" placeholder="π.χ. Διατύπωση ερευνητικού ερωτήματος, screening, σύνθεση ευρημάτων, ανάλυση δεδομένων."></textarea>
+
+        <div class="section-head">✅ Δ. Επαλήθευση</div>
+        <label>DOI Verification</label>
+        <select>
+          <option>— Επίλεξε —</option>
+          <option>Όλες οι αναφορές από ΤΝ επαληθεύτηκαν στο doi.org</option>
+          <option>Δεν χρησιμοποίησα αναφορές από ΤΝ</option>
+        </select>
+        <label>Μεθοδολογική παράγραφος (σε ποια ενότητα αναφέρεται η χρήση ΤΝ)</label>
+        <input type="text" placeholder="π.χ. Κεφάλαιο 3 — Μεθοδολογία, παρ. 3.1">
+
+        <div class="section-head">📝 Ε. Δήλωση</div>
+        <p style="font-size:.9rem;line-height:1.65;color:var(--ink-soft);">Βεβαιώνω ότι η χρήση εργαλείων ΤΝ περιορίστηκε στις αποδεκτές χρήσεις που περιγράφονται ανωτέρω. Αναλαμβάνω πλήρη ευθύνη για το περιεχόμενο της εργασίας. Έχω επαληθεύσει όλα τα στοιχεία που παρήχθησαν με εργαλεία ΤΝ.</p>
+        <p style="font-size:.88rem;color:var(--muted);margin-top:var(--space-4);">Υπογραφή: ________________________________ &nbsp;&nbsp; Ημερομηνία: ____________</p>
+
+        <div class="warn-box">⚠ <strong>Σημαντικό:</strong> Αυτή η online φόρμα είναι για εξάσκηση. Για επίσημη υποβολή, κατέβασε το <a href="downloads/04_HEAL_Link_Statement_Template.docx" download>Word template →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+let toolCount = 0;
+function addTool() {
+  toolCount++;
+  const div = document.createElement('div');
+  div.className = 'tool-row';
+  div.innerHTML = `
+    <div><label>Εργαλείο ${toolCount}</label><input type="text" placeholder="π.χ. Claude Sonnet 4.5"></div>
+    <div><label>Έκδοση / Version</label><input type="text" placeholder="π.χ. claude-sonnet-4-5"></div>
+    <div><button class="btn-remove" onclick="this.closest('.tool-row').remove()">✕</button></div>
+  `;
+  document.getElementById('tools-container').appendChild(div);
+}
+addTool();
+</script>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-2.html">Μάθημα 2</a></li></ul></div><div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank">HEAL-Link</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

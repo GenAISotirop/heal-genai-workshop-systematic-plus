@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block-by-Block Worksheet · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .ws-section { background:var(--paper-card); border:3px solid var(--ink); border-radius:var(--r-lg); padding:var(--space-5); margin-bottom:var(--space-5); }
+    .ws-section:nth-of-type(1){box-shadow:6px 6px 0 var(--coral);}
+    .ws-section:nth-of-type(2){box-shadow:6px 6px 0 var(--teal);}
+    .ws-section:nth-of-type(3){box-shadow:6px 6px 0 var(--sun);}
+    .ws-section:nth-of-type(4){box-shadow:6px 6px 0 var(--sage);}
+    .ws-title { font-family:var(--font-display); font-size:1.5rem; margin-bottom:var(--space-3); }
+    label { display:block; font-weight:700; font-size:0.88rem; margin-bottom:6px; color:var(--ink-soft); letter-spacing:0.03em; }
+    input[type=text], textarea { width:100%; padding:var(--space-3); border:2px solid var(--rule); border-radius:var(--r-md); font-family:var(--font-body); font-size:0.95rem; color:var(--ink); background:var(--paper-warm); outline:none; box-sizing:border-box; }
+    input[type=text]:focus, textarea:focus { border-color:var(--coral); background:var(--paper-card); }
+    .field { margin-bottom:var(--space-4); }
+    .tags-area { display:flex; flex-wrap:wrap; gap:var(--space-2); margin-top:var(--space-2); min-height:2.5rem; padding:var(--space-2); background:var(--paper-warm); border:2px dashed var(--rule); border-radius:var(--r-md); }
+    .tag { background:var(--coral); color:white; padding:.2rem .7rem; border-radius:var(--r-full); font-size:.82rem; font-weight:700; display:flex; align-items:center; gap:6px; }
+    .tag button { background:none; border:none; color:white; cursor:pointer; font-size:1rem; padding:0; line-height:1; }
+    .tag-input { border:none; background:transparent; font-family:var(--font-body); font-size:.88rem; outline:none; flex:1; min-width:120px; }
+    .output-box { position:relative; background:var(--paper-warn); border:2px dashed var(--ink); border-radius:var(--r-md); padding:var(--space-3); font-family:var(--font-mono); font-size:.85rem; line-height:1.7; min-height:3rem; margin-top:var(--space-2); }
+    .btn-gen { padding:.5rem 1rem; background:var(--coral); color:white; border:2px solid var(--ink); border-radius:var(--r-full); font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:3px 3px 0 var(--ink); margin-top:var(--space-3); }
+    .hint { font-size:.85rem; color:var(--muted); font-style:italic; margin-top:4px; }
+    .pico-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:var(--space-3); }
+    .pico-cell { background:var(--paper-warm); padding:var(--space-3); border-radius:var(--r-md); border:2px solid var(--rule); }
+    .pico-cell h4 { font-family:var(--font-display); font-size:1.1rem; margin-bottom:var(--space-2); }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Worksheet · Μάθημα 1 — Άσκηση 4</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">Block-by-Block Worksheet</h1>
+    <p style="color:var(--ink-soft);max-width:36rem;">Χτίσε τη search strategy σου block by block. Συμπλήρωσε online — το string χτίζεται αυτόματα.</p>
+    <a href="downloads/08_Block_by_Block_Worksheet.docx" download class="btn" style="margin-top:var(--space-3);font-size:.9rem;">⬇ Download .docx</a>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <!-- STEP 1: PICO -->
+    <div class="ws-section">
+      <h3 class="ws-title">Βήμα 1 — Το PICO σου</h3>
+      <div class="pico-grid">
+        <div class="pico-cell"><h4>P — Population</h4><input id="pico-p" type="text" placeholder="π.χ. παιδιά με ΔΑΦ, 5-12 ετών"></div>
+        <div class="pico-cell"><h4>I — Intervention</h4><input id="pico-i" type="text" placeholder="π.χ. tablet-based social skills app"></div>
+        <div class="pico-cell"><h4>C — Comparator</h4><input id="pico-c" type="text" placeholder="π.χ. traditional instruction (ή N/A)"></div>
+        <div class="pico-cell"><h4>O — Outcomes</h4><input id="pico-o" type="text" placeholder="π.χ. social interaction, participation"></div>
+        <div class="pico-cell"><h4>S — Study Design</h4><input id="pico-s" type="text" placeholder="π.χ. RCT, quasi-experimental"></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Blocks -->
+    <div class="ws-section">
+      <h3 class="ws-title">Βήμα 2 — Blocks (Concepts)</h3>
+      <p style="color:var(--ink-soft);margin-bottom:var(--space-4);">Κάθε block = ένα concept από το PICO. Πρόσθεσε συνώνυμα με Enter.</p>
+
+      <div id="blocks-container"></div>
+      <button onclick="addBlock()" class="btn-gen" style="background:var(--teal);">+ Νέο Block</button>
+    </div>
+
+    <!-- STEP 3: Generate String -->
+    <div class="ws-section">
+      <h3 class="ws-title">Βήμα 3 — Αυτόματο Search String</h3>
+      <p style="color:var(--ink-soft);margin-bottom:var(--space-3);">Επίλεξε βάση και το string χτίζεται αυτόματα από τα blocks σου.</p>
+      <select id="db-select" onchange="buildString()" style="padding:var(--space-2) var(--space-3);border:2px solid var(--ink);border-radius:var(--r-full);font-family:var(--font-body);font-size:.9rem;font-weight:700;margin-bottom:var(--space-3);">
+        <option value="eric">ERIC (EBSCOhost)</option>
+        <option value="psycinfo">PsycINFO</option>
+        <option value="scopus">Scopus</option>
+      </select>
+      <button onclick="buildString()" class="btn-gen">⚡ Δημιούργησε String</button>
+      <div class="output-box" id="output" style="margin-top:var(--space-3);">
+        <button class="copy-btn" onclick="copyOutput(this)">Copy</button>
+        <span id="outputText">← Συμπλήρωσε τα blocks και κλικ "Δημιούργησε String"</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+let blockCount = 0;
+const colors = ['var(--coral)','var(--teal)','var(--sun)','var(--sage)','var(--plum)'];
+
+function addBlock(name='') {
+  blockCount++;
+  const c = colors[(blockCount-1) % colors.length];
+  const div = document.createElement('div');
+  div.className = 'field';
+  div.id = `block-${blockCount}`;
+  div.innerHTML = `
+    <label>Block ${blockCount} — Concept Name</label>
+    <input type="text" class="block-name" placeholder="π.χ. Population, Technology..." value="${name}" onchange="buildString()">
+    <div class="hint">Πρόσθεσε συνώνυμα με Enter ↓</div>
+    <div class="tags-area" id="tags-${blockCount}">
+      <input class="tag-input" placeholder="Γράψε συνώνυμο + Enter" onkeydown="handleTag(event, ${blockCount})">
+    </div>
+  `;
+  document.getElementById('blocks-container').appendChild(div);
+}
+
+function handleTag(e, blockId) {
+  if (e.key === 'Enter' && e.target.value.trim()) {
+    e.preventDefault();
+    const val = e.target.value.trim();
+    const container = document.getElementById(`tags-${blockId}`);
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.innerHTML = `${val} <button onclick="this.parentElement.remove();buildString();">×</button>`;
+    container.insertBefore(tag, e.target);
+    e.target.value = '';
+    buildString();
+  }
+}
+
+function getBlockTerms() {
+  const result = [];
+  document.querySelectorAll('[id^="block-"]').forEach(block => {
+    const name = block.querySelector('.block-name').value;
+    const tags = [...block.querySelectorAll('.tag')].map(t => t.textContent.replace('×','').trim());
+    if (tags.length > 0 || name) result.push({ name, terms: tags });
+  });
+  return result;
+}
+
+function buildString() {
+  const db = document.getElementById('db-select').value;
+  const blocks = getBlockTerms();
+  if (!blocks.length || blocks.every(b => !b.terms.length)) {
+    document.getElementById('outputText').textContent = '← Πρόσθεσε συνώνυμα στα blocks';
+    return;
+  }
+  let parts = blocks.map(b => {
+    if (!b.terms.length) return null;
+    const terms = b.terms.map(t => t.includes(' ') ? `"${t}"` : t);
+    const inner = terms.join(' OR ');
+    if (db === 'scopus') return `TITLE-ABS-KEY ( ${inner} )`;
+    return `( ${inner} )`;
+  }).filter(Boolean);
+  const str = parts.join(db === 'scopus' ? '\nAND ' : '\nAND ');
+  document.getElementById('outputText').textContent = str;
+}
+
+function copyOutput(btn) {
+  const text = document.getElementById('outputText').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+// Start with 2 default blocks
+addBlock('Population');
+addBlock('Intervention');
+</script>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-1.html">Μάθημα 1</a></li></ul></div><div><h5>Reference</h5><ul><li><a href="reference.html">Database Syntax</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

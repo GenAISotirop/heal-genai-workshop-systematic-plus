@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Σχετικά · Από το Prompt στη Δήλωση</title>
+  <meta name="description" content="HEAL-Link/ΣΕΑΒ — οι 3 θεμελιώδεις αρχές, οι 4 αποδεκτές χρήσεις, και οι 4 μη αποδεκτές χρήσεις ΤΝ στην ακαδημαϊκή έρευνα.">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .principle-deep {
+      background: var(--paper-card);
+      border: 3px solid var(--ink);
+      border-radius: var(--r-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+    .principle-deep:nth-of-type(1) { box-shadow: 8px 8px 0 var(--coral); }
+    .principle-deep:nth-of-type(2) { box-shadow: 8px 8px 0 var(--teal); }
+    .principle-deep:nth-of-type(3) { box-shadow: 8px 8px 0 var(--sage); }
+
+    .principle-deep-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 2px dashed var(--rule);
+    }
+    .principle-deep-icon {
+      width: 4rem; height: 4rem;
+      border-radius: var(--r-full);
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: white;
+      border: 3px solid var(--ink);
+      flex-shrink: 0;
+    }
+    .principle-deep:nth-of-type(1) .principle-deep-icon { background: var(--coral); }
+    .principle-deep:nth-of-type(2) .principle-deep-icon { background: var(--teal); }
+    .principle-deep:nth-of-type(3) .principle-deep-icon { background: var(--sage); }
+
+    .principle-deep h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .principle-deep .principle-deep-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .principle-deep p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin-bottom: var(--space-3);
+    }
+    .principle-deep .what-means {
+      background: var(--paper-warm);
+      border-radius: var(--r-md);
+      padding: var(--space-3);
+      margin-top: var(--space-3);
+    }
+    .principle-deep .what-means h4 {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: var(--space-2);
+    }
+    .principle-deep:nth-of-type(2) .what-means h4 { color: var(--teal); }
+    .principle-deep:nth-of-type(3) .what-means h4 { color: var(--sage); }
+    .principle-deep .what-means ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .principle-deep .what-means li {
+      padding-left: var(--space-3);
+      position: relative;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .principle-deep .what-means li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--coral);
+      font-weight: 700;
+    }
+    .principle-deep:nth-of-type(2) .what-means li::before { color: var(--teal); }
+    .principle-deep:nth-of-type(3) .what-means li::before { color: var(--sage); }
+
+    .uses-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      margin-top: var(--space-5);
+    }
+    @media (min-width: 800px) {
+      .uses-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .uses-card {
+      background: var(--paper-card);
+      border: 3px solid var(--ink);
+      border-radius: var(--r-lg);
+      padding: var(--space-5);
+    }
+    .uses-card.allowed {
+      box-shadow: 6px 6px 0 var(--sage);
+    }
+    .uses-card.forbidden {
+      box-shadow: 6px 6px 0 var(--coral);
+    }
+
+    .uses-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .uses-card .badge {
+      font-size: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--r-full);
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+    }
+    .uses-card.allowed .badge { background: var(--sage); color: white; }
+    .uses-card.forbidden .badge { background: var(--coral); color: white; }
+
+    .uses-card ol {
+      list-style: none;
+      padding: 0;
+      counter-reset: use-counter;
+    }
+    .uses-card ol li {
+      counter-increment: use-counter;
+      padding: var(--space-3) 0;
+      border-bottom: 1px dashed var(--rule);
+      padding-left: 3rem;
+      position: relative;
+    }
+    .uses-card ol li:last-child { border-bottom: none; }
+    .uses-card ol li::before {
+      content: counter(use-counter);
+      position: absolute;
+      left: 0;
+      top: var(--space-3);
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--r-full);
+      display: grid;
+      place-items: center;
+      color: white;
+    }
+    .uses-card.allowed ol li::before { background: var(--sage); }
+    .uses-card.forbidden ol li::before { background: var(--coral); }
+    .uses-card ol li strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .uses-card ol li p {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .extra-cta {
+      background: var(--sun);
+      border: 3px solid var(--ink);
+      border-radius: var(--r-lg);
+      padding: var(--space-6);
+      box-shadow: 8px 8px 0 var(--ink);
+      max-width: 42rem;
+      margin: var(--space-6) auto 0;
+      text-align: center;
+    }
+    .extra-cta h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      margin-bottom: var(--space-3);
+    }
+    .extra-cta p {
+      font-size: 1.05rem;
+      margin-bottom: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="spark">Από</span> το Prompt στη Δήλωση
+    </a>
+<ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html">Προετοιμασία</a></li>
+      <li><a href="session-1.html">Μάθημα 1</a></li>
+      <li><a href="session-2.html">Μάθημα 2</a></li>
+      <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html" class="active">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Φιλοσοφία · HEAL-Link / ΣΕΑΒ</div>
+        <h1 class="hero-title fade-up">
+          Η φιλοσοφία<br>
+          <span class="hand">σε βάθος</span>
+        </h1>
+        <p class="hero-subtitle fade-up">
+          Οι 3 θεμελιώδεις αρχές του εργαστηρίου, οι 4 αποδεκτές και 4 μη αποδεκτές χρήσεις ΤΝ — όλα προέρχονται από τις επίσημες κατευθυντήριες του Συνδέσμου Ελληνικών Ακαδημαϊκών Βιβλιοθηκών (HEAL-Link / ΣΕΑΒ, 2024).
+        </p>
+        <div class="cta-group fade-up">
+          <a href="#principles" class="btn">
+            Οι 3 αρχές <span class="arrow">↓</span>
+          </a>
+          <a href="international.html" class="btn btn-outline">
+            Διεθνές πλαίσιο
+          </a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--coral); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--teal); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--sage); top: 5%; left: 5%;"></div>
+        <div class="hero-label">
+          Why?<br>
+          <span>here's how ✦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="principles">
+  <div class="container">
+    <div class="section-eyebrow">✷ Οι θεμελιώδεις αρχές</div>
+    <h2 class="section-title">Τρεις αρχές <span class="accent">σε βάθος</span></h2>
+    <p class="section-lead">
+      Αυτές οι αρχές δεν είναι «κανόνες προς απομνημόνευση». Είναι το συμπυκνωμένο αποτέλεσμα διεθνούς ακαδημαϊκής συζήτησης για το πώς συνυπάρχουμε με την ΤΝ χωρίς να χάσουμε την επιστημονική μας ακεραιότητα.
+    </p>
+
+    <div style="margin-top: var(--space-6);">
+
+      <div class="principle-deep">
+        <div class="principle-deep-header">
+          <div class="principle-deep-icon">i</div>
+          <div>
+            <h3>Η ΤΝ δεν είναι συγγραφέας</h3>
+            <div class="principle-deep-sub">Αρχή 1 · Συγγραφική ευθύνη</div>
+          </div>
+        </div>
+        <p>
+          Η πλήρης ευθύνη για το περιεχόμενο μιας ακαδημαϊκής εργασίας — συμπεριλαμβανομένων τμημάτων που έχουν παραχθεί ή υποστηριχθεί από ΤΝ — βαρύνει αποκλειστικά τον/την συγγραφέα. Η ΤΝ δεν αναγνωρίζεται ως συγγραφέας ή συν-συγγραφέας.
+        </p>
+        <p>
+          Αυτό δεν είναι τυπική απαίτηση. Είναι θεμελιώδης αρχή: <strong>η συγγραφή είναι πράξη πνευματικής ευθύνης</strong>. Όταν υπογράφεις ένα κείμενο, υπογράφεις και τη δέσμευσή σου για ό,τι λέει αυτό το κείμενο. Η ΤΝ δεν μπορεί να αναλάβει τέτοια δέσμευση.
+        </p>
+        <div class="what-means">
+          <h4>Τι σημαίνει πρακτικά</h4>
+          <ul>
+            <li>Δεν αναφέρεις ποτέ την ΤΝ ως συγγραφέα ή συν-συγγραφέα.</li>
+            <li>Παίρνεις πλήρη ευθύνη ακόμα και για τμήματα που υποστηρίχθηκαν από ΤΝ.</li>
+            <li>Αν η ΤΝ έκανε λάθος, δεν είναι δικαιολογία — εσύ έπρεπε να το εντοπίσεις.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle-deep">
+        <div class="principle-deep-header">
+          <div class="principle-deep-icon">ii</div>
+          <div>
+            <h3>Επικουρική, όχι υποκατάστατο</h3>
+            <div class="principle-deep-sub">Αρχή 2 · Ρόλος της ΤΝ</div>
+          </div>
+        </div>
+        <p>
+          Η ΤΝ χρησιμοποιείται ως υποστηρικτικό μέσο, ουδέποτε ως υποκατάστατο της επιστημονικής κρίσης. Το ερευνητικό ερώτημα, η μεθοδολογία, οι αποφάσεις screening, η ανάλυση και η σύνθεση των ευρημάτων παραμένουν ανθρώπινες εργασίες.
+        </p>
+        <p>
+          Αυτή η αρχή απαντά στο κρίσιμο ερώτημα: <em>"Πού τραβάμε τη γραμμή;"</em> Η απάντηση είναι: <strong>στην πνευματική παραγωγή</strong>. Η ΤΝ μπορεί να σε βοηθήσει με τη γλωσσική επιμέλεια ή τον εντοπισμό βιβλιογραφίας. Δεν μπορεί να αποφασίσει τι θες να ερευνήσεις ή τι σημαίνουν τα ευρήματά σου.
+        </p>
+        <div class="what-means">
+          <h4>Τι σημαίνει πρακτικά</h4>
+          <ul>
+            <li>Διατυπώνεις ΕΣΥ το ερευνητικό σου ερώτημα — η ΤΝ μόνο αποσαφηνίζει.</li>
+            <li>Κάνεις ΕΣΥ το screening — η ΤΝ δεν αποφασίζει τι μπαίνει στην ανασκόπηση.</li>
+            <li>Συνθέτεις ΕΣΥ τα ευρήματα — η ΤΝ βοηθάει μόνο με τη δομή/επιμέλεια.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle-deep">
+        <div class="principle-deep-header">
+          <div class="principle-deep-icon">iii</div>
+          <div>
+            <h3>Διαφάνεια σε κάθε βήμα</h3>
+            <div class="principle-deep-sub">Αρχή 3 · Δήλωση χρήσης</div>
+          </div>
+        </div>
+        <p>
+          Κάθε ουσιαστική χρήση ΤΝ δηλώνεται ρητά. Το επίσημο πρότυπο HEAL-Link συμπληρώνεται και εντάσσεται ως παράρτημα στην εργασία. Η μεθοδολογία αναφέρει επίσης τη χρήση εν συντομία.
+        </p>
+        <p>
+          Η διαφάνεια <strong>προστατεύει τη φήμη σου</strong> — δεν την υπονομεύει. Όταν δηλώνεις ρητά τη χρήση ΤΝ, ο reviewer/επιβλέπων σου σε εμπιστεύεται περισσότερο. Όταν την κρύβεις, διακινδυνεύεις την επιστημονική σου ακεραιότητα — γιατί κάποια στιγμή θα φανεί.
+        </p>
+        <div class="what-means">
+          <h4>Τι σημαίνει πρακτικά</h4>
+          <ul>
+            <li>Κρατάς AI Usage Log καθόλη τη διάρκεια της έρευνάς σου.</li>
+            <li>Συμπληρώνεις το επίσημο HEAL-Link Statement στην τελική εργασία.</li>
+            <li>Αναφέρεις τη χρήση εν συντομία στη μεθοδολογία (όχι μόνο στο παράρτημα).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="section-eyebrow">✷ Αναλυτικά</div>
+    <h2 class="section-title">4 αποδεκτές + 4 μη αποδεκτές <span class="hand">χρήσεις</span></h2>
+    <p class="section-lead">
+      Σύμφωνα με τις επίσημες κατευθυντήριες HEAL-Link/ΣΕΑΒ (2024). Δες ποιες χρήσεις επιτρέπονται με κατάλληλη δήλωση, και ποιες είναι παραβίαση ακαδημαϊκής ηθικής.
+    </p>
+
+    <div class="uses-grid">
+
+      <div class="uses-card allowed">
+        <h3>
+          <span class="badge">✓</span>
+          ΑΠΟΔΕΚΤΕΣ χρήσεις
+        </h3>
+        <ol>
+          <li>
+            <strong>Επιμέλεια κειμένου</strong>
+            <p>Γλωσσικός έλεγχος, βελτίωση διατύπωσης, μορφοποίηση — χωρίς αλλαγή νοήματος ή ισχυρισμών.</p>
+          </li>
+          <li>
+            <strong>Έλεγχος βιβλιογραφικών αναφορών</strong>
+            <p>Μορφοποίηση κατά APA/Vancouver, εντοπισμός λαθών στα DOIs, ολοκλήρωση ελλιπών στοιχείων.</p>
+          </li>
+          <li>
+            <strong>Μέρος μεθοδολογίας με ρητή δήλωση</strong>
+            <p>Π.χ. Consensus για scoping της βιβλιογραφίας — με DOI verification και ρητή αναφορά στη μεθοδολογία.</p>
+          </li>
+          <li>
+            <strong>Όταν η ΤΝ είναι αντικείμενο μελέτης</strong>
+            <p>Αν η ίδια η παραγωγή ΤΝ είναι το ερευνητικό αντικείμενο — π.χ. ανάλυση outputs LLM για γλωσσολογική έρευνα.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="uses-card forbidden">
+        <h3>
+          <span class="badge">✕</span>
+          ΜΗ αποδεκτές χρήσεις
+        </h3>
+        <ol>
+          <li>
+            <strong>Παραγωγή ερευνητικού ερωτήματος</strong>
+            <p>Η ΤΝ δεν διατυπώνει το ερευνητικό σου ερώτημα ή την υπόθεσή σου. Αυτό είναι η ουσία της ερευνητικής σου συμβολής.</p>
+          </li>
+          <li>
+            <strong>Δημιουργία πλειονότητας κειμένου</strong>
+            <p>Όταν η πλειοψηφία της εργασίας έχει παραχθεί από ΤΝ — αυτό είναι ουσιαστική παράληψη συγγραφικού ρόλου.</p>
+          </li>
+          <li>
+            <strong>Συνθετικά δεδομένα χωρίς δήλωση</strong>
+            <p>Χρήση «δεδομένων» που παρήχθησαν από ΤΝ ως πραγματικά δεδομένα. Επιστημονική απάτη ακόμα κι αν δηλωθεί κατόπιν εορτής.</p>
+          </li>
+          <li>
+            <strong>Μη επαληθευμένες βιβλιογραφικές αναφορές</strong>
+            <p>Χρήση citations από ΤΝ χωρίς DOI verification. Η ΤΝ ψευδαισθάνεται αναφορές — γι' αυτό κάνουμε DOI check ΠΑΝΤΑ.</p>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="text-center" style="max-width: 36rem; margin: 0 auto;">
+      <div class="section-eyebrow" style="display: inline-block;">✷ Πηγή</div>
+      <h2 class="section-title" style="margin: 0 auto var(--space-4);">
+        Από πού <span class="hand">προέρχονται</span>;
+      </h2>
+      <p style="font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6;">
+        Οι αρχές προέρχονται από τις επίσημες κατευθυντήριες του <strong>Συνδέσμου Ελληνικών Ακαδημαϊκών Βιβλιοθηκών (HEAL-Link / ΣΕΑΒ)</strong> για τη χρήση παραγωγικής τεχνητής νοημοσύνης στην έρευνα (2024-2025).
+      </p>
+      <p style="font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6; margin-top: var(--space-3);">
+        Δεν είναι ωστόσο μοναδικές. Παρόμοιες αρχές διατυπώνονται από την <strong>Ευρωπαϊκή Επιτροπή</strong>, την <strong>UNESCO</strong>, και πανεπιστήμια διεθνώς. <a href="international.html">Δες το διεθνές πλαίσιο →</a>
+      </p>
+    </div>
+
+    <div class="extra-cta">
+      <h3>Θες να δεις και άλλες <span class="hand">προοπτικές</span>;</h3>
+      <p>
+        Σύγκριση HEAL-Link με 4 άλλα διεθνή πλαίσια (Ευρωπαϊκή Επιτροπή, UNESCO, Russell Group UK, Nature/Science journals).
+      </p>
+      <a href="international.html" class="btn">
+        Στο διεθνές πλαίσιο <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="hand">Από</span> το Prompt στη Δήλωση
+        </div>
+        <p class="footer-text">
+          Εργαστήριο εισαγωγής στην υπεύθυνη χρήση εργαλείων GenAI για μεταπτυχιακούς φοιτητές. Σύμφωνα με τις κατευθυντήριες HEAL-Link / ΣΕΑΒ. Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color: var(--sun);">ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας</a>.
+        </p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="agenda.html">Πρόγραμμα</a></li>
+          <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+          <li><a href="materials.html">Υλικό</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Εργαλεία</h5>
+        <ul>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link.gr</a></li>
+          <li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li>
+          <li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li>
+          <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA</div>
+      <div>SR+ Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reference Card · Database Syntax · SR+ Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .ref-section { background:var(--paper-card); border:3px solid var(--ink); border-radius:var(--r-lg); padding:var(--space-5); margin-bottom:var(--space-5); }
+    .ref-section:nth-of-type(1){box-shadow:6px 6px 0 var(--coral);}
+    .ref-section:nth-of-type(2){box-shadow:6px 6px 0 var(--teal);}
+    .ref-section:nth-of-type(3){box-shadow:6px 6px 0 var(--sun);}
+    .ref-section:nth-of-type(4){box-shadow:6px 6px 0 var(--sage);}
+    .ref-title { font-family:var(--font-display); font-size:1.5rem; margin-bottom:var(--space-3); display:flex; align-items:center; gap:var(--space-2); }
+    .db-badge { font-size:0.75rem; font-weight:700; padding:0.2rem 0.7rem; border-radius:var(--r-full); border:2px solid var(--ink); }
+    .ref-table { width:100%; border-collapse:collapse; font-size:0.88rem; margin:var(--space-3) 0; }
+    .ref-table th { background:var(--paper-warm); padding:var(--space-2) var(--space-3); text-align:left; font-weight:700; border-bottom:2px solid var(--rule); }
+    .ref-table td { padding:var(--space-2) var(--space-3); border-bottom:1px dashed var(--rule); vertical-align:top; }
+    .ref-table tr:last-child td { border-bottom:none; }
+    .code-block { position:relative; background:var(--paper-warm); border:2px dashed var(--ink-soft); border-radius:var(--r-md); padding:var(--space-3); font-family:var(--font-mono); font-size:0.83rem; line-height:1.7; margin:var(--space-3) 0; white-space:pre-wrap; }
+    code { font-family:var(--font-mono); font-size:0.88em; background:var(--paper-warm); padding:0.15rem 0.4rem; border-radius:4px; border:1px solid var(--rule); }
+    .tip { background:var(--sun-bg); border-left:4px solid var(--sun); padding:var(--space-3); border-radius:0 var(--r-md) var(--r-md) 0; font-size:0.9rem; margin:var(--space-3) 0; }
+    .warn { background:var(--coral-bg); border-left:4px solid var(--coral); padding:var(--space-3); border-radius:0 var(--r-md) var(--r-md) 0; font-size:0.9rem; margin:var(--space-3) 0; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Reference Card · Homework + Μάθημα 1</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">Database Syntax Reference</h1>
+    <p style="color:var(--ink-soft);max-width:36rem;">Σύνταξη Boolean για ERIC, PsycINFO, Scopus. Κάνε Copy στα strings ή Download το πλήρες αρχείο.</p>
+    <div style="margin-top:var(--space-3);">
+      <a href="downloads/09_Reference_Card_Database_Syntax.docx" download class="btn" style="font-size:.9rem;">⬇ Download .docx</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <!-- Boolean Operators -->
+    <div class="ref-section">
+      <h3 class="ref-title">Boolean Operators</h3>
+      <table class="ref-table">
+        <tr><th>Operator</th><th>Σημασία</th><th>Παράδειγμα</th></tr>
+        <tr><td><code>AND</code></td><td>Και τα δύο concepts πρέπει να υπάρχουν</td><td><code>autism AND tablet</code></td></tr>
+        <tr><td><code>OR</code></td><td>Τουλάχιστον ένα concept (synonyms)</td><td><code>autism OR ASD OR "autistic spectrum"</code></td></tr>
+        <tr><td><code>NOT</code></td><td>Αποκλείει term</td><td><code>intervention NOT review</code></td></tr>
+        <tr><td><code>" "</code></td><td>Exact phrase</td><td><code>"social skills"</code></td></tr>
+        <tr><td><code>( )</code></td><td>Ομαδοποίηση</td><td><code>(autism OR ASD) AND tablet</code></td></tr>
+        <tr><td><code>*</code></td><td>Truncation (wildcard)</td><td><code>inclus* → inclusion, inclusive</code></td></tr>
+      </table>
+    </div>
+
+    <!-- ERIC -->
+    <div class="ref-section">
+      <h3 class="ref-title"><span class="db-badge" style="background:var(--coral-bg);color:var(--coral);">ERIC</span> ERIC — EBSCOhost Interface</h3>
+      <table class="ref-table">
+        <tr><th>Field Tag</th><th>Αναζητά σε</th></tr>
+        <tr><td><code>TI</code></td><td>Title</td></tr>
+        <tr><td><code>AB</code></td><td>Abstract</td></tr>
+        <tr><td><code>DE</code></td><td>ERIC Descriptors (controlled vocabulary)</td></tr>
+        <tr><td><code>TX</code></td><td>Full text (αν διαθέσιμο)</td></tr>
+      </table>
+      <div class="tip">💡 Αρχές: δοκίμασε ERIC Descriptors <code>DE</code> — είναι πιο ακριβή από keyword search</div>
+      <p style="margin:var(--space-3) 0 var(--space-2);">Παράδειγμα string:</p>
+      <div class="code-block"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>(TI "autism spectrum" OR TI ASD OR DE "Autism") AND (TI tablet OR TI "mobile application" OR TI app) AND (TI classroom OR TI school OR TI inclusion)</div>
+    </div>
+
+    <!-- PsycINFO -->
+    <div class="ref-section">
+      <h3 class="ref-title"><span class="db-badge" style="background:var(--teal-bg);color:var(--teal);">PsycINFO</span> PsycINFO — APA PsycINFO</h3>
+      <table class="ref-table">
+        <tr><th>Field Tag</th><th>Αναζητά σε</th></tr>
+        <tr><td><code>TI</code></td><td>Title</td></tr>
+        <tr><td><code>AB</code></td><td>Abstract</td></tr>
+        <tr><td><code>ID</code></td><td>Index Terms (controlled vocabulary)</td></tr>
+        <tr><td><code>SU</code></td><td>Subject headings</td></tr>
+      </table>
+      <div class="tip">💡 Χρησιμοποίησε APA Thesaurus για controlled terms — πιο πλούσιο από ERIC σε ψυχολογικούς όρους</div>
+      <p style="margin:var(--space-3) 0 var(--space-2);">Παράδειγμα string:</p>
+      <div class="code-block"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>(TI "autism spectrum disorder" OR ID "Autistic Disorder" OR ID "Asperger Syndrome") AND (TI tablet OR TI "touch screen" OR TI "digital technology") AND (AB classroom OR AB school OR AB inclusion)</div>
+    </div>
+
+    <!-- Scopus -->
+    <div class="ref-section">
+      <h3 class="ref-title"><span class="db-badge" style="background:var(--sun-bg);color:var(--ink);">Scopus</span> Scopus — Elsevier</h3>
+      <table class="ref-table">
+        <tr><th>Field Tag</th><th>Αναζητά σε</th></tr>
+        <tr><td><code>TITLE</code></td><td>Title μόνο</td></tr>
+        <tr><td><code>ABS</code></td><td>Abstract μόνο</td></tr>
+        <tr><td><code>KEY</code></td><td>Keywords</td></tr>
+        <tr><td><code>TITLE-ABS-KEY</code></td><td>Title + Abstract + Keywords</td></tr>
+        <tr><td><code>PUBYEAR &gt; 2019</code></td><td>Φίλτρο έτους (μετά το 2019)</td></tr>
+        <tr><td><code>LANGUAGE(english)</code></td><td>Φίλτρο γλώσσας</td></tr>
+      </table>
+      <div class="tip">💡 Το <code>TITLE-ABS-KEY</code> είναι το πιο κοινό field για systematic reviews στο Scopus</div>
+      <p style="margin:var(--space-3) 0 var(--space-2);">Παράδειγμα string:</p>
+      <div class="code-block"><button class="copy-btn" onclick="copyPrompt(this)">Copy</button>TITLE-ABS-KEY ( ( "autism spectrum" OR "ASD" OR "autistic" ) AND ( "tablet" OR "mobile app" OR "digital intervention" ) AND ( "classroom" OR "school" OR "inclusive education" ) ) AND PUBYEAR > 2018 AND LANGUAGE ( english )</div>
+      <div class="warn">⚠ Το Scopus δεν χρησιμοποιεί <code>TI</code>/<code>AB</code> — χρησιμοποιεί <code>TITLE</code>/<code>ABS</code> (κεφαλαία).</div>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="ref-section">
+      <h3 class="ref-title">Troubleshooting — Πολλά ή λίγα αποτελέσματα</h3>
+      <table class="ref-table">
+        <tr><th>Πρόβλημα</th><th>Λύση</th></tr>
+        <tr><td><strong>Πάρα πολλά (&gt;5000)</strong></td><td>Πρόσθεσε <code>AND</code> με νέο concept · Χρησιμοποίησε <code>TI</code> αντί <code>AB</code> · Πρόσθεσε φίλτρο έτους</td></tr>
+        <tr><td><strong>Πολύ λίγα (&lt;50)</strong></td><td>Πρόσθεσε <code>OR</code> synonyms · Χρησιμοποίησε truncation <code>*</code> · Άνοιξε από <code>TI</code> σε <code>AB</code></td></tr>
+        <tr><td><strong>Άσχετα αποτελέσματα</strong></td><td>Βάλε exact phrase <code>" "</code> · Έλεγξε Boolean logic με παρενθέσεις</td></tr>
+        <tr><td><strong>Missing key papers</strong></td><td>Έλεγξε controlled vocabulary (ERIC Descriptors / APA Terms) · Pearl growing</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function copyPrompt(btn) {
+  const box = btn.parentElement;
+  const clone = box.cloneNode(true);
+  clone.querySelector('.copy-btn')?.remove();
+  navigator.clipboard.writeText(clone.textContent.trim()).then(()=>{
+    btn.textContent='✓ Copied!'; btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="session-1.html">Μάθημα 1</a></li></ul></div><div><h5>Βάσεις</h5><ul><li><a href="https://eric.ed.gov" target="_blank">ERIC</a></li><li><a href="https://www.scopus.com" target="_blank">Scopus</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>

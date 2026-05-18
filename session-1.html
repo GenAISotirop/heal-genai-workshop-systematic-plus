@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Μάθημα 1 · Ηθική + Αναζήτηση · Από το Prompt στη Δήλωση</title>
+  <meta name="description" content="Πρώτο τρίωρο: HEAL-Link briefing, prompt engineering, PICO, block-by-block search strategy, Consensus + DOI verification.">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .timeline { position: relative; max-width: 52rem; margin: var(--space-6) auto 0; }
+    .timeline::before { content: ''; position: absolute; left: 27px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--coral), var(--teal), var(--sun), var(--sage)); border-radius: var(--r-full); }
+    @media (max-width: 700px) { .timeline::before { left: 22px; } }
+
+    .module { position: relative; padding-left: 80px; margin-bottom: var(--space-7); }
+    @media (max-width: 700px) { .module { padding-left: 60px; } }
+    .module-dot { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: var(--r-full); border: 4px solid var(--ink); color: white; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; z-index: 2; box-shadow: 4px 4px 0 var(--ink); }
+    @media (max-width: 700px) { .module-dot { width: 46px; height: 46px; font-size: 1.1rem; } }
+    .module:nth-of-type(1) .module-dot { background: var(--coral); }
+    .module:nth-of-type(2) .module-dot { background: var(--ink); color: var(--sun); border-color: var(--sun); }
+    .module:nth-of-type(3) .module-dot { background: var(--teal); }
+    .module:nth-of-type(4) .module-dot { background: var(--sage); }
+
+    .module-header { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-3); }
+    .module-title { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
+    .module-time { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; padding: 0.3rem 0.8rem; color: white; border-radius: var(--r-full); flex-shrink: 0; }
+    .module:nth-of-type(1) .module-time { background: var(--coral); }
+    .module:nth-of-type(2) .module-time { background: var(--ink); color: var(--sun); }
+    .module:nth-of-type(3) .module-time { background: var(--teal); }
+    .module:nth-of-type(4) .module-time { background: var(--sage); }
+
+    .module-lead { font-size: 1.02rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: var(--space-4); }
+    .module-body { background: var(--paper-card); border: 2px solid var(--rule); border-radius: var(--r-md); padding: var(--space-4); }
+    .module-block { padding: var(--space-3) 0; border-bottom: 1px dashed var(--rule); }
+    .module-block:last-child { border-bottom: none; padding-bottom: 0; }
+    .module-block:first-child { padding-top: 0; }
+    .block-meta { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+    .block-time { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+    .block-type { font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: var(--r-full); }
+    .type-lecture { background: var(--coral-bg); color: var(--coral); }
+    .type-activity { background: var(--teal-bg); color: var(--teal); }
+    .type-demo { background: var(--sun-bg); color: var(--ink); }
+    .type-discussion { background: var(--sage-bg); color: var(--sage); }
+    .type-break { background: var(--rule); color: var(--ink-soft); }
+
+    .block-title { font-family: var(--font-display); font-size: 1.08rem; font-weight: 400; margin-bottom: 4px; }
+    .block-desc { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
+
+    .deliv-card { background: linear-gradient(135deg, var(--sun-bg), var(--coral-bg)); border: 2px dashed var(--coral); border-radius: var(--r-md); padding: var(--space-3); margin-top: var(--space-3); display: flex; gap: var(--space-2); align-items: center; }
+    .deliv-icon { flex-shrink: 0; width: 2rem; height: 2rem; border-radius: var(--r-full); background: var(--coral); color: white; display: grid; place-items: center; font-weight: 700; border: 2px solid var(--ink); }
+    .deliv-text { font-size: 0.88rem; }
+    .deliv-text strong { font-family: var(--font-display); font-weight: 400; font-size: 0.98rem; display: block; margin-bottom: 2px; }
+
+    .break-module { padding-left: 80px; margin-bottom: var(--space-7); position: relative; }
+    @media (max-width: 700px) { .break-module { padding-left: 60px; } }
+    .break-card { background: var(--paper-warm); border: 2px dashed var(--ink-soft); border-radius: var(--r-md); padding: var(--space-4); text-align: center; }
+    .break-card h4 { font-family: var(--font-hand); font-size: 2rem; font-weight: 600; color: var(--ink-soft); margin-bottom: var(--space-1); }
+    .break-card p { font-size: 0.92rem; color: var(--muted); margin: 0; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Αρχική</a></li>
+      <li><a href="prepare.html">Προετοιμασία</a></li>
+      <li><a href="session-1.html" class="active">Μάθημα 1</a></li>
+      <li><a href="session-2.html">Μάθημα 2</a></li>
+      <li><a href="instructor.html">Διδάσκοντες/ουσες</a></li>
+      <li><a href="materials.html">Υλικό</a></li>
+      <li><a href="about.html">Σχετικά</a></li>
+      <li><a href="international.html">Διεθνές</a></li>
+      <li><a href="leapspace.html">LeapSpace</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">✷ Μάθημα 1 από 2 · 180 λεπτά</div>
+        <h1 class="hero-title fade-up">Ηθική +<br><span class="hand">Αναζήτηση</span></h1>
+        <p class="hero-subtitle fade-up">
+          Πρώτο τρίωρο: βάζουμε θεμέλια. Οι 3 αρχές HEAL-Link, prompt engineering, PICO, block-by-block search strategy, και πρώτη γνωριμία με Consensus + DOI verification. 5 ασκήσεις.
+        </p>
+        <div class="cta-group fade-up">
+          <a href="#block-a" class="btn">Ξεκίνα <span class="arrow">↓</span></a>
+          <a href="prepare.html" class="btn btn-outline">Πρώτα η προετοιμασία</a>
+        </div>
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1" style="background: var(--coral); top: 0; right: 0;"></div>
+        <div class="hero-shape shape-2" style="background: var(--teal); bottom: 0; left: 0;"></div>
+        <div class="hero-shape shape-3" style="background: var(--sun); top: 5%; left: 5%;"></div>
+        <div class="hero-label">Day 1<br><span>5 exercises ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">✷ Αναλυτικό πρόγραμμα</div>
+    <h2 class="section-title">Τέσσερα <span class="accent">blocks</span></h2>
+    <p class="section-lead">Block A: Ηθική + Prompting (90') · Break (15') · Block Γ: PICO + Search (60') · Block Δ: Wrap-up (15')</p>
+
+    <div class="timeline">
+
+      <!-- BLOCK A -->
+      <div class="module" id="block-a">
+        <div class="module-dot">Α</div>
+        <div class="module-header">
+          <h3 class="module-title">HEAL-Link Briefing + Prompt Engineering</h3>
+          <span class="module-time">0:00 — 1:30 · 90'</span>
+        </div>
+        <p class="module-lead">Ξεκινάμε με τα θεμέλια: ηθική, σενάρια σε γκρίζες ζώνες, και hands-on prompting. Στο τέλος αυτού του block, θα ξέρεις τι επιτρέπεται, τι όχι, και πώς γράφεται ένα σωστό prompt.</p>
+
+        <div class="module-body">
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:00 — 0:10</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">Opening + οι 3 θεμελιώδεις αρχές</h4>
+            <p class="block-desc">Παρουσίαση HEAL-Link: ΤΝ ≠ συγγραφέας · επικουρική, όχι υποκατάστατο · διαφάνεια.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:10 — 0:20</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">4 αποδεκτές + 4 μη αποδεκτές χρήσεις</h4>
+            <p class="block-desc">Walkthrough με παραδείγματα από τις επιστήμες αγωγής.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:20 — 0:30</span><span class="block-type type-discussion">Discussion</span></div>
+            <h4 class="block-title">«Πού τραβάμε τη γραμμή;» — 5 Σενάρια</h4>
+            <p class="block-desc">5 γκρίζες περιπτώσεις. Συζήτηση: αποδεκτή χρήση; Με ποιες προϋποθέσεις; Ποια αρχή παραβιάζεται;</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:30 — 0:35</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Υπογραφή AI Usage Agreement</h4>
+            <p class="block-desc">Συλλέγονται τα υπογεγραμμένα Agreements.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #1</strong>Υπογεγραμμένο AI Usage Agreement</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:35 — 0:50</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">Δομή καλού prompt + Human-in-the-loop</h4>
+            <p class="block-desc">6 στοιχεία: Ρόλος · Πλαίσιο · Εργασία · Περιορισμοί · Format · Έλεγχος.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">0:50 — 1:05</span><span class="block-type type-demo">Live Demo</span></div>
+            <h4 class="block-title">ChatGPT vs Claude — ίδιο prompt, διαφορετικό output</h4>
+            <p class="block-desc">Συγκρίνουμε LLMs live. Δείχνουμε ότι «η ΤΝ» δεν είναι ενιαία οντότητα.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">1:05 — 1:20</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 1: Bad → Good Prompt</h4>
+            <p class="block-desc">Σε ζευγάρια: 3 κακά prompts → rewrite. Ατομικά: 2 prompts για δικό σου θέμα. Live test στο Claude.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #2</strong>5 prompts γραμμένα (3 βελτιωμένα + 2 ατομικά)</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">1:20 — 1:30</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 2: Scoping με Consensus</h4>
+            <p class="block-desc">Πρώτο scoping του θέματός σου μέσω Claude + Consensus. 3 αναζητήσεις + DOI verification 5 papers.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #3</strong>3 scoping queries + 5 verified DOIs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BREAK -->
+      <div class="break-module">
+        <div class="break-card">
+          <h4>~ διάλειμμα ~</h4>
+          <p>1:30 — 1:45 · 15 λεπτά · καφές + τεχνική επίλυση</p>
+        </div>
+      </div>
+
+      <!-- BLOCK Γ -->
+      <div class="module" id="block-c">
+        <div class="module-dot">Γ</div>
+        <div class="module-header">
+          <h3 class="module-title">PICO + Search Strategy</h3>
+          <span class="module-time">1:45 — 2:45 · 60'</span>
+        </div>
+        <p class="module-lead">Μετατρέπουμε το ερευνητικό ενδιαφέρον σε δομημένο PICO, και το PICO σε search string. Χτίζουμε block-by-block τη στρατηγική αναζήτησης.</p>
+
+        <div class="module-body">
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">1:45 — 2:00</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">PICO review + refinement</h4>
+            <p class="block-desc">Αναθεώρηση του PICO που ήρθε από το pre-work. Κοινά λάθη: πολύ ευρύ P, ασαφές O, missing S.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:00 — 2:10</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 3: Finalize your PICO</h4>
+            <p class="block-desc">Ατομικά: γράφεις τη final version του PICO σου. Σύντομο peer review σε ζευγάρι.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #4</strong>Finalized PICO (1 πρόταση ανά στοιχείο)</div>
+            </div>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:10 — 2:25</span><span class="block-type type-lecture">Lecture + Demo</span></div>
+            <h4 class="block-title">Block-by-block strategy + Boolean logic</h4>
+            <p class="block-desc">Πώς μετατρέπεται το PICO σε blocks, πώς δουλεύουν OR/AND, truncation, phrase searching.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:25 — 2:45</span><span class="block-type type-activity">Activity</span></div>
+            <h4 class="block-title">Άσκηση 4: Block-by-Block Worksheet</h4>
+            <p class="block-desc">Ατομικά: εντοπίζεις 2-3 blocks, brainstorm συνωνύμων (πρώτα χωρίς ΤΝ, μετά 5 από ΤΝ), γράφεις ERIC search string.</p>
+            <div class="deliv-card">
+              <div class="deliv-icon">📌</div>
+              <div class="deliv-text"><strong>Παραδοτέο #5</strong>Συμπληρωμένο Block-by-Block Worksheet + ERIC search string</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK Δ -->
+      <div class="module" id="block-d">
+        <div class="module-dot">Δ</div>
+        <div class="module-header">
+          <h3 class="module-title">Wrap-up + Homework Preview</h3>
+          <span class="module-time">2:45 — 3:00 · 15'</span>
+        </div>
+        <p class="module-lead">Κλείνουμε το πρώτο μάθημα με preview της εργασίας σπιτιού — θα τρέξεις τις αναζητήσεις σου πραγματικά.</p>
+
+        <div class="module-body">
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:45 — 2:55</span><span class="block-type type-lecture">Lecture</span></div>
+            <h4 class="block-title">Homework briefing</h4>
+            <p class="block-desc">Τι θα κάνεις στο σπίτι: τρέξε ERIC + PsycINFO + Scopus · εξάγω RIS · ανέβασε στο Rayyan · DOI verification 10 papers. Αναλυτικές οδηγίες στο handout.</p>
+          </div>
+          <div class="module-block">
+            <div class="block-meta"><span class="block-time">2:55 — 3:00</span><span class="block-type type-discussion">Q&A</span></div>
+            <h4 class="block-title">Ερωτήσεις + κλείσιμο</h4>
+            <p class="block-desc">Ανοιχτή συζήτηση. Πού κόλλησες; Τι σε εξέπληξε; Υπενθύμιση: homework deadline πριν το Μάθημα 2.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="glance">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-eyebrow" style="display: inline-block;">✷ Παραδοτέα Μαθήματος 1</div>
+      <h2 class="section-title" style="margin: 0 auto var(--space-5);">5 <span class="hand">παραδοτέα</span></h2>
+    </div>
+    <div class="learn-grid" style="max-width: 48rem; margin: 0 auto;">
+      <div class="learn-item"><div class="learn-marker">1</div><div class="learn-content"><h4>Signed AI Usage Agreement</h4><p>Δέσμευση στις 3 αρχές HEAL-Link.</p></div></div>
+      <div class="learn-item"><div class="learn-marker">2</div><div class="learn-content"><h4>5 prompts (3 + 2)</h4><p>3 βελτιωμένα + 2 ατομικά, tested live.</p></div></div>
+      <div class="learn-item"><div class="learn-marker">3</div><div class="learn-content"><h4>Scoping results + DOIs</h4><p>3 queries Consensus + 5 verified DOIs.</p></div></div>
+      <div class="learn-item"><div class="learn-marker">4</div><div class="learn-content"><h4>Finalized PICO</h4><p>Ένα PICO statement, peer-reviewed.</p></div></div>
+    </div>
+    <div class="learn-grid" style="max-width: 24rem; margin: var(--space-4) auto 0;">
+      <div class="learn-item"><div class="learn-marker" style="background: var(--plum);">5</div><div class="learn-content"><h4>ERIC search string</h4><p>Block-by-block, ready to run.</p></div></div>
+    </div>
+    <div class="text-center" style="margin-top: var(--space-6);">
+      <a href="homework.html" class="btn">Εργασία σπιτιού <span class="arrow">→</span></a>
+      <a href="session-2.html" class="btn btn-outline" style="margin-left: var(--space-3);">Μάθημα 2 →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Πλήρες εργαστήριο εισαγωγής στην υπεύθυνη χρήση GenAI στη συστηματική ανασκόπηση. HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top: 1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color: var(--sun);">ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας</a>.</p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="session-1.html">Μάθημα 1</a></li>
+          <li><a href="homework.html">Εργασία</a></li>
+          <li><a href="session-2.html">Μάθημα 2</a></li>
+          <li><a href="materials.html">Υλικό</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Εργαλεία</h5>
+        <ul>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link.gr</a></li>
+          <li><a href="https://consensus.app" target="_blank" rel="noopener">Consensus</a></li>
+          <li><a href="https://www.elsevier.com/products/leapspace" target="_blank" rel="noopener">LeapSpace</a></li>
+          <li><a href="https://rayyan.ai" target="_blank" rel="noopener">Rayyan</a></li>
+          <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA</div>
+      <div>SR+ Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
