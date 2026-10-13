@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Frameworks · PICO · SPIDER · PEO · Full Edition</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .fw-card { background:var(--paper-card); border:3px solid var(--ink); border-radius:var(--r-lg); padding:var(--space-5); margin-bottom:var(--space-5); }
+    .fw-card:nth-of-type(1){box-shadow:6px 6px 0 var(--coral);}
+    .fw-card:nth-of-type(2){box-shadow:6px 6px 0 var(--teal);}
+    .fw-card:nth-of-type(3){box-shadow:6px 6px 0 var(--sun);}
+    .fw-card:nth-of-type(4){box-shadow:6px 6px 0 var(--sage);}
+    .fw-card:nth-of-type(5){box-shadow:6px 6px 0 var(--plum);}
+    .fw-card:nth-of-type(6){box-shadow:6px 6px 0 var(--coral);}
+    .fw-header { display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3); }
+    .fw-badge { font-family:var(--font-display); font-size:1.4rem; padding:0.4rem 1rem; border-radius:var(--r-md); color:white; border:3px solid var(--ink); flex-shrink:0; }
+    .fw-badge-coral { background:var(--coral); }
+    .fw-badge-teal { background:var(--teal); }
+    .fw-badge-sun { background:var(--sun); color:var(--ink); }
+    .fw-badge-sage { background:var(--sage); }
+    .fw-badge-plum { background:var(--plum); }
+    .fw-badge-ink { background:var(--ink); color:var(--sun); border-color:var(--sun); }
+    .fw-title { font-family:var(--font-display); font-size:1.4rem; }
+    .fw-when { font-size:0.88rem; color:var(--muted); font-style:italic; margin-top:2px; }
+
+    .letter-table { width:100%; border-collapse:collapse; margin:var(--space-3) 0; font-size:0.88rem; }
+    .letter-table th { background:var(--paper-warm); padding:var(--space-2) var(--space-3); text-align:left; border-bottom:2px solid var(--rule); font-weight:700; }
+    .letter-table td { padding:var(--space-2) var(--space-3); border-bottom:1px dashed var(--rule); vertical-align:top; }
+    .letter-table td:first-child {
+      font-family:var(--font-display); font-weight:700; font-size:1.05rem;
+      color:var(--ink); background:var(--paper-warm); width:2.5rem; text-align:center;
+    }
+    .letter-table tr:last-child td { border-bottom:none; }
+
+    .example-box { position:relative; background:var(--paper-warm); border:2px dashed var(--ink-soft); border-radius:var(--r-md); padding:var(--space-3); font-size:0.88rem; margin:var(--space-3) 0; line-height:1.6; }
+    .example-box strong { display:block; margin-bottom:var(--space-2); font-family:var(--font-display); font-weight:400; font-size:0.95rem; }
+    .example-box p { margin:4px 0; }
+    .example-label { font-family:var(--font-mono); color:var(--coral); font-weight:700; }
+
+    .comparison-table { width:100%; border-collapse:separate; border-spacing:0; margin:var(--space-4) 0; font-size:0.85rem; }
+    .comparison-table th { background:var(--ink); color:white; padding:var(--space-3); text-align:left; font-family:var(--font-display); font-weight:400; }
+    .comparison-table th:first-child { border-radius:var(--r-md) 0 0 0; }
+    .comparison-table th:last-child { border-radius:0 var(--r-md) 0 0; }
+    .comparison-table td { padding:var(--space-3); border-bottom:2px dashed var(--rule); background:var(--paper-card); vertical-align:top; }
+    .comparison-table tr:hover td { background:var(--paper-warm); }
+    .comparison-table td:first-child { font-family:var(--font-display); font-weight:700; }
+
+    .ovx { overflow-x:auto; }
+    .tag { display:inline-block; padding:0.15rem 0.5rem; font-size:0.72rem; font-weight:700; border-radius:var(--r-full); }
+    .tag-quant { background:var(--coral-bg); color:var(--coral); }
+    .tag-qual { background:var(--sage-bg); color:var(--sage); }
+    .tag-mixed { background:var(--sun-bg); color:var(--ink); }
+    .tag-policy { background:var(--teal-bg); color:var(--teal); }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a><ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="session-1.html">Μάθημα 1</a></li><li><a href="session-2.html">Μάθημα 2</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="about.html">Σχετικά</a></li><li><a href="international.html">Διεθνές</a></li><li><a href="leapspace.html">LeapSpace</a></li></ul></div></nav>
+
+<header style="background:var(--paper-warm);padding:var(--space-5) 0;border-bottom:2px dashed var(--rule);">
+  <div class="container">
+    <div class="eyebrow">✷ Πέρα από το PICO · Question Frameworks</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);margin:var(--space-2) 0;">6 Frameworks για <span class="hand">ερευνητικό ερώτημα</span></h1>
+    <p style="color:var(--ink-soft);max-width:38rem;">Το PICO είναι το πιο γνωστό, αλλά <strong>δεν ταιριάζει πάντα</strong>. Στην εκπαιδευτική έρευνα και στην ειδική αγωγή, συχνά χρειάζεσαι SPIDER, PEO, ή PECO. Ας δούμε πότε.</p>
+    <div style="margin-top:var(--space-3);display:flex;gap:var(--space-3);flex-wrap:wrap;">
+      <a href="worksheet.html" class="btn" style="font-size:.9rem;">📝 Πήγαινε στο Worksheet</a>
+      <a href="#comparison" class="btn btn-outline" style="font-size:.9rem;">Comparison table ↓</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <!-- Quick decision tree -->
+    <div style="max-width:44rem;margin:0 auto var(--space-6);padding:var(--space-4);background:var(--sun-bg);border:2px dashed var(--sun);border-radius:var(--r-md);">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:var(--space-3);">🎯 Ποιο ταιριάζει σε μένα;</h3>
+      <ul style="list-style:none;padding:0;font-size:0.92rem;line-height:1.7;">
+        <li><strong>Παρέμβαση με σύγκριση (π.χ. tablet vs traditional):</strong> → <a href="#pico">PICO / PICOS</a></li>
+        <li><strong>Έκθεση χωρίς παρέμβαση (π.χ. έκθεση σε ΤΝ):</strong> → <a href="#peco">PECO</a></li>
+        <li><strong>Ποιοτική έρευνα — εμπειρίες, αντιλήψεις:</strong> → <a href="#spider">SPIDER</a> ή <a href="#peo">PEO</a></li>
+        <li><strong>Έρευνα σε υπηρεσίες, πολιτικές, οργανισμούς:</strong> → <a href="#spice">SPICE</a></li>
+        <li><strong>Mixed methods:</strong> → <a href="#spider">SPIDER</a></li>
+      </ul>
+    </div>
+
+    <!-- PICO/PICOS -->
+    <div class="fw-card" id="pico">
+      <div class="fw-header">
+        <div class="fw-badge fw-badge-coral">PICO(S)</div>
+        <div>
+          <h3 class="fw-title">Population · Intervention · Comparator · Outcomes <span style="opacity:0.6;">(· Study design)</span></h3>
+          <p class="fw-when">Το κλασικό framework — παρεμβάσεις με ξεκάθαρη σύγκριση <span class="tag tag-quant">Quantitative</span></p>
+        </div>
+      </div>
+      <table class="letter-table">
+        <tr><th>Γράμμα</th><th>Σημασία</th><th>Παράδειγμα (ειδική αγωγή)</th></tr>
+        <tr><td>P</td><td>Population — Πληθυσμός</td><td>Παιδιά 6-12 ετών με ΔΑΦ σε γενικές τάξεις</td></tr>
+        <tr><td>I</td><td>Intervention — Παρέμβαση</td><td>Tablet-based social skills app (καθημερινή χρήση 20')</td></tr>
+        <tr><td>C</td><td>Comparator — Σύγκριση</td><td>Traditional social skills instruction</td></tr>
+        <tr><td>O</td><td>Outcomes — Αποτελέσματα</td><td>Ποσοστό κοινωνικών αλληλεπιδράσεων / συνεργατικών εργασιών</td></tr>
+        <tr><td>S</td><td>Study design (μόνο PICOS)</td><td>RCT ή quasi-experimental</td></tr>
+      </table>
+      <div class="example-box">
+        <strong>Παράδειγμα ερώτησης:</strong>
+        <p><span class="example-label">P:</span> Σε παιδιά με ΔΑΦ 6-12 ετών σε γενικές τάξεις,</p>
+        <p><span class="example-label">I:</span> η χρήση tablet-based social skills app για 20' ημερησίως,</p>
+        <p><span class="example-label">C:</span> σε σύγκριση με traditional social skills instruction,</p>
+        <p><span class="example-label">O:</span> βελτιώνει το ποσοστό κοινωνικών αλληλεπιδράσεων στην τάξη;</p>
+      </div>
+    </div>
+
+    <!-- PECO -->
+    <div class="fw-card" id="peco">
+      <div class="fw-header">
+        <div class="fw-badge fw-badge-teal">PECO</div>
+        <div>
+          <h3 class="fw-title">Population · Exposure · Comparator · Outcomes</h3>
+          <p class="fw-when">Όταν εξετάζεις <strong>έκθεση</strong> (exposure) αντί για παρέμβαση — παρατηρησιακές μελέτες <span class="tag tag-quant">Observational</span></p>
+        </div>
+      </div>
+      <p style="margin-bottom:var(--space-3);font-size:0.92rem;color:var(--ink-soft);"><strong>Διαφορά με PICO:</strong> Στο PICO ελέγχεις την παρέμβαση (π.χ. δίνεις tablet). Στο PECO παρατηρείς την έκθεση (π.χ. τα παιδιά ΗΔΗ χρησιμοποιούν GenAI στο σπίτι — δεν το ελέγχεις εσύ).</p>
+      <table class="letter-table">
+        <tr><th>Γράμμα</th><th>Σημασία</th><th>Παράδειγμα</th></tr>
+        <tr><td>P</td><td>Population</td><td>Μαθητές δημοτικού 8-11 ετών</td></tr>
+        <tr><td>E</td><td>Exposure — Έκθεση</td><td>Καθημερινή χρήση ChatGPT για εργασίες στο σπίτι</td></tr>
+        <tr><td>C</td><td>Comparator</td><td>Μαθητές που δεν χρησιμοποιούν GenAI</td></tr>
+        <tr><td>O</td><td>Outcomes</td><td>Δημιουργική σκέψη, self-efficacy</td></tr>
+      </table>
+      <div class="example-box">
+        <strong>Παράδειγμα ερώτησης:</strong>
+        <p>Σε μαθητές δημοτικού 8-11 ετών, η <span class="example-label">έκθεση</span> σε καθημερινή χρήση ChatGPT για σχολικές εργασίες, σε σύγκριση με μαθητές που δεν χρησιμοποιούν GenAI, συνδέεται με διαφορές στη δημιουργική σκέψη και το self-efficacy;</p>
+      </div>
+    </div>
+
+    <!-- SPIDER -->
+    <div class="fw-card" id="spider">
+      <div class="fw-header">
+        <div class="fw-badge fw-badge-sun">SPIDER</div>
+        <div>
+          <h3 class="fw-title">Sample · Phenomenon of Interest · Design · Evaluation · Research type</h3>
+          <p class="fw-when">Για <strong>ποιοτική & mixed methods</strong> έρευνα (Cooke, Smith &amp; Booth, 2012) <span class="tag tag-qual">Qualitative</span> <span class="tag tag-mixed">Mixed</span></p>
+        </div>
+      </div>
+      <p style="margin-bottom:var(--space-3);font-size:0.92rem;color:var(--ink-soft);"><strong>Πότε το χρησιμοποιείς:</strong> Όταν σε ενδιαφέρουν εμπειρίες, αντιλήψεις, στάσεις, βιώματα — όχι μετρήσιμα αποτελέσματα.</p>
+      <table class="letter-table">
+        <tr><th>Γράμμα</th><th>Σημασία</th><th>Παράδειγμα (ειδική αγωγή)</th></tr>
+        <tr><td>S</td><td>Sample — Δείγμα</td><td>Εκπαιδευτικοί ειδικής αγωγής</td></tr>
+        <tr><td>PI</td><td>Phenomenon of Interest</td><td>Εμπειρίες με τη χρήση GenAI στη διδασκαλία</td></tr>
+        <tr><td>D</td><td>Design — Σχεδιασμός</td><td>Ημιδομημένες συνεντεύξεις, focus groups</td></tr>
+        <tr><td>E</td><td>Evaluation — Αξιολόγηση</td><td>Αντιλήψεις, εμπόδια, στάσεις</td></tr>
+        <tr><td>R</td><td>Research type</td><td>Qualitative (ή Mixed methods)</td></tr>
+      </table>
+      <div class="example-box">
+        <strong>Παράδειγμα ερώτησης:</strong>
+        <p>Ποιες είναι οι <span class="example-label">εμπειρίες</span> των εκπαιδευτικών ειδικής αγωγής από τη χρήση GenAI στη διδασκαλία μαθητών με ΔΑΦ, όπως προκύπτουν από ποιοτικές μελέτες με συνεντεύξεις/focus groups;</p>
+      </div>
+    </div>
+
+    <!-- PEO -->
+    <div class="fw-card" id="peo">
+      <div class="fw-header">
+        <div class="fw-badge fw-badge-sage">PEO</div>
+        <div>
+          <h3 class="fw-title">Population · Exposure · Outcome</h3>
+          <p class="fw-when">Απλοποιημένη έκδοση — όταν <strong>δεν έχεις σύγκριση</strong> <span class="tag tag-qual">Qualitative</span></p>
+        </div>
+      </div>
+      <p style="margin-bottom:var(--space-3);font-size:0.92rem;color:var(--ink-soft);"><strong>Διαφορά:</strong> Σαν PECO αλλά χωρίς Comparator — για ποιοτική/περιγραφική έρευνα.</p>
+      <table class="letter-table">
+        <tr><th>Γράμμα</th><th>Σημασία</th><th>Παράδειγμα</th></tr>
+        <tr><td>P</td><td>Population</td><td>Γονείς παιδιών με ΔΕΠ-Υ</td></tr>
+        <tr><td>E</td><td>Exposure</td><td>Πρόγραμμα γονεϊκής εκπαίδευσης</td></tr>
+        <tr><td>O</td><td>Outcome</td><td>Αντιλήψεις για την αποτελεσματικότητα</td></tr>
+      </table>
+      <div class="example-box">
+        <strong>Παράδειγμα ερώτησης:</strong>
+        <p>Ποιες είναι οι αντιλήψεις γονέων παιδιών με ΔΕΠ-Υ σχετικά με την αποτελεσματικότητα προγραμμάτων γονεϊκής εκπαίδευσης;</p>
+      </div>
+    </div>
+
+    <!-- SPICE -->
+    <div class="fw-card" id="spice">
+      <div class="fw-header">
+        <div class="fw-badge fw-badge-plum">SPICE</div>
+        <div>
+          <h3 class="fw-title">Setting · Perspective · Intervention · Comparison · Evaluation</h3>
+          <p class="fw-when">Για <strong>υπηρεσίες, πολιτικές, οργανωσιακές</strong> ερωτήσεις (Booth, 2004) <span class="tag tag-policy">Policy</span></p>
+        </div>
+      </div>
+      <p style="margin-bottom:var(--space-3);font-size:0.92rem;color:var(--ink-soft);"><strong>Πότε το χρησιμοποιείς:</strong> Όταν η έρευνα αφορά τη λειτουργία μιας υπηρεσίας ή την εφαρμογή μιας πολιτικής — προσθέτει τη <em>σκοπιά</em> (perspective).</p>
+      <table class="letter-table">
+        <tr><th>Γράμμα</th><th>Σημασία</th><th>Παράδειγμα</th></tr>
+        <tr><td>S</td><td>Setting — Πλαίσιο</td><td>Δημόσια νηπιαγωγεία</td></tr>
+        <tr><td>P</td><td>Perspective — Σκοπιά</td><td>Οπτική νηπιαγωγών</td></tr>
+        <tr><td>I</td><td>Intervention</td><td>Πολιτική συμπερίληψης μαθητών με αναπηρία</td></tr>
+        <tr><td>C</td><td>Comparison</td><td>Πριν/μετά την πολιτική (ή συγκριτικά με άλλες περιοχές)</td></tr>
+        <tr><td>E</td><td>Evaluation</td><td>Αποτελεσματικότητα εφαρμογής, εμπόδια</td></tr>
+      </table>
+      <div class="example-box">
+        <strong>Παράδειγμα ερώτησης:</strong>
+        <p>Στα δημόσια νηπιαγωγεία, από τη σκοπιά των νηπιαγωγών, πώς αξιολογείται η αποτελεσματικότητα της πολιτικής συμπερίληψης μαθητών με αναπηρία σε σύγκριση με την προηγούμενη περίοδο;</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Comparison table -->
+<section id="comparison" class="glance">
+  <div class="container">
+    <div class="section-eyebrow" style="display:inline-block;">✷ Σύγκριση με μία ματιά</div>
+    <h2 class="section-title" style="margin-top:var(--space-2);">Ποιο <span class="hand">πότε</span>;</h2>
+
+    <div class="ovx">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Framework</th>
+            <th>Πλήρες όνομα</th>
+            <th>Καλύτερο για</th>
+            <th>Τύπος έρευνας</th>
+            <th>Πηγή</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PICO</td>
+            <td>Population, Intervention, Comparator, Outcome</td>
+            <td>Παρεμβάσεις με σύγκριση</td>
+            <td><span class="tag tag-quant">Quantitative</span></td>
+            <td>Richardson et al., 1995</td>
+          </tr>
+          <tr>
+            <td>PICOS</td>
+            <td>PICO + Study design</td>
+            <td>Systematic reviews με specific designs</td>
+            <td><span class="tag tag-quant">Quantitative</span></td>
+            <td>Methley et al., 2014</td>
+          </tr>
+          <tr>
+            <td>PECO</td>
+            <td>Population, Exposure, Comparator, Outcome</td>
+            <td>Παρατηρησιακές / επιδημιολογικές μελέτες</td>
+            <td><span class="tag tag-quant">Observational</span></td>
+            <td>Morgan et al., 2018</td>
+          </tr>
+          <tr>
+            <td>SPIDER</td>
+            <td>Sample, Phenomenon of Interest, Design, Evaluation, Research type</td>
+            <td>Ποιοτική / mixed methods έρευνα</td>
+            <td><span class="tag tag-qual">Qualitative</span> <span class="tag tag-mixed">Mixed</span></td>
+            <td>Cooke et al., 2012</td>
+          </tr>
+          <tr>
+            <td>PEO</td>
+            <td>Population, Exposure, Outcome</td>
+            <td>Ποιοτική/περιγραφική χωρίς σύγκριση</td>
+            <td><span class="tag tag-qual">Qualitative</span></td>
+            <td>Bettany-Saltikov, 2012</td>
+          </tr>
+          <tr>
+            <td>SPICE</td>
+            <td>Setting, Perspective, Intervention, Comparison, Evaluation</td>
+            <td>Πολιτικές, υπηρεσίες, οργανωσιακά</td>
+            <td><span class="tag tag-policy">Policy</span></td>
+            <td>Booth, 2004</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="max-width:36rem;margin:var(--space-5) auto 0;padding:var(--space-4);background:var(--paper-warm);border:2px dashed var(--ink-soft);border-radius:var(--r-md);text-align:center;">
+      <p style="color:var(--ink-soft);font-size:0.95rem;margin-bottom:var(--space-3);"><strong>💡 Χρυσός κανόνας:</strong><br>Επίλεξε το framework <em>μετά</em> τη διατύπωση της ερώτησης — όχι πριν. Η φύση της ερώτησης καθορίζει το εργαλείο.</p>
+      <a href="worksheet.html" class="btn" style="font-size:.9rem;">📝 Στο Worksheet <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div><p class="footer-text">SR+ Edition · HEAL-Link / ΣΕΑΒ.</p></div><div><h5>Σελίδες</h5><ul><li><a href="materials.html">Υλικό</a></li><li><a href="worksheet.html">Worksheet</a></li><li><a href="reference.html">Database Syntax</a></li></ul></div><div><h5>Εργαλεία</h5><ul><li><a href="https://www.heal-link.gr/" target="_blank">HEAL-Link</a></li><li><a href="https://consensus.app" target="_blank">Consensus</a></li></ul></div></div><div class="footer-bottom"><div>© 2026 · CC BY-NC-SA</div><div>SR+ Edition · v1.0</div></div></div></footer>
+</body>
+</html>
